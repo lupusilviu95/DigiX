@@ -18,3 +18,5 @@ Route::get('/', function () {
 Route::auth();
 
 Route::get('/dashboard', 'DashboardController@index');
+
+Route::get('/viewChest/{id}','ChestController@index');
