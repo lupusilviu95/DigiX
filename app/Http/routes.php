@@ -20,3 +20,10 @@ Route::auth();
 Route::get('/dashboard', 'DashboardController@index');
 
 Route::get('/viewChest/{id}','ChestController@index');
+
+Route::get('/viewChest/{id}/add','ChestController@addFile');
+
+Route::get('/newChest','ChestController@newChest');
+
+
+Route::post('/create','ChestController@create');
