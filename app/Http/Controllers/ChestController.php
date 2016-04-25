@@ -122,6 +122,44 @@ class ChestController extends Controller
     }
 
     public function addFile($id) {
-        return "Add file to chest with id=".$id;
+
+
+
+        session_start();
+        session_destroy();
+
+
+        $user=Auth::user()->id;
+       
+
+        $conn = oci_connect('student', 'STUDENT', 'localhost/XE');
+        if (!$conn) 
+        {
+            $e = oci_error();
+            trigger_error(htmlentities($e['message'], ENT_QUOTES), E_USER_ERROR);
+        } 
+
+
+        $verify=oci_parse($conn, 'select 1 from chests join users on id=user_id where users.id=:idu and chest_id=:cufarid');
+        oci_bind_by_name($verify,':idu', $user);
+        oci_bind_by_name($verify,':cufarid' ,$id);
+        oci_execute($verify);
+
+
+        $owner=0;
+        while ($row = oci_fetch_array($verify, OCI_ASSOC+OCI_RETURN_NULLS)) 
+        {
+            $owner=$row['1'];
+        }
+
+        if($owner==1)
+        {
+    
+            return view('chest.addFile',compact('id'));
+
+        }
+        else  return redirect('/dashboard');
+        
+        return view('chest.addFile',compact('id'));
     }
 }
