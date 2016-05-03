@@ -38,7 +38,7 @@ class DashboardController extends Controller
         $stid = oci_parse($conn, 'SELECT  chests.name,chest_id,user_id,capacity,freeslots,description from users join chests on user_id=id and user_id=:idu');
         oci_bind_by_name($stid, ':idu', $user);
         oci_execute($stid);
-
+        
 
         $cufere=null;
         while ($row = oci_fetch_array($stid, OCI_ASSOC+OCI_RETURN_NULLS)) 
