@@ -53,7 +53,7 @@
                     <?php 
                         echo "<li><a href='/viewChest/".$_SESSION['currChest']."/add'>Add File</a></li>";
                     ?>
-                    <li><a href="" id="deleteOption">Delete</a></li>
+                    <li><a href="" id="deleteOption" class="delete" data-confirm="Are you sure to delete this item?">Delete</a></li>
                     <li><a href="" id="downloadOption">Download</a></li>
                 </ul>
 
@@ -124,5 +124,6 @@
             
         }
     </script>
+
 </body>
 </html>

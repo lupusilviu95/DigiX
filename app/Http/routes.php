@@ -26,6 +26,8 @@ Route::get('/viewChest/{id}/add','ChestController@addFile');
 Route::get('/newChest','ChestController@newChest');
 
 
+Route::get('/delete/file/{id}','FileController@delete');
+
 Route::post('/create','ChestController@create');
 
 
