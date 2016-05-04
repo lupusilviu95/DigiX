@@ -1,0 +1,100 @@
+.ax_inline_frame {
+    font-family:'Arial Regular', 'Arial';
+    font-weight:400;
+    font-style:normal;
+    font-size:13px;
+    color:#333333;
+    text-align:center;
+    line-height:normal;
+}
+
+.ax_image {
+    font-family:'Arial Regular', 'Arial';
+    font-weight:400;
+    font-style:normal;
+    font-size:13px;
+    color:#000000;
+    text-align:center;
+    line-height:normal;
+}
+
+#u52 {
+    margin-top:50px;
+    margin-left: 50px;
+    margin-bottom:50px;
+    position:center;
+    left:85px;
+    top:960px;
+    width:516px;
+    height:316px;
+}
+
+#u52_input {
+    position:center;
+    left:0px;
+    top:0px;
+    width:516px;
+    height:316px;
+}
+
+#u61 {
+    position:center;
+    margin-left: 50px;
+    margin-bottom:50px;
+    left:85px;
+    top:1400px;
+    width:520px;
+    height:170px;
+}
+
+#u61_input {
+    position:center;
+    left:0px;
+    top:0px;
+    width:520px;
+    height:170px;
+}
+
+#u62 {
+    position:center;
+    margin-left: 50px;
+    margin-bottom:50px;
+    left:85px;
+    top:1630px;
+    width:515px;
+    height:185px;
+    color:#333333;
+}
+
+#u62_img {
+    position:center;
+    left:0px;
+    top:0px;
+    width:515px;
+    height:185px;
+}
+
+#slider{
+    position:center;
+    margin-top:50px;
+    margin-left: 50px;
+    margin-bottom:50px;
+    width: 515px;
+    height:330px;
+    overflow:hidden;
+}
+
+#slider .slides{
+    display:block;
+    width:6000px;
+    height:400px;
+    margin:0;
+    padding: 0;
+}
+
+#slider .slide{
+    float: left;
+    list-style-type: none;
+    width:720px;
+    height:400px;
+}
