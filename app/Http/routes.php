@@ -27,3 +27,9 @@ Route::get('/newChest','ChestController@newChest');
 
 
 Route::post('/create','ChestController@create');
+
+
+Route::get('/twitter', function()
+{
+    return Twitter::linkify('https://twitter.com/ArchonAmazHS/status/727510623131594753');
+});

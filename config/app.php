@@ -148,6 +148,7 @@ return [
         Illuminate\Validation\ValidationServiceProvider::class,
         Illuminate\View\ViewServiceProvider::class,
         Yajra\Oci8\Oci8ServiceProvider::class,
+        'Thujohn\Twitter\TwitterServiceProvider',
 
         /*
          * Application Service Providers...
@@ -202,6 +203,7 @@ return [
         'URL' => Illuminate\Support\Facades\URL::class,
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
+        'Twitter' => 'Thujohn\Twitter\Facades\Twitter',
 
     ],
 

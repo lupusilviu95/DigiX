@@ -11,9 +11,11 @@
                             <div class="panel-body">
                                 {{$cufar->description}}
                            </div>
+
                         <hr>
                         <br>
                     @endforeach 
+                   
                 @else 
                     <div class="panel-heading">Nu ai nici un cufar :(</div>
                 @endif

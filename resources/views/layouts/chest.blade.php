@@ -53,6 +53,8 @@
                     <?php 
                         echo "<li><a href='/viewChest/".$_SESSION['currChest']."/add'>Add File</a></li>";
                     ?>
+                    <li><a href="" id="deleteOption">Delete</a></li>
+                    <li><a href="" id="downloadOption">Download</a></li>
                 </ul>
 
                 <div class="col-sm-3 col-md-3 ">
@@ -94,5 +96,33 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.3/jquery.min.js" integrity="sha384-I6F5OKECLVtK/BL+8iSLDEHowSAfUo76ZL9+kGAgTRdiByINKJaqTPH/QVNS1VDb" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
     {{-- <script src="{{ elixir('js/app.js') }}"></script> --}}
+    <script type="text/javascript">
+           
+        
+        $(document).ready(function() {
+           
+            $('#myTable').on('click', '.clickable-row', function(event) {
+            $(this).addClass('active').siblings().removeClass('active');
+            
+        });
+          
+        
+        });
+        
+
+    </script>
+    <script type="text/javascript">
+        function pop(e) {
+            var urldelete="/delete/file/";
+            var urldownload="/download/file/"
+            var id=e.getAttribute("id");
+            var sterge=urldelete.concat(id);
+            var descarca=urldownload.concat(id);
+            document.getElementById("deleteOption").href=sterge;
+            document.getElementById("downloadOption").href=descarca;
+
+            
+        }
+    </script>
 </body>
 </html>
