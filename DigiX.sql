@@ -147,6 +147,7 @@ create or replace package body DigiX is
    if(checkExistsChest(id_chest)=false)
       then raise DigixExceptions.inexistent_chest;
      end if;
+     delete from files where chest_id=id_chest;
      delete from chests where chest_id=id_chest;
      EXCEPTION
      when DigixExceptions.inexistent_chest then
@@ -299,4 +300,24 @@ begin
 end decreaseFreeSlots;
 
 
+
+create or replace trigger disableFilesTriggers before delete on chests
+begin
+ execute immediate ' alter table files disable all triggers';
+end disableFilesTriggers;
+
+
+create or replace trigger enableFilesTriggers after delete on chests
+begin
+ execute immediate ' alter table files enable all triggers';
+end disableFilesTriggers;
+
 commit;
+
+drop trigger enableFilesTriggers;
+
+
+select * from chests;
+
+
+delete from chests where chest_id=1;

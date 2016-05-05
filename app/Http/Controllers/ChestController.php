@@ -88,12 +88,25 @@ class ChestController extends Controller
         
         if($owner==1)
         {
-    
+            
+
             return view('chest.addFile',compact('id'));
 
         }
         else  return redirect('/dashboard');
         
-        return view('chest.addFile',compact('id'));
+       
+    }
+
+     public function delete($id) {
+        
+      $user=Auth::user()->id;
+      $db=new DatabaseInteraction('student', 'STUDENT', 'localhost/XE');
+      $db->connect();
+      $db->deleteChest($id);
+      $filepath='userdata/users/user'.$user.'/chest'.$id;
+      Storage::disk('local')->deleteDirectory($filepath);
+  
+        return redirect()->back();
     }
 }

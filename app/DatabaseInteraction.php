@@ -118,6 +118,8 @@ class DatabaseInteraction {
         oci_free_statement($stid);
         return $cufere;
 	}
+
+	
 	public function deleteFile($fileid) {
 
 		$sql="begin 
@@ -132,6 +134,24 @@ class DatabaseInteraction {
 
 		
 	}
+
+
+	public function deleteChest($chestid) {
+
+		$sql="begin 
+			  DIGIX.DELETECHEST(:chestid);
+			  end;";
+		$stid=oci_parse($this->conn,$sql);
+		oci_bind_by_name($stid, ':chestid', $chestid);
+		oci_execute($stid);
+		oci_commit($this->conn);
+		oci_free_statement($stid);
+
+
+		
+	}
+
+
 	public function __destruct(){
 		# close the connection
 		oci_close($this->conn);

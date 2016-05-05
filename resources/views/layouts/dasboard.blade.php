@@ -50,6 +50,7 @@
                 <ul class="nav navbar-nav">
                     <li><a href="{{ url('/dashboard') }}">Dashboard</a></li>
                     <li><a href="{{ url('/newChest') }}">Add Chest</a></li>
+                    <li><a href="" id="deleteOption" class="delete" data-confirm="Are you sure to delete this item?">Delete Chest</a></li>
                 </ul>
                 <div class="col-sm-3 col-md-3 ">
                     <form class="navbar-form" role="search">
@@ -92,5 +93,21 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.3/jquery.min.js" integrity="sha384-I6F5OKECLVtK/BL+8iSLDEHowSAfUo76ZL9+kGAgTRdiByINKJaqTPH/QVNS1VDb" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
     {{-- <script src="{{ elixir('js/app.js') }}"></script> --}}
+
+    <script type="text/javascript">
+        function pop(e) {
+            var elements =document.getElementsByClassName("bg-info");
+             for( var i=0;i<elements.length;i++){
+                 elements[i].classList.remove("bg-info");
+             }
+            e.classList.add("bg-info");
+            var urldelete="/delete/chest/";
+            var id=e.getAttribute("id");
+            var sterge=urldelete.concat(id);
+            document.getElementById("deleteOption").href=sterge;
+            
+            
+        }
+    </script>
 </body>
 </html>

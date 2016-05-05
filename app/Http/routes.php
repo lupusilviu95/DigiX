@@ -28,8 +28,11 @@ Route::get('/newChest','ChestController@newChest');
 
 Route::get('/delete/file/{id}','FileController@delete');
 
+Route::get('/delete/chest/{id}','ChestController@delete');
+
 Route::post('/create','ChestController@create');
 
+Route::post('/upload/{id}','FileController@upload');
 
 Route::get('/twitter', function()
 {

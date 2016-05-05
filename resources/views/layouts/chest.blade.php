@@ -102,7 +102,7 @@
         $(document).ready(function() {
            
             $('#myTable').on('click', '.clickable-row', function(event) {
-            $(this).addClass('active').siblings().removeClass('active');
+            $(this).addClass('bg-info').siblings().removeClass('bg-info');
             
         });
           

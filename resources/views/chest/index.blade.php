@@ -8,7 +8,7 @@
             	 @if($files!=null)
             	 <table class="table table-bordered" id="myTable">
                      <tbody>
-            		 <tr class="clickable-row">
+            		 <tr>
    						<th>File name</th>
    						<th>Type</th>
  					 </tr>
