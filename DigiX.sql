@@ -32,7 +32,10 @@ path varchar2(255)
 ;
 
 
-select * from files;
+select files.name,tags.name from files join files_tags on files.file_id=files_tags.file_id join tags on tags.tag_id = files_tags.tag_id;
+select * from files_tags;
+select * from tags;
+
 /
 alter table files drop constraint files_chests;
 alter table files add constraint files_chests foreign key (chest_id) references chests(chest_id) ON DELETE CASCADE;
@@ -280,3 +283,36 @@ end decreaseFreeSlots;
 
 
 commit;
+select * from relatives;
+
+select * from files_relatives;
+
+
+select f.name,t.name,r.name from files f join files_tags ft on f.file_id=ft.file_id join tags t on t.tag_id = ft.tag_id left outer join files_relatives fr on f.file_id=fr.file_id left outer join relatives r on r.relative_id=fr.relative_id;
+
+
+select files.fi,files.name,tags.name from files join files_tags on files.file_id=files_tags.file_id join tags on tags.tag_id = files_tags.tag_id ;
+select  files.name,relatives.name from files left outer join files_relatives on files.file_id=files_relatives.file_id left outer join  relatives on relatives.relative_id=files_relatives.relative_id;
+
+
+
+-----------------------------------CAUTARE
+
+select * from files;
+select * from users;
+
+
+
+
+  select f.file_id,count(f.file_id) from files_tags ft, files f, tags t 
+  where ft.tag_id=t.tag_id
+  and (t.name in ('amazon','test','internship'))
+  and f.file_id=ft.file_id and f.chest_id in (select chest_id from chests where user_id=2)
+  group by f.file_id;
+  
+  
+  select f.file_id,count(f.file_id) from files f join files_tags ft on f.file_id=ft.file_id join tags t on t.tag_id = ft.tag_id left outer join files_relatives fr on f.file_id=fr.file_id left outer join relatives r on r.relative_id=fr.relative_id
+  where (((t.name in ('amazon','test','internship'))
+  or r.name in ('mama')))
+  and f.chest_id in (select chest_id from chests where user_id=2)
+  group by f.file_id;

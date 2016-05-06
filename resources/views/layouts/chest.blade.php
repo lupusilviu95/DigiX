@@ -48,17 +48,16 @@
                 <!-- Left Side Of Navbar -->
                 <ul class="nav navbar-nav">
                     <li><a href="{{ url('/dashboard') }}">Dashboard</a></li>
-                    <!--<li><a href="{{ url('/viewChest/add') }}">Add File</a></li>-->
+                    
 
-                    <?php 
-                        echo "<li><a href='/viewChest/".$_SESSION['currChest']."/add'>Add File</a></li>";
-                    ?>
+
+                    <li><a href="/viewChest/{{$_SESSION['currChest']}}/add">Add File</a></li>
                     <li><a href="" id="deleteOption" class="delete" data-confirm="Are you sure to delete this item?">Delete</a></li>
                     <li><a href="" id="downloadOption">Download</a></li>
                 </ul>
 
                 <div class="col-sm-3 col-md-3 ">
-                    <form class="navbar-form" role="search">
+                    <form class="navbar-form" role="search" action="/viewChest/{{$_SESSION['currChest']}}/search" method="GET">
                         <div class="input-group">
                             <input type="text" class="form-control" placeholder="Search" name="srch-term" id="srch-term">
                              <div class="input-group-btn">

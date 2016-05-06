@@ -20,22 +20,17 @@ Route::auth();
 Route::get('/dashboard', 'DashboardController@index');
 
 Route::get('/viewChest/{id}','ChestController@index');
-
 Route::get('/viewChest/{id}/add','ChestController@addFile');
-
 Route::get('/newChest','ChestController@newChest');
-
-Route::get('/viewFile/{id}','FileController@view');
-
-Route::get('/delete/file/{id}','FileController@delete');
-
-Route::get('/download/file/{id}','FileController@download');
-
 Route::get('/delete/chest/{id}','ChestController@delete');
-
 Route::post('/create','ChestController@create');
 
+Route::get('/viewFile/{id}','FileController@view');
+Route::get('/delete/file/{id}','FileController@delete');
+Route::get('/download/file/{id}','FileController@download');
 Route::post('/upload/{id}','FileController@upload');
+
+Route::get('/viewChest/{id}/search','ChestController@search');
 
 Route::get('/twitter', function()
 {

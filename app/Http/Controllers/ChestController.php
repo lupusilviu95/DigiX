@@ -109,4 +109,14 @@ class ChestController extends Controller
   
      return redirect()->back();
     }
+    public function search($id) {
+
+        $search_term=$_GET['srch-term'];
+        $regex='/^(([a-z]+)(;[a-z]+)?)$|^(([a-z]+)[,]([a-z]+)(;[a-z]+)?)$|^(([a-z]+)[,]([a-z]+)[,]([a-z]+)(;[a-z]+)?)$/i';
+        if(preg_match($regex, $search_term))
+            return 'Search term ok';
+        else
+            return 'Sorry , but the search pattern is missconstructed';
+        
+    }
 }
