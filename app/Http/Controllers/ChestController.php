@@ -107,6 +107,6 @@ class ChestController extends Controller
       $filepath='userdata/users/user'.$user.'/chest'.$id;
       Storage::disk('local')->deleteDirectory($filepath);
   
-        return redirect()->back();
+     return redirect()->back();
     }
 }

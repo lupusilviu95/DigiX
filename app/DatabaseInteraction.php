@@ -150,7 +150,61 @@ class DatabaseInteraction {
 
 		
 	}
+	
 
+	public function addFile($cufar,$nume,$tip,$cale) {
+
+		$sql="begin 
+			  :r:=DIGIX.ADDFILE(:chestid,:filename,:filetype,:filepath);
+			  end;";
+		$stid=oci_parse($this->conn,$sql);
+		oci_bind_by_name($stid,":r",$result,32);
+		oci_bind_by_name($stid, ':chestid', $cufar);
+		oci_bind_by_name($stid, ':filename',$nume);
+		oci_bind_by_name($stid, ':filetype',$tip);
+		oci_bind_by_name($stid, ':filepath',$cale);
+		oci_execute($stid);
+		oci_commit($this->conn);
+		oci_free_statement($stid);
+		return $result;
+		
+	} 
+
+	public function addTagToFile($file,$tag){
+		$sql="begin 
+			  DIGIX.ADDTAGTOFILE(:file,:tag);
+			  end;";
+		$stid=oci_parse($this->conn,$sql);
+		oci_bind_by_name($stid, ':file',$file);
+		oci_bind_by_name($stid, ':tag',$tag);
+		oci_execute($stid);
+		oci_commit($this->conn);
+		oci_free_statement($stid);
+		}
+
+	public function addRelativeToFile($file,$relative){
+		$sql="begin 
+			  DIGIX.ADDRELATIVETOFILE(:file,:relative);
+			  end;";
+		$stid=oci_parse($this->conn,$sql);
+		oci_bind_by_name($stid, ':file',$file);
+		oci_bind_by_name($stid, ':relative',$relative);
+		oci_execute($stid);
+		oci_commit($this->conn);
+		oci_free_statement($stid);
+	}
+	public function getFilePath ($fileid) {
+		$sql="begin 
+			  :r:=DIGIX.GETFILEPATH(:fileid);
+			  end;";
+		$stid=oci_parse($this->conn,$sql);
+		oci_bind_by_name($stid, ':r',$response,100);
+		oci_bind_by_name($stid, ':fileid',$fileid);
+		oci_execute($stid);
+		oci_commit($this->conn);
+		oci_free_statement($stid);
+		return $response;
+	}
 
 	public function __destruct(){
 		# close the connection

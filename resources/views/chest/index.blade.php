@@ -14,7 +14,7 @@
  					 </tr>
                     @foreach($files as $file)
                     <tr class="clickable-row" id="{{$file->fileid}}" onclick="pop(this)">
-                    	<td>{{$file->name}}</td>
+                    	<td><a href="/viewFile/{{$file->fileid}}">{{$file->name}}</a></td>
                     	<td>{{$file->type}}</td>
                     </tr>    
                     @endforeach

@@ -30,6 +30,9 @@ type varchar2(255),
 path varchar2(255)
 )
 ;
+
+
+select * from files;
 /
 alter table files drop constraint files_chests;
 alter table files add constraint files_chests foreign key (chest_id) references chests(chest_id) ON DELETE CASCADE;
@@ -100,9 +103,10 @@ create or replace package DigiX is
   procedure deleteChest(id_chest chests.chest_id%type);
   function checkChestOwnership(id_user users.id%type,id_chest chests.chest_id%type) return integer;
   function newChest(id_user users.id%type,cap chests.capacity%type,frees chests.freeSlots%type,descr chests.description%type,nume chests.name%type) return integer;
-  procedure addFile(id_chest files.chest_id%type,nume files.name%type, tip files.type%type,cale files.path%type);
+  function addFile(id_chest files.chest_id%type,nume files.name%type, tip files.type%type,cale files.path%type) return integer;
   procedure addTagToFile(id_file files.file_id%type,tag varchar2);
   procedure addRelativeToFile(id_file files.file_id%type , rudenie varchar2);
+  function getFilePath(id_fisier files.file_id%type ) return varchar2;
 end DigiX;
   
   
@@ -121,12 +125,25 @@ create or replace package body DigiX is
       else return false;
     end if;
   end checkExistsFile;
-  
+  function getFilePath(id_fisier files.file_id%type ) return varchar2 is
+  cale varchar2(100);
+  begin
+     if(checkExistsFile(id_fisier)=false)
+      then raise DigixExceptions.inexistent_file;
+     end if;
+     select path into cale from files where file_id =id_fisier;
+     return cale;
+     EXCEPTION
+     when DigixExceptions.inexistent_file then
+     RAISE_APPLICATION_ERROR(-20010,'FISIERUL CU ID-UL SPECIFICAT NU EXISTA');
+  end;
   procedure deleteFile(id_fisier files.file_id%type) is
   begin 
      if(checkExistsFile(id_fisier)=false)
       then raise DigixExceptions.inexistent_file;
      end if;
+     delete from files_relatives where file_id=id_fisier;
+     delete from files_tags where file_id=id_fisier;
      delete from files where file_id=id_fisier;
      EXCEPTION
      when DigixExceptions.inexistent_file then
@@ -178,7 +195,7 @@ create or replace package body DigiX is
     return maxID;
   end;
   
-  procedure addFile(id_chest files.chest_id%type,nume files.name%type, tip files.type%type,cale files.path%type) is 
+  function addFile(id_chest files.chest_id%type,nume files.name%type, tip files.type%type,cale files.path%type) return integer is 
   begin
   select count(*) into nrRecords from files;
     if(nrRecords=0) then
@@ -188,6 +205,7 @@ create or replace package body DigiX is
    maxID:=maxID+1;
    end if;
    insert into files values(maxID,id_chest,nume,tip,cale);
+   return maxID;
   end;
   
   procedure addTagToFile(id_file files.file_id%type,tag varchar2) is 
@@ -231,48 +249,7 @@ create or replace package body DigiX is
   
 end DigiX;
 /
-begin 
-DIGIX.DELETEFILE(2);
-end;
 
-
-begin 
-DIGIX.DELETEchest(2);
-end;
-
-set serveroutput on;
-begin
-if DIGIX.checkChestOwnership(3,1)=true then
-  DBMS_OUTPUT.PUT_Line('owner');
-else DBMS_OUTPUT.PUT_Line('this is not the chest you are looking for');
-end if;
-end;
-
-commit;
-/
-
-
-
-begin
-DIGIX.NEWCHEST(2,40,40,'cufar adaugat prin procedura2','test2');
-end;
-
-
-begin
-digix.addtagtofile(1,'smecher');
-end;
-
-
-
-begin
-digix.addFile(1,'melodie','mp3','');
-end;
-select * from files_tags;
-select * from files;
-
-begin
-digix.addrelativetofile(1,'frate');
-end;
 
 create or replace trigger decreaseFreeSlots after insert on files
 for each row 
@@ -286,7 +263,7 @@ begin
   update chests set freeSlots=old_slots where chest_id=chest;
 end decreaseFreeSlots;
 
-
+/
 create or replace trigger increaseFreeSlots after delete on files
 for each row 
 declare 
@@ -298,26 +275,8 @@ begin
   old_slots:=old_slots+1;
   update chests set freeSlots=old_slots where chest_id=chest;
 end decreaseFreeSlots;
+/
 
 
-
-create or replace trigger disableFilesTriggers before delete on chests
-begin
- execute immediate ' alter table files disable all triggers';
-end disableFilesTriggers;
-
-
-create or replace trigger enableFilesTriggers after delete on chests
-begin
- execute immediate ' alter table files enable all triggers';
-end disableFilesTriggers;
 
 commit;
-
-drop trigger enableFilesTriggers;
-
-
-select * from chests;
-
-
-delete from chests where chest_id=1;

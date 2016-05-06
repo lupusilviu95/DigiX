@@ -5,7 +5,7 @@
 <div class="container">
 	<div class="row">
 		<div class="col-md-5 col-md-offset-3">
-			<form action="/upload/{{$id}}" method="POST">
+			<form action="/upload/{{$id}}" method="POST" enctype="multipart/form-data">
 			 {!! csrf_field() !!}
 			 <input type="hidden" name="chestid" value="{{$id}}">
 			  <div class="form-group{{ $errors->has('file') ? ' has-error' : '' }}">
