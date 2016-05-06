@@ -167,7 +167,10 @@ create or replace package body DigiX is
    if(checkExistsChest(id_chest)=false)
       then raise DigixExceptions.inexistent_chest;
      end if;
-     delete from files where chest_id=id_chest;
+     for c_i in (select file_id from files where chest_id=id_chest) loop
+      deleteFile(c_i.file_id);
+     end loop;
+    
      delete from chests where chest_id=id_chest;
      EXCEPTION
      when DigixExceptions.inexistent_chest then
@@ -300,13 +303,14 @@ select  files.name,relatives.name from files left outer join files_relatives on 
 
 select * from files;
 select * from users;
+select * from tags;
 
 
 
 
-  select f.file_id,count(f.file_id) from files_tags ft, files f, tags t 
+  select f.file_id,count(f.file_id) as "relevance" from files_tags ft, files f, tags t 
   where ft.tag_id=t.tag_id
-  and (t.name in ('amazon','test','internship'))
+  and (t.name in ('amazon'))
   and f.file_id=ft.file_id and f.chest_id in (select chest_id from chests where user_id=2)
   group by f.file_id;
   
@@ -316,3 +320,8 @@ select * from users;
   or r.name in ('mama')))
   and f.chest_id in (select chest_id from chests where user_id=2)
   group by f.file_id;
+  
+  
+  SELECT * FROM USER_CONSTRAINTS WHERE TABLE_NAME = 'USERS';
+  
+  select f.file_id ,count(f.file_id) as relevance from files_tags ft ,files f,tags t where ft.tag_id=t.tag_id and (t.name in ('amazon') ) and f.file_id=ft.file_id and f.chest_id=1 group by f.file_id;

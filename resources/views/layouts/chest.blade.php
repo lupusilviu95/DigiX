@@ -57,7 +57,8 @@
                 </ul>
 
                 <div class="col-sm-3 col-md-3 ">
-                    <form class="navbar-form" role="search" action="/viewChest/{{$_SESSION['currChest']}}/search" method="GET">
+                    <form name ="searchform" class="navbar-form" role="search" action="/viewChest/{{$_SESSION['currChest']}}/search" method="GET" onsubmit="return validateForm()">
+                    <input type="hidden" name="chestid" value="{{$_SESSION['currChest']}}">
                         <div class="input-group">
                             <input type="text" class="form-control" placeholder="Search" name="srch-term" id="srch-term">
                              <div class="input-group-btn">
@@ -122,6 +123,22 @@
 
             
         }
+    </script>
+    <script type="text/javascript">
+        function validateForm(){
+            var x= document.forms["searchform"]["srch-term"].value;
+            
+            if(/^(([a-z]+)([;][a-z]+)?)$|^(([a-z]+)[,]([a-z]+)([;][a-z]+)?)$|^(([a-z]+)[,]([a-z]+)[,]([a-z]+)([;][a-z]+)?)$/i.test(x))
+            {
+                return true;
+            }
+            else
+            {
+                alert("Search query is malformed; it should be something like : tag,tag;relative");
+                return false;
+            }
+        }
+        
     </script>
 
 </body>

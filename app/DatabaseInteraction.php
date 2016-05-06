@@ -205,7 +205,33 @@ class DatabaseInteraction {
 		oci_free_statement($stid);
 		return $response;
 	}
+	public function searchFilesByTags($chestid,$tags){
 
+
+
+  		$sql="select f.file_id as fisier,count(f.file_id) as relevance from files_tags ft ,files f,tags t 
+  			  where ft.tag_id=t.tag_id
+  			  and (t.name in ".$tags." ) and f.file_id=ft.file_id 
+  			  and f.chest_id=:chestid 
+  		      group by f.file_id" ;
+  		var_dump($sql);
+  		$stid=oci_parse($this->conn,$sql);
+		oci_bind_by_name($stid, ':chestid', $chestid);
+		oci_execute($stid);
+		$ids=null;
+        while ($row = oci_fetch_array($stid, OCI_ASSOC+OCI_RETURN_NULLS)) 
+        {
+               $id=$row['FISIER'];
+               $ids[]=$id;
+
+        
+        }
+        oci_free_statement($stid);
+        return $ids;
+
+
+
+	}
 	public function __destruct(){
 		# close the connection
 		oci_close($this->conn);

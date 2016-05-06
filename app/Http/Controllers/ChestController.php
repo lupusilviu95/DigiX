@@ -112,11 +112,30 @@ class ChestController extends Controller
     public function search($id) {
 
         $search_term=$_GET['srch-term'];
-        $regex='/^(([a-z]+)(;[a-z]+)?)$|^(([a-z]+)[,]([a-z]+)(;[a-z]+)?)$|^(([a-z]+)[,]([a-z]+)[,]([a-z]+)(;[a-z]+)?)$/i';
-        if(preg_match($regex, $search_term))
-            return 'Search term ok';
-        else
-            return 'Sorry , but the search pattern is missconstructed';
+        if(strpos($search_term,';')){
+            $tokens=explode(";",$search_term);
+            $tags=explode(",",$tokens[0]);
+            
+        }
+        else  {
+            $tags=explode(",",$search_term);
+            $in_list="('";
+
+            foreach ($tags as $tag) {
+                $in_list=$in_list.$tag."','";
+            }
+            $in_list=rtrim($in_list,"'");
+            $in_list=rtrim($in_list,",");
+            $in_list=$in_list.")";
+            $db=new DatabaseInteraction('student', 'STUDENT', 'localhost/XE');
+            $db->connect();
+            $ids=$db->searchFilesByTags($id,$in_list);
+
+            foreach ($ids as $idf) {
+                echo $idf."\n\n";
+            }
+            
+        }
         
     }
 }
