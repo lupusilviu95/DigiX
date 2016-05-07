@@ -52,7 +52,7 @@
 
 
                     <li><a href="/viewChest/{{$_SESSION['currChest']}}/add">Add File</a></li>
-                    <li><a href="" id="deleteOption" class="delete" data-confirm="Are you sure to delete this item?">Delete</a></li>
+                    <li><a href="" id="deleteOption" class="delete" onclick="confirmDelete(this)">Delete</a></li>
                     <li><a href="" id="downloadOption">Download</a></li>
                 </ul>
 
@@ -139,6 +139,19 @@
             }
         }
         
+    </script>
+
+    <script>
+        function confirmDelete(elem){
+            var sterge = elem.getAttribute("href");
+            elem.href="";
+            if(sterge!=""){
+                var conf = confirm("Esti sigur ca vrei sa stergi fisierul?");
+                if(conf == true){
+                    elem.href=sterge;
+                } 
+            }
+        }
     </script>
 
 </body>
