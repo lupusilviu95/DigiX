@@ -50,6 +50,7 @@
                 <ul class="nav navbar-nav">
                     <li><a href="{{ url('/dashboard') }}">Dashboard</a></li>
                     <li><a href="{{ url('/newChest') }}">Add Chest</a></li>
+                    <li><a href="" id ="updateOption" class="update">Update Chest</a></li>
                     <li><a href="" id="deleteOption" class="delete" onclick="confirmDelete(this)">Delete Chest</a></li>
                 </ul>
                 <div class="col-sm-3 col-md-3 ">
@@ -104,10 +105,13 @@
                  elements[i].classList.remove("bg-info");
              }
             e.classList.add("bg-info");
+            var urlupdate="/edit/chest/";
             var urldelete="/delete/chest/";
             var id=e.getAttribute("id");
             var sterge=urldelete.concat(id);
+            var update=urlupdate.concat(id);
             document.getElementById("deleteOption").href=sterge;
+            document.getElementById("updateOption").href=update;
             
             
         }
@@ -135,7 +139,7 @@
         }
     </script>
     
->>>>>>> origin/master
+
 
     <script type="text/javascript">
         function validateForm(){
@@ -153,6 +157,6 @@
         }
         
     </script>
->>>>>>> origin/master
+
 </body>
 </html>

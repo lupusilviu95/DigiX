@@ -93,33 +93,6 @@ class DatabaseInteraction {
 
 	}
 
-	public function getChestsForUser($userid){
-		$sql='SELECT  chests.name,chest_id,user_id,capacity,freeslots,description from users join chests on user_id=id and user_id=:idu';
-		$stid=oci_parse($this->conn,$sql);
-		oci_bind_by_name($stid, ':idu', $userid);
-        oci_execute($stid);
-        
-
-        $cufere=null;
-        while ($row = oci_fetch_array($stid, OCI_ASSOC+OCI_RETURN_NULLS)) 
-        {
-               $cufar=new Chest();
-               $cufar->id_cufar=$row['CHEST_ID'];
-               $cufar->id_user=$row['USER_ID'];
-               $cufar->capacity=$row['CAPACITY'];
-               $cufar->freeSlots=$row['FREESLOTS'];
-               $cufar->description=$row['DESCRIPTION'];
-               $cufar->name=$row['NAME'];
-
-               $cufere[]=$cufar;
-
-        
-        }
-        oci_free_statement($stid);
-        return $cufere;
-	}
-
-	
 	public function deleteFile($fileid) {
 
 		$sql="begin 
@@ -348,6 +321,69 @@ class DatabaseInteraction {
         }
         oci_free_statement($stid);
         return $files;
+	}
+	public function getChestsForUser($userid){
+		$sql='SELECT  chests.name,chest_id,user_id,capacity,freeslots,description from users join chests on user_id=id and user_id=:idu';
+		$stid=oci_parse($this->conn,$sql);
+		oci_bind_by_name($stid, ':idu', $userid);
+        oci_execute($stid);
+        
+
+        $cufere=null;
+        while ($row = oci_fetch_array($stid, OCI_ASSOC+OCI_RETURN_NULLS)) 
+        {
+               $cufar=new Chest();
+               $cufar->id_cufar=$row['CHEST_ID'];
+               $cufar->id_user=$row['USER_ID'];
+               $cufar->capacity=$row['CAPACITY'];
+               $cufar->freeSlots=$row['FREESLOTS'];
+               $cufar->description=$row['DESCRIPTION'];
+               $cufar->name=$row['NAME'];
+
+               $cufere[]=$cufar;
+
+        
+        }
+        oci_free_statement($stid);
+        return $cufere;
+	}
+
+	public function getChestData($chestid) {
+		$sql='select name,chest_id,user_id,capacity,freeslots,description from chests where chest_id=:chestid';
+		$stid=oci_parse($this->conn,$sql);
+		oci_bind_by_name($stid, ':chestid', $chestid);
+        oci_execute($stid);
+        
+
+        
+        while ($row = oci_fetch_array($stid, OCI_ASSOC+OCI_RETURN_NULLS)) 
+        {
+               $cufar=new Chest();
+               $cufar->id_cufar=$row['CHEST_ID'];
+               $cufar->id_user=$row['USER_ID'];
+               $cufar->capacity=$row['CAPACITY'];
+               $cufar->freeSlots=$row['FREESLOTS'];
+               $cufar->description=$row['DESCRIPTION'];
+               $cufar->name=$row['NAME'];
+
+              
+
+        
+        }
+        oci_free_statement($stid);
+        return $cufar;
+
+		
+	}
+	public function updateChest($chestid,$name,$description){
+		$sql='update chests set name=:chestname ,description=:descr where chest_id=:chestid';
+		$stid=oci_parse($this->conn,$sql);
+		oci_bind_by_name($stid,':descr',$description);
+		oci_bind_by_name($stid,':chestname',$name);
+		oci_bind_by_name($stid, ':chestid', $chestid);
+        oci_execute($stid);
+        oci_commit($this->conn);
+		oci_free_statement($stid);
 	}
 	public function __destruct(){
 		# close the connection

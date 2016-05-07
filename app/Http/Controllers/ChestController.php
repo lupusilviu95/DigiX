@@ -151,4 +151,39 @@ class ChestController extends Controller
         }
         
     }
+
+    public function edit ($id) {
+
+        $user=Auth::user()->id;
+        $db=new DatabaseInteraction('student', 'STUDENT', 'localhost/XE');
+        $db->connect();
+        $owner=$db->verifyOwnership($user,$id);
+        
+        if($owner==1)
+        {
+            
+            $cufar=$db->getChestData($id);
+            return view('chest.edit',compact('cufar'));
+
+        }
+        else  return redirect('/dashboard');
+
+        
+        
+    }
+
+    public function update(Request $request,$id){
+        $this->validate($request,[
+            'description'=>'required', 
+            'chestName'=>'required'
+            ]);
+
+        $desc=$request->description;
+        $name=$request->chestName;
+        $db=new DatabaseInteraction('student', 'STUDENT', 'localhost/XE');
+        $db->connect();
+        $db->updateChest($id,$name,$desc);
+        return redirect('/dashboard');
+
+    }
 }
