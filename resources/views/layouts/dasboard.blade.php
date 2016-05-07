@@ -50,7 +50,7 @@
                 <ul class="nav navbar-nav">
                     <li><a href="{{ url('/dashboard') }}">Dashboard</a></li>
                     <li><a href="{{ url('/newChest') }}">Add Chest</a></li>
-                    <li><a href="" id="deleteOption" class="delete" data-confirm="Are you sure to delete this item?">Delete Chest</a></li>
+                    <li><a href="" id="deleteOption" class="delete" onclick="confirmDelete()">Delete Chest</a></li>
                 </ul>
                 <div class="col-sm-3 col-md-3 ">
                     <form class="navbar-form" role="search" name ="searchform" action="/dashboard/search" method="GET" onsubmit="return validateForm()">
@@ -121,6 +121,20 @@
             });
         });
     </script>
+
+    <script>
+        function confirmDelete(elem){
+            var sterge = elem.getAttribute("href");
+            elem.href="";
+            if(sterge!=""){
+                var conf = confirm("Esti sigur ca vrei sa stergi cufarul?");
+                if(conf == true){
+                    elem.href=sterge;
+                } 
+            }
+        }
+    </script>
+    
 >>>>>>> origin/master
 
     <script type="text/javascript">
