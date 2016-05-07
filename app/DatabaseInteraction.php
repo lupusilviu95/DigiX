@@ -51,28 +51,28 @@ class DatabaseInteraction {
 			return $result==1;
 		}
 	}
-
-	public function getFilesForChest($cid){
-
-		$sql='select name,type,file_id,chest_id,path from files where chest_id=:idc';
+	public function verifyFileOwnership($uid,$fid){
+		
+		$sql= "begin 
+			   :r:=DIGIX.CHECKFILEOWNERSHIP(:utilizator,:fisier);
+			   end;";
 		$stid=oci_parse($this->conn,$sql);
-		oci_bind_by_name($stid, ':idc', $cid);
-	    oci_execute($stid);
-	    $files=null;
-	    while ($row = oci_fetch_array($stid, OCI_ASSOC+OCI_RETURN_NULLS)) 
-	        {
-	        	$file=new File();
-	        	$file->fileid=$row['FILE_ID'];
-	        	$file->chestid=$row['CHEST_ID'];
-	        	$file->type=$row['TYPE'];
-	        	$file->name=$row['NAME'];
-	        	$file->path=$row['PATH'];
-	        	$files[]=$file;
+		oci_bind_by_name($stid,":r",$result,32);
+		oci_bind_by_name($stid,":utilizator",$uid);
+		oci_bind_by_name($stid,":fisier",$fid);
 
-	        }
-	    oci_free_statement($stid);
-	    return $files;
+		$r=@oci_execute($stid);
+		if(!$r){
+			$e = oci_error($stid); 
+			echo $e['message'];
+
+		}
+		else {
+			oci_free_statement($stid);
+			return $result==1;
+		}
 	}
+	
 
 	public function newChest ($userid,$capacity,$freeS,$descr,$name) {
 
@@ -205,32 +205,149 @@ class DatabaseInteraction {
 		oci_free_statement($stid);
 		return $response;
 	}
+
+
+	public function getFilesForChest($cid){
+
+		$sql='select name,type,file_id,chest_id,path from files where chest_id=:idc';
+		$stid=oci_parse($this->conn,$sql);
+		oci_bind_by_name($stid, ':idc', $cid);
+	    oci_execute($stid);
+	    $files=null;
+	    while ($row = oci_fetch_array($stid, OCI_ASSOC+OCI_RETURN_NULLS)) 
+	        {
+	        	$file=new File();
+	        	$file->fileid=$row['FILE_ID'];
+	        	$file->chestid=$row['CHEST_ID'];
+	        	$file->type=$row['TYPE'];
+	        	$file->name=$row['NAME'];
+	        	$file->path=$row['PATH'];
+	        	$files[]=$file;
+
+	        }
+	    oci_free_statement($stid);
+	    return $files;
+	}
 	public function searchFilesByTags($chestid,$tags){
 
 
 
-  		$sql="select f.file_id as fisier,count(f.file_id) as relevance from files_tags ft ,files f,tags t 
+  		$sql="select f.file_id as fisier,f.name as nume , f.type as tip, f.path as cale,count(f.file_id) as relevance from files_tags ft ,files f,tags t 
   			  where ft.tag_id=t.tag_id
   			  and (t.name in ".$tags." ) and f.file_id=ft.file_id 
   			  and f.chest_id=:chestid 
-  		      group by f.file_id" ;
-  		var_dump($sql);
+  		      group by f.file_id,f.name,f.type,f.path order by relevance desc" ;
   		$stid=oci_parse($this->conn,$sql);
 		oci_bind_by_name($stid, ':chestid', $chestid);
 		oci_execute($stid);
-		$ids=null;
+		 $files=null;
         while ($row = oci_fetch_array($stid, OCI_ASSOC+OCI_RETURN_NULLS)) 
         {
-               $id=$row['FISIER'];
-               $ids[]=$id;
+               	$file=new File();
+	        	$file->fileid=$row['FISIER'];
+	        	$file->chestid=$chestid;
+	        	$file->type=$row['TIP'];
+	        	$file->name=$row['NUME'];
+	        	$file->path=$row['CALE'];
+	        	$files[]=$file;
 
         
         }
         oci_free_statement($stid);
-        return $ids;
+        return $files;
 
 
 
+	}
+
+	public function globalSearchFilesByTags($userid,$tags ) {
+
+		$sql="select f.file_id as fisier,f.name as nume , f.type as tip, f.path as cale,f.chest_id as cufar ,count(f.file_id) as relevance from files_tags ft ,files f,tags t 
+  			  where ft.tag_id=t.tag_id
+  			  and (t.name in ".$tags." ) and f.file_id=ft.file_id 
+  			  and f.chest_id in ( select chest_id from chests where user_id=:user_id)
+  		      group by f.file_id,f.name,f.type,f.path,f.chest_id order by relevance desc" ;
+  		$stid=oci_parse($this->conn,$sql);
+		oci_bind_by_name($stid,":user_id",$userid);
+		oci_execute($stid);
+		 $files=null;
+        while ($row = oci_fetch_array($stid, OCI_ASSOC+OCI_RETURN_NULLS)) 
+        {
+               	$file=new File();
+	        	$file->fileid=$row['FISIER'];
+	        	$file->chestid=$row['CUFAR'];
+	        	$file->type=$row['TIP'];
+	        	$file->name=$row['NUME'];
+	        	$file->path=$row['CALE'];
+	        	$files[]=$file;
+
+        
+        }
+        oci_free_statement($stid);
+        return $files;
+		
+	}
+
+	public function globalSearchFilesByTagsAndRelative($userid,$tags,$relative){
+		$sql="select f.file_id as fisier,f.name as nume , f.type as tip, f.path as cale,f.chest_id as cufar, count (f.file_id) as relevance from files f 
+			  join files_tags ft on f.file_id=ft.file_id 
+			  join tags t on t.tag_id = ft.tag_id 
+			  left outer join files_relatives fr on f.file_id=fr.file_id 
+			  left outer join relatives r on r.relative_id=fr.relative_id
+			  where (((t.name in " .$tags. " ) 
+			  or r.name in ".$relative." ))
+			  and f.chest_id in (select chest_id from chests where user_id=:userid)
+			  group by f.file_id,f.name,f.type,f.path,f.chest_id order by relevance desc";
+			  
+  		$stid=oci_parse($this->conn,$sql);
+		oci_bind_by_name($stid, ':userid', $userid);
+		oci_execute($stid);
+		$files=null;
+        while ($row = oci_fetch_array($stid, OCI_ASSOC+OCI_RETURN_NULLS)) 
+        {
+               	$file=new File();
+	        	$file->fileid=$row['FISIER'];
+	        	$file->chestid=$row['CUFAR'];
+	        	$file->type=$row['TIP'];
+	        	$file->name=$row['NUME'];
+	        	$file->path=$row['CALE'];
+	        	$files[]=$file;
+
+        
+        }
+        oci_free_statement($stid);
+        return $files;
+	}
+
+	public function searchFilesByTagsAndRelative($chestid,$tags,$relative){
+		$sql="select f.file_id as fisier,f.name as nume , f.type as tip, f.path as cale, count (f.file_id) as relevance from files f 
+			  join files_tags ft on f.file_id=ft.file_id 
+			  join tags t on t.tag_id = ft.tag_id 
+			  left outer join files_relatives fr on f.file_id=fr.file_id 
+			  left outer join relatives r on r.relative_id=fr.relative_id
+			  where (((t.name in " .$tags. " ) 
+			  or r.name in ".$relative." ))
+			  and f.chest_id=:chestid 
+			  group by f.file_id,f.name,f.type,f.path order by relevance desc";
+			  
+  		$stid=oci_parse($this->conn,$sql);
+		oci_bind_by_name($stid, ':chestid', $chestid);
+		oci_execute($stid);
+		$files=null;
+        while ($row = oci_fetch_array($stid, OCI_ASSOC+OCI_RETURN_NULLS)) 
+        {
+               	$file=new File();
+	        	$file->fileid=$row['FISIER'];
+	        	$file->chestid=$chestid;
+	        	$file->type=$row['TIP'];
+	        	$file->name=$row['NUME'];
+	        	$file->path=$row['CALE'];
+	        	$files[]=$file;
+
+        
+        }
+        oci_free_statement($stid);
+        return $files;
 	}
 	public function __destruct(){
 		# close the connection

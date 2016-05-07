@@ -104,6 +104,7 @@ end DigiXExceptions;
 create or replace package DigiX is
   procedure deleteFile(id_fisier files.file_id%type);
   procedure deleteChest(id_chest chests.chest_id%type);
+  function checkFileOwnership(id_user users.id%type,id_file files.file_id%type) return integer;
   function checkChestOwnership(id_user users.id%type,id_chest chests.chest_id%type) return integer;
   function newChest(id_user users.id%type,cap chests.capacity%type,frees chests.freeSlots%type,descr chests.description%type,nume chests.name%type) return integer;
   function addFile(id_chest files.chest_id%type,nume files.name%type, tip files.type%type,cale files.path%type) return integer;
@@ -175,6 +176,16 @@ create or replace package body DigiX is
      EXCEPTION
      when DigixExceptions.inexistent_chest then
      RAISE_APPLICATION_ERROR(-20011,'Cufarul CU ID-UL SPECIFICAT NU EXISTA');
+  end;
+  function checkFileOwnership(id_user users.id%type , id_file files.file_id%type) return integer is 
+  begin
+    select 1 into counter from users join chests on users.id=chests.user_id join files on files.chest_id=chests.chest_id where files.file_id=id_file and chests.user_id=id_user;
+    if(counter =1) then 
+      return 1;
+    end if;
+    EXCEPTION
+    when no_data_found then
+    return 0;
   end;
   function checkChestOwnership(id_user users.id%type,id_chest chests.chest_id%type) return integer is
   begin
@@ -310,18 +321,36 @@ select * from tags;
 
   select f.file_id,count(f.file_id) as "relevance" from files_tags ft, files f, tags t 
   where ft.tag_id=t.tag_id
-  and (t.name in ('amazon'))
+  and (t.name in ('amazon','test','internship'))
   and f.file_id=ft.file_id and f.chest_id in (select chest_id from chests where user_id=2)
   group by f.file_id;
   
   
-  select f.file_id,count(f.file_id) from files f join files_tags ft on f.file_id=ft.file_id join tags t on t.tag_id = ft.tag_id left outer join files_relatives fr on f.file_id=fr.file_id left outer join relatives r on r.relative_id=fr.relative_id
+  select f.chest_id,f.file_id,count(f.file_id) from files f join files_tags ft on f.file_id=ft.file_id join tags t on t.tag_id = ft.tag_id left outer join files_relatives fr on f.file_id=fr.file_id left outer join relatives r on r.relative_id=fr.relative_id
   where (((t.name in ('amazon','test','internship'))
   or r.name in ('mama')))
   and f.chest_id in (select chest_id from chests where user_id=2)
-  group by f.file_id;
+  group by f.file_id,f.chest_id;
   
   
   SELECT * FROM USER_CONSTRAINTS WHERE TABLE_NAME = 'USERS';
   
   select f.file_id ,count(f.file_id) as relevance from files_tags ft ,files f,tags t where ft.tag_id=t.tag_id and (t.name in ('amazon') ) and f.file_id=ft.file_id and f.chest_id=1 group by f.file_id;
+  
+  
+  
+  
+  
+  select chests.chest_id,chests.user_id,files.file_id from users join chests on users.id=chests.user_id join files on files.chest_id=chests.chest_id;
+  
+  
+  select count(*) from users join chests on users.id=chests.user_id join files on files.chest_id=chests.chest_id where files.file_id=:fileid and chests.user_id=:userid;
+  
+  
+  
+  
+  
+  
+  
+  
+  select f.file_id as fisier, count (f.file_id) as relevance from files f join files_tags ft on f.file_id=ft.file_id join tags t on t.tag_id = ft.tag_id left outer join files_relatives fr on f.file_id=fr.file_id left outer join relatives r on r.relative_id=fr.relative_id where (((t.name in ('amazon','internship','test') ) or r.name in ('mama') )) and f.chest_id=:chestid group by f.file_id
