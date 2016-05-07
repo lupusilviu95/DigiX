@@ -113,7 +113,6 @@
         }
     </script>
 
-<<<<<<< HEAD
     <script type="text/javascript">
         $(document).ready(function() {
             $("div").on('click','.panel-heading' ,function () {
@@ -122,17 +121,7 @@
             });
         });
     </script>
-    
-=======
-    <script src="http://code.jquery.com/jquery-1.10.2.js"></script>
-    <script src="http://code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
-    <script type="text/javascript">
-        $(document).ready(function() {
-            $("div").on('click','.panel-heading' ,function () {
-                $(this).effect("highlight", {color:"#FF0000"}, 3000);
-            });
-        });
-    </script>
+>>>>>>> origin/master
 
     <script type="text/javascript">
         function validateForm(){
