@@ -127,7 +127,7 @@
             var sterge = elem.getAttribute("href");
             elem.href="";
             if(sterge!=""){
-                var conf = confirm("Esti sigur ca vrei sa stergi cufarul?");
+                var conf = confirm("All files will be lost!!! \nAre you sure you want to delete the chest?");
                 if(conf == true){
                     elem.href=sterge;
                 } 

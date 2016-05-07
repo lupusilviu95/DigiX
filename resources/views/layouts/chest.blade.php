@@ -146,7 +146,7 @@
             var sterge = elem.getAttribute("href");
             elem.href="";
             if(sterge!=""){
-                var conf = confirm("Esti sigur ca vrei sa stergi fisierul?");
+                var conf = confirm("Are you sure you want to delete the file?");
                 if(conf == true){
                     elem.href=sterge;
                 } 
