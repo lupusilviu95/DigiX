@@ -46,27 +46,16 @@
 
             <div class="collapse navbar-collapse" id="app-navbar-collapse">
                 <!-- Left Side Of Navbar -->
-                 
                 <ul class="nav navbar-nav">
                     <li><a href="{{ url('/dashboard') }}">Dashboard</a></li>
-                    <li><a href="{{ url('/newChest') }}">Add Chest</a></li>
-                    <li><a href="" id="deleteOption" class="delete" data-confirm="Are you sure to delete this item?">Delete Chest</a></li>
+                    <li><a href="" id="deleteOption" class="delete" data-confirm="Are you sure to delete this item?">Delete</a></li>
+                    <li><a href="" id="downloadOption">Download</a></li>
                 </ul>
-                <div class="col-sm-3 col-md-3 ">
-                    <form class="navbar-form" role="search" name ="searchform" action="/dashboard/search" method="GET" onsubmit="return validateForm()">
-                        <div class="input-group">
-                            <input type="text" class="form-control" placeholder="Search" name="srch-term" id="srch-term">
-                             <div class="input-group-btn">
-                                <button class="btn btn-default" type="submit"><i class="glyphicon glyphicon-search"></i></button>
-                            </div>
-                        </div>
-                    </form>
-                </div>
-               
-               
+
+                
+
                 <!-- Right Side Of Navbar -->
                 <ul class="nav navbar-nav navbar-right">
-
                     <!-- Authentication Links -->
                     @if (Auth::guest())
                         <li><a href="{{ url('/login') }}">Login</a></li>
@@ -93,63 +82,35 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.3/jquery.min.js" integrity="sha384-I6F5OKECLVtK/BL+8iSLDEHowSAfUo76ZL9+kGAgTRdiByINKJaqTPH/QVNS1VDb" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
     {{-- <script src="{{ elixir('js/app.js') }}"></script> --}}
+    <script type="text/javascript">
+           
+        
+        $(document).ready(function() {
+           
+            $('#myTable').on('click', '.clickable-row', function(event) {
+            $(this).addClass('bg-info').siblings().removeClass('bg-info');
+            
+        });
+          
+        
+        });
+        
 
-    <script src="http://code.jquery.com/jquery-1.10.2.js"></script>
-    <script src="http://code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
-
+    </script>
     <script type="text/javascript">
         function pop(e) {
-            var elements =document.getElementsByClassName("bg-info");
-             for( var i=0;i<elements.length;i++){
-                 elements[i].classList.remove("bg-info");
-             }
-            e.classList.add("bg-info");
-            var urldelete="/delete/chest/";
+            var urldelete="/delete/file/";
+            var urldownload="/download/file/"
             var id=e.getAttribute("id");
             var sterge=urldelete.concat(id);
+            var descarca=urldownload.concat(id);
             document.getElementById("deleteOption").href=sterge;
-            
+            document.getElementById("downloadOption").href=descarca;
+
             
         }
     </script>
+   
 
-<<<<<<< HEAD
-    <script type="text/javascript">
-        $(document).ready(function() {
-            $("div").on('click','.panel-heading' ,function () {
-                $(".panel-heading").stop(true, true);
-                $(this).effect("highlight", {color:"#00FFE4"}, 300000);
-            });
-        });
-    </script>
-    
-=======
-    <script src="http://code.jquery.com/jquery-1.10.2.js"></script>
-    <script src="http://code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
-    <script type="text/javascript">
-        $(document).ready(function() {
-            $("div").on('click','.panel-heading' ,function () {
-                $(this).effect("highlight", {color:"#FF0000"}, 3000);
-            });
-        });
-    </script>
-
-    <script type="text/javascript">
-        function validateForm(){
-            var x= document.forms["searchform"]["srch-term"].value;
-            
-            if(/^(([a-z]+)([;][a-z]+)?)$|^(([a-z]+)[,]([a-z]+)([;][a-z]+)?)$|^(([a-z]+)[,]([a-z]+)[,]([a-z]+)([;][a-z]+)?)$/i.test(x))
-            {
-                return true;
-            }
-            else
-            {
-                alert("Search query is malformed; it should be something like : tag,tag;relative");
-                return false;
-            }
-        }
-        
-    </script>
->>>>>>> origin/master
 </body>
 </html>

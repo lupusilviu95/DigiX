@@ -22,31 +22,70 @@ class FileController extends Controller
       
    }
    public function delete($id) {
-   		
-      $db=new DatabaseInteraction('student', 'STUDENT', 'localhost/XE');
-      $db->connect();
-      $cale=$db->getFilePath($id);
-      Storage::delete($cale);
-      $db->deleteFile($id);
-      
-   		return redirect()->back();
+
+      if(!Auth::check())
+        return redirect('/');
+      else 
+      {
+
+       		$user=Auth::user()->id;
+          $db=new DatabaseInteraction('student', 'STUDENT', 'localhost/XE');
+          $db->connect();
+           $owner=$db->verifyFileOwnership($user,$id);
+          if($owner==1){
+          $cale=$db->getFilePath($id);
+          Storage::delete($cale);
+          $db->deleteFile($id);
+          
+       		return redirect()->back();
+        }
+        else {
+            return redirect('/dashboard');
+        }
+      }
+
    	}
     public function download ($id) {
 
-      $db=new DatabaseInteraction('student', 'STUDENT', 'localhost/XE');
-      $db->connect();
-      $cale=$db->getFilePath($id);
-      return response()->download($this->root.$cale);
       
+      if(!Auth::check())
+        return redirect('/');
+      else 
+      {
+        
+          $user=Auth::user()->id;
+
+          $db=new DatabaseInteraction('student', 'STUDENT', 'localhost/XE');
+          $db->connect();
+          $owner=$db->verifyFileOwnership($user,$id);
+          if($owner==1){
+          $cale=$db->getFilePath($id);
+          return response()->download($this->root.$cale);
+          }
+          else {
+            return redirect('/dashboard');
+          }
+      }
       
     }
     public function view ($id) {
 
-      $db=new DatabaseInteraction('student', 'STUDENT', 'localhost/XE');
-      $db->connect();
-      $cale=$db->getFilePath($id);
-      return response()->file($this->root.$cale);
-      
+      if(!Auth::check())
+        return redirect('/');
+      else 
+      {
+          $user=Auth::user()->id;
+          $db=new DatabaseInteraction('student', 'STUDENT', 'localhost/XE');
+          $db->connect();
+          $owner=$db->verifyFileOwnership($user,$id);
+          if($owner==1){
+          $cale=$db->getFilePath($id);
+          return response()->file($this->root.$cale);
+          }
+          else{
+            return redirect('/dashboard');
+          }
+      }
       
     }
 

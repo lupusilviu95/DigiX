@@ -111,10 +111,25 @@ class ChestController extends Controller
     }
     public function search($id) {
 
+
+        $_SESSION['currChest'] = $id;
         $search_term=$_GET['srch-term'];
         if(strpos($search_term,';')){
             $tokens=explode(";",$search_term);
             $tags=explode(",",$tokens[0]);
+            $in_list="('";
+
+            foreach ($tags as $tag) {
+                $in_list=$in_list.$tag."','";
+            }
+            $in_list=rtrim($in_list,"'");
+            $in_list=rtrim($in_list,",");
+            $in_list=$in_list.")";
+            $rudenie_in="('".$tokens[1]."')";
+            $db=new DatabaseInteraction('student', 'STUDENT', 'localhost/XE');
+            $db->connect();
+            $files=$db->searchFilesByTagsAndRelative($id,$in_list,$rudenie_in);
+            return view('chest.search',compact('files'));
             
         }
         else  {
@@ -129,11 +144,9 @@ class ChestController extends Controller
             $in_list=$in_list.")";
             $db=new DatabaseInteraction('student', 'STUDENT', 'localhost/XE');
             $db->connect();
-            $ids=$db->searchFilesByTags($id,$in_list);
-
-            foreach ($ids as $idf) {
-                echo $idf."\n\n";
-            }
+            $files=$db->searchFilesByTags($id,$in_list);
+            return view('chest.search',compact('files'));
+          
             
         }
         
