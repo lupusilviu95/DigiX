@@ -2,83 +2,115 @@
 
 @section('content')
 
-<script src="/js/slider.js"></script>
+<script src="/js/carousel.js"></script>
  <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
  <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
- <script src="resources/scripts/jquery-1.7.1.min.js"></script>
-    <script src="resources/scripts/jquery-ui-1.8.10.custom.min.js"></script>
-    <script src="resources/scripts/axure/axQuery.js"></script>
-    <script src="resources/scripts/axure/globals.js"></script>
-    <script src="resources/scripts/axutils.js"></script>
-    <script src="resources/scripts/axure/annotation.js"></script>
-    <script src="resources/scripts/axure/axQuery.std.js"></script>
-    <script src="resources/scripts/axure/doc.js"></script>
-    <script src="data/document.js"></script>
-    <script src="resources/scripts/messagecenter.js"></script>
-    <script src="resources/scripts/axure/events.js"></script>
-    <script src="resources/scripts/axure/action.js"></script>
-    <script src="resources/scripts/axure/expr.js"></script>
-    <script src="resources/scripts/axure/geometry.js"></script>
-    <script src="resources/scripts/axure/flyout.js"></script>
-    <script src="resources/scripts/axure/ie.js"></script>
-    <script src="resources/scripts/axure/model.js"></script>
-    <script src="resources/scripts/axure/repeater.js"></script>
-    <script src="resources/scripts/axure/sto.js"></script>
-    <script src="resources/scripts/axure/utils.temp.js"></script>
-    <script src="resources/scripts/axure/variables.js"></script>
-    <script src="resources/scripts/axure/drag.js"></script>
-    <script src="resources/scripts/axure/move.js"></script>
-    <script src="resources/scripts/axure/visibility.js"></script>
-    <script src="resources/scripts/axure/style.js"></script>
-    <script src="resources/scripts/axure/adaptive.js"></script>
-    <script src="resources/scripts/axure/tree.js"></script>
-    <script src="resources/scripts/axure/init.temp.js"></script>
-    <script src="files/home/data.js"></script>
-    <script src="resources/scripts/axure/legacy.js"></script>
-    <script src="resources/scripts/axure/viewer.js"></script>
-    <script type="text/javascript">
-      $axure.utils.getTransparentGifPath = function() { return 'resources/images/transparent.gif'; };
-      $axure.utils.getOtherPath = function() { return 'resources/Other.html'; };
-      $axure.utils.getReloadPath = function() { return 'resources/reload.html'; };
-    </script>
+  <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
+  <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
 
-<div class="container">
-    <div class="row">
+    <style>
+        body{
+            font-family: 'Lato';
+            background: url("/css/treasure_top.jpg") no-repeat, url("/css/treasure_background.jpg") no-repeat,url("/css/treasure_login.jpg") no-repeat;
+            -webkit-background-size: auto,auto,auto;
+            -moz-background-size: auto,auto,auto;
+            -o-background-size: auto,auto,auto;
+            background-size: auto,auto,auto;
+            background-position: 0px 51px,0px 378px,bottom;
+            }
+
+            footer {
+            margin-top: 20px;
+            margin-bottom: 300px;
+            }
+</style>
+
+    <body>
+    <div class="container">
+    <div class="row">   
         <div class="col-md-10 col-md-offset-1">
-            <div class="panel panel-default">
-                
-                    <div id="slider">
-                        <ul class="slides">
-                            <li class="slide"><img src="/css/photo1.jpg"></li>
-                            <li class="slide"><img src="/css/photo2.jpg"></li>
-                            <li class="slide"><img src="/css/photo3.jpg"></li>
-                            <li class="slide"><img src="/css/photo4.jpg"></li>
-                            <li class="slide"><img src="/css/photo1.jpg"></li>                             
-                        </ul>
-                    </div>
+            <div class="panel panel-default">                 
 
-                    <script src="../js/slider.js"></script>
-                    <!-- Youtube (Inline Frame) -->
-                    <div id="u52" class="ax_inline_frame" data-label="Youtube">
-                         <iframe id="u52_input" data-label="Youtube" scrolling="auto" frameborder="1"></iframe>
-                    </div>
+                    
+            <div class="row">
+            <div class="col-xs-8 col-sm-8">
+                    
+            <div id="myCarousel" class="carousel slide" data-ride="carousel">
+            <!-- Indicators -->
+                <ol class="carousel-indicators">
+                    <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+                    <li data-target="#myCarousel" data-slide-to="1"></li>
+                    <li data-target="#myCarousel" data-slide-to="2"></li>
+                    <li data-target="#myCarousel" data-slide-to="3"></li>
+                </ol>
 
-                    <!-- SoundCloud (Inline Frame) -->
-                     <div id="u61" class="ax_inline_frame" data-label="SoundCloud">
-                         <iframe id="u61_input" data-label="SoundCloud" scrolling="auto" frameborder="0"></iframe>
-                     </div>
+                <!-- Wrapper for slides -->
+                <div class="carousel-inner" role="listbox">
 
-                     <!-- Tweet PrintScreen (Image) -->
-                     <div id="u62" class="ax_image" data-label="Tweet PrintScreen">
-                            <img id="u62_img" class="img " src="images/home/tweet_printscreen_u62.jpg"/>
-                        <!-- Unnamed () -->
-                        <div id="u63" class="text">
-                        <p><span></span></p>
-                        </div>
-                    </div>
-                
+                <div class="item active">
+                    <img src="/css/photo1.jpg" alt="Responsive image"class="img-responsive"  >
+                    
+                </div>
+
+                <div class="item">
+                    <img src="/css/photo2.jpg" alt="Responsive image"class="img-responsive"  >
+                    
+                </div>
+    
+                <div class="item">
+                    <img src="/css/photo3.jpg" alt="Responsive image"class="img-responsive"  >
+                    
+                </div>
+
+                <div class="item">
+                    <img src="/css/photo4.jpg" alt="Responsive image"class="img-responsive"  >
+                </div>
+
+                </div>
+
+                <!-- Left and right controls -->
+                <a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev">
+                    <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+                    <span class="sr-only">Previous</span>
+                </a>
+                <a class="right carousel-control" href="#myCarousel" role="button" data-slide="next">
+                    <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+                    <span class="sr-only">Next</span>
+                </a>
             </div>
+
+
+            <script src="../js/carousel.js"></script>
+                    
+    
+            <div class="videoWrapper">
+                <iframe class="embed-responsive-item"  src="https://www.youtube.com/embed/N9q9uNa4DAg" frameborder="0" width="560" height="315"></iframe>
+            </div>
+
+
+            <div class="audioWrapper">
+                <iframe width="100%" height="166" scrolling="no" frameborder="no" src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/4152184&amp;color=ff5500&amp;auto_play=false&amp;hide_related=false&amp;show_comments=true&amp;show_user=true&amp;show_reposts=false"></iframe>
+            </div>
+
+            <div class="twitterWrapper">
+                <blockquote class="twitter-tweet" data-lang="en"><p lang="en" dir="ltr">The cute city of Bellagio, Italy. Image via <a href="https://twitter.com/AprendizViajant">@AprendizViajant</a> on Instagram. Thanks for tagging <a href="https://twitter.com/hashtag/TravelDudes?src=hash">#TravelDudes</a>! <a href="https://twitter.com/hashtag/Travel?src=hash">#Travel</a> <a href="https://t.co/VhRkpBxlcU">pic.twitter.com/VhRkpBxlcU</a></p>&mdash; Melvin (@TravelDudes) <a href="https://twitter.com/TravelDudes/status/729827106172096512">May 10, 2016</a></blockquote>
+                <script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
+           </div>
+           </div>
+           </div>
+        </div>
         </div>
     </div>
 </div>
+
+<footer class="footer">
+      <div class="container">
+        <p class="text-muted">Place footer content here.</p>
+      </div>
+    </footer>
+
+</body>
+
+
 @endsection

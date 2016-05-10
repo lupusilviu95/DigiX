@@ -1,6 +1,19 @@
 @extends('layouts.app')
 
 @section('content')
+
+<style>
+        body{
+            font-family: 'Lato';
+            background: url("/css/treasure_login.jpg") no-repeat;
+            -webkit-background-size: cover;
+            -moz-background-size: cover;
+            -o-background-size: cover;
+            background-size: cover;
+            background-position: initial;
+        }
+</style>
+
 <div class="container">
     <div class="row">
         <div class="col-md-8 col-md-offset-2">
