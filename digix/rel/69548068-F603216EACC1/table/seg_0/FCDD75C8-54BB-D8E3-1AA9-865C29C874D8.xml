@@ -1,0 +1,131 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Table class="oracle.dbtools.crest.model.design.relational.Table" directorySegmentName="seg_0" id="FCDD75C8-54BB-D8E3-1AA9-865C29C874D8" schemaObject="524A9E88-9262-6005-569F-0697DFAEBBF5" name="FILES">
+<sourceConnName>Student</sourceConnName>
+<sourceObjSchema>STUDENT</sourceObjSchema>
+<sourceObjName>FILES</sourceObjName>
+<createdBy>silviu</createdBy>
+<createdTime>2016-05-13 16:07:04 UTC</createdTime>
+<ownerDesignName>digix</ownerDesignName>
+<allowColumnReorder>false</allowColumnReorder>
+<existDependencyGenerateInDDl>true</existDependencyGenerateInDDl>
+<parsed>true</parsed>
+<columns itemClass="oracle.dbtools.crest.model.design.relational.Column">
+<Column name="FILE_ID" id="C92F9D6F-141A-D717-6D42-4D27EBEEEDAA">
+<sourceConnName>Student</sourceConnName>
+<sourceObjSchema>FILES</sourceObjSchema>
+<sourceObjName>FILE_ID</sourceObjName>
+<createdBy>silviu</createdBy>
+<createdTime>2016-05-13 16:07:05 UTC</createdTime>
+<ownerDesignName>digix</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<dataTypePrecision>10</dataTypePrecision>
+<dataTypeScale>0</dataTypeScale>
+<ownDataTypeParameters>,10,0</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="CHEST_ID" id="7E2C0905-65D5-5572-AE74-1C83C24ED91E">
+<sourceConnName>Student</sourceConnName>
+<sourceObjSchema>FILES</sourceObjSchema>
+<sourceObjName>CHEST_ID</sourceObjName>
+<createdBy>silviu</createdBy>
+<createdTime>2016-05-13 16:07:05 UTC</createdTime>
+<ownerDesignName>digix</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<dataTypePrecision>10</dataTypePrecision>
+<dataTypeScale>0</dataTypeScale>
+<ownDataTypeParameters>,10,0</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+<associations>
+<colAssociation fkAssociation="93778E4A-74FE-E3DF-33CF-1F66DEDCB949" referredColumn="A949C82E-D8D6-89F3-9FEE-97C62026C710"/>
+</associations>
+</Column>
+<Column name="NAME" id="7BA611A0-9416-EE20-F0F6-C658D6F60DDE">
+<sourceConnName>Student</sourceConnName>
+<sourceObjSchema>FILES</sourceObjSchema>
+<sourceObjName>NAME</sourceObjName>
+<createdBy>silviu</createdBy>
+<createdTime>2016-05-13 16:07:05 UTC</createdTime>
+<ownerDesignName>digix</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>255 BYTE</dataTypeSize>
+<ownDataTypeParameters>255 BYTE,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="TYPE" id="42CD6323-0B25-90FA-75A1-109C976EEDAC">
+<sourceConnName>Student</sourceConnName>
+<sourceObjSchema>FILES</sourceObjSchema>
+<sourceObjName>TYPE</sourceObjName>
+<createdBy>silviu</createdBy>
+<createdTime>2016-05-13 16:07:05 UTC</createdTime>
+<ownerDesignName>digix</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>255 BYTE</dataTypeSize>
+<ownDataTypeParameters>255 BYTE,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="PATH" id="7E3CFC17-0C18-F904-BCC5-FDCB11130C3E">
+<sourceConnName>Student</sourceConnName>
+<sourceObjSchema>FILES</sourceObjSchema>
+<sourceObjName>PATH</sourceObjName>
+<createdBy>silviu</createdBy>
+<createdTime>2016-05-13 16:07:05 UTC</createdTime>
+<ownerDesignName>digix</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>255 BYTE</dataTypeSize>
+<ownDataTypeParameters>255 BYTE,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+</columns>
+<indexes itemClass="oracle.dbtools.crest.model.design.relational.Index">
+<ind_PK_UK id="8953A61C-E2FD-189E-FADC-96F2AD8B0FC2" schemaObject="524A9E88-9262-6005-569F-0697DFAEBBF5" name="FILES_PK">
+<sourceConnName>Student</sourceConnName>
+<sourceObjSchema>STUDENT</sourceObjSchema>
+<sourceObjName>SYS_C007665</sourceObjName>
+<createdBy>silviu</createdBy>
+<createdTime>2016-05-13 16:07:05 UTC</createdTime>
+<ownerDesignName>digix</ownerDesignName>
+<pk>true</pk>
+<indexState>Primary Constraint</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="C92F9D6F-141A-D717-6D42-4D27EBEEEDAA"/>
+</indexColumnUsage>
+</ind_PK_UK>
+<ind_PK_UK id="2EA72CE4-7550-05DE-3305-D4513162E97D" schemaObject="524A9E88-9262-6005-569F-0697DFAEBBF5" name="FILES_FOR_CHEST">
+<sourceConnName>Student</sourceConnName>
+<sourceObjSchema>STUDENT</sourceObjSchema>
+<sourceObjName>FILES_FOR_CHEST</sourceObjName>
+<createdBy>silviu</createdBy>
+<createdTime>2016-05-13 16:07:05 UTC</createdTime>
+<ownerDesignName>digix</ownerDesignName>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="7E2C0905-65D5-5572-AE74-1C83C24ED91E"/>
+</indexColumnUsage>
+</ind_PK_UK>
+<ind_PK_UK id="80A60E18-6D91-6C77-6ADD-03CEF82587D1" name="FILES_CHESTS">
+<createdBy>silviu</createdBy>
+<createdTime>2016-05-13 16:07:05 UTC</createdTime>
+<ownerDesignName>digix</ownerDesignName>
+<indexState>Foreign Key</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="7E2C0905-65D5-5572-AE74-1C83C24ED91E"/>
+</indexColumnUsage>
+</ind_PK_UK>
+</indexes>
+</Table>

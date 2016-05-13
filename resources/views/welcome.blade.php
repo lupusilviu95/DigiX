@@ -12,12 +12,7 @@
     <style>
         body{
             font-family: 'Lato';
-            background: url("/css/treasure_top.jpg") no-repeat, url("/css/treasure_background.jpg") no-repeat,url("/css/treasure_login.jpg") no-repeat;
-            -webkit-background-size: auto,auto,auto;
-            -moz-background-size: auto,auto,auto;
-            -o-background-size: auto,auto,auto;
-            background-size: auto,auto,auto;
-            background-position: 0px 51px,0px 378px,bottom;
+            
             }
 
             footer {

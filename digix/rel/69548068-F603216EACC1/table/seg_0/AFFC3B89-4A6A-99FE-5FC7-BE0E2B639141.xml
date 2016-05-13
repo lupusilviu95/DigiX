@@ -1,0 +1,74 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Table class="oracle.dbtools.crest.model.design.relational.Table" directorySegmentName="seg_0" id="AFFC3B89-4A6A-99FE-5FC7-BE0E2B639141" schemaObject="524A9E88-9262-6005-569F-0697DFAEBBF5" name="FILES_RELATIVES">
+<sourceConnName>Student</sourceConnName>
+<sourceObjSchema>STUDENT</sourceObjSchema>
+<sourceObjName>FILES_RELATIVES</sourceObjName>
+<createdBy>silviu</createdBy>
+<createdTime>2016-05-13 16:07:04 UTC</createdTime>
+<ownerDesignName>digix</ownerDesignName>
+<allowColumnReorder>false</allowColumnReorder>
+<existDependencyGenerateInDDl>true</existDependencyGenerateInDDl>
+<parsed>true</parsed>
+<columns itemClass="oracle.dbtools.crest.model.design.relational.Column">
+<Column name="RELATIVE_ID" id="54B1F328-4BD8-04A9-AAEB-E032DD0D34D7">
+<sourceConnName>Student</sourceConnName>
+<sourceObjSchema>FILES_RELATIVES</sourceObjSchema>
+<sourceObjName>RELATIVE_ID</sourceObjName>
+<createdBy>silviu</createdBy>
+<createdTime>2016-05-13 16:07:05 UTC</createdTime>
+<ownerDesignName>digix</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<dataTypePrecision>10</dataTypePrecision>
+<dataTypeScale>0</dataTypeScale>
+<ownDataTypeParameters>,10,0</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+<associations>
+<colAssociation fkAssociation="B05243D7-11A6-3786-4F60-4843B5BAD198" referredColumn="FF8D9D2D-733D-8AAA-A1C2-AF9753A813DE"/>
+</associations>
+</Column>
+<Column name="FILE_ID" id="AB2AFC3E-7CF7-5683-EE58-DBC0E0720B34">
+<sourceConnName>Student</sourceConnName>
+<sourceObjSchema>FILES_RELATIVES</sourceObjSchema>
+<sourceObjName>FILE_ID</sourceObjName>
+<createdBy>silviu</createdBy>
+<createdTime>2016-05-13 16:07:05 UTC</createdTime>
+<ownerDesignName>digix</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<dataTypePrecision>10</dataTypePrecision>
+<dataTypeScale>0</dataTypeScale>
+<ownDataTypeParameters>,10,0</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+<associations>
+<colAssociation fkAssociation="9DADC655-AD38-3069-7371-3AA686684BB2" referredColumn="C92F9D6F-141A-D717-6D42-4D27EBEEEDAA"/>
+</associations>
+</Column>
+</columns>
+<indexes itemClass="oracle.dbtools.crest.model.design.relational.Index">
+<ind_PK_UK id="299B5746-5597-2326-64E8-728BEC76F354" name="FILES_RELATIVES_FILE">
+<createdBy>silviu</createdBy>
+<createdTime>2016-05-13 16:07:05 UTC</createdTime>
+<ownerDesignName>digix</ownerDesignName>
+<indexState>Foreign Key</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="AB2AFC3E-7CF7-5683-EE58-DBC0E0720B34"/>
+</indexColumnUsage>
+</ind_PK_UK>
+<ind_PK_UK id="D5AB9A82-3404-6BD8-DA15-6DD101C07D43" name="FILES_RELATIVES_RELATIVE">
+<createdBy>silviu</createdBy>
+<createdTime>2016-05-13 16:07:05 UTC</createdTime>
+<ownerDesignName>digix</ownerDesignName>
+<indexState>Foreign Key</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="54B1F328-4BD8-04A9-AAEB-E032DD0D34D7"/>
+</indexColumnUsage>
+</ind_PK_UK>
+</indexes>
+</Table>
