@@ -19,7 +19,7 @@
   	 <label for="capacitate">Capacity</label>
 	 <select class="form-control" id="capacitate" name="capacitate">
   		<option>10</option>
- 		<option>40</option>
+ 		  <option>40</option>
   		<option>100</option>
   		<option>500</option>
   		<option>1000</option>

@@ -70,6 +70,8 @@
                     </form>
                 </div>
                
+                
+               
                
                 <!-- Right Side Of Navbar -->
                 <ul class="nav navbar-nav navbar-right">
@@ -82,16 +84,17 @@
                         Sort <span class="caret"></span>
                     </button>
                     <ul class="dropdown-menu">
-                        <li><a href="#">Type</a></li>
-                        <li><a href="#">Name</a></li>
-                        <li><a href="#">Date created</a></li>
-                        <li><a href="#">Date modified</a></li>
+                 
+                        <li><a href="?sortOption=name">Name</a></li>
+                        <li><a href="?sortOption=capacity">Capacity</a></li>
+                        <li><a href="?sortOption=created_at">Created at</a></li>
                     </ul>
                     </div>
                     </div>
-                   </li>
+                </li>
                     
-                    <li>
+               
+               
 
                     <!-- Authentication Links -->
                     @if (Auth::guest())

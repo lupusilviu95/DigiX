@@ -13,8 +13,9 @@ name varchar2(200)
 ;
 /
 
-
-
+alter table chests add createdat date;
+select * from chests;
+update chests set createdat=sysdate;
 alter table chests drop constraint chests_users;
 alter table chests add constraint chests_users foreign key (user_id) references users(id) ;
 /
@@ -31,8 +32,10 @@ path varchar2(255)
 )
 ;
 
-
-
+alter table files add createdat date;
+update files set createdat=sysdate;
+select * from files;
+commit;
 /
 alter table files drop constraint files_chests;
 alter table files add constraint files_chests foreign key (chest_id) references chests(chest_id) ;
@@ -103,14 +106,14 @@ create or replace package DigiX is
   procedure deleteChest(id_chest chests.chest_id%type);
   function checkFileOwnership(id_user users.id%type,id_file files.file_id%type) return integer;
   function checkChestOwnership(id_user users.id%type,id_chest chests.chest_id%type) return integer;
-  function newChest(id_user users.id%type,cap chests.capacity%type,frees chests.freeSlots%type,descr chests.description%type,nume chests.name%type) return integer;
-  function addFile(id_chest files.chest_id%type,nume files.name%type, tip files.type%type,cale files.path%type) return integer;
+  function newChest(id_user users.id%type,cap chests.capacity%type,frees chests.freeSlots%type,descr chests.description%type,nume chests.name%type,datac date) return integer;
+  function addFile(id_chest files.chest_id%type,nume files.name%type, tip files.type%type,cale files.path%type,datac date) return integer;
   procedure addTagToFile(id_file files.file_id%type,tag varchar2);
   procedure addRelativeToFile(id_file files.file_id%type , rudenie varchar2);
   function getFilePath(id_fisier files.file_id%type ) return varchar2;
 end DigiX;
   
-  
+select * from files where file_id=119897;
   
   
 create or replace package body DigiX is 
@@ -196,7 +199,7 @@ create or replace package body DigiX is
     
   end;
   
-  function newChest(id_user users.id%type,cap chests.capacity%type,frees chests.freeSlots%type,descr chests.description%type,nume chests.name%type) return integer is 
+  function newChest(id_user users.id%type,cap chests.capacity%type,frees chests.freeSlots%type,descr chests.description%type,nume chests.name%type,datac date) return integer is 
   begin
     select count(*) into nrRecords from chests;
     if(nrRecords=0) then
@@ -205,11 +208,11 @@ create or replace package body DigiX is
     select max(chest_id) into maxID from chests;
     maxID:=maxID+1;
     end if;
-    insert into chests values(maxID,id_user,cap,frees,descr,nume);
+    insert into chests values(maxID,id_user,cap,frees,descr,nume,datac);
     return maxID;
   end;
   
-  function addFile(id_chest files.chest_id%type,nume files.name%type, tip files.type%type,cale files.path%type) return integer is 
+  function addFile(id_chest files.chest_id%type,nume files.name%type, tip files.type%type,cale files.path%type,datac date) return integer is 
   begin
   select count(*) into nrRecords from files;
     if(nrRecords=0) then
@@ -218,7 +221,7 @@ create or replace package body DigiX is
    select max(file_id) into maxID from files;
    maxID:=maxID+1;
    end if;
-   insert into files values(maxID,id_chest,nume,tip,cale);
+   insert into files values(maxID,id_chest,nume,tip,cale,datac);
    return maxID;
   end;
   

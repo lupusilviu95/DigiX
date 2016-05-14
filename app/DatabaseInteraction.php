@@ -77,8 +77,9 @@ class DatabaseInteraction {
 	public function newChest ($userid,$capacity,$freeS,$descr,$name) {
 
 		$sql= "begin 
-			   :r:=DIGIX.NEWCHEST(:iduser,:capacity,:freeslots,:description,:name);
+			   :r:=DIGIX.NEWCHEST(:iduser,:capacity,:freeslots,:description,:name,:datac);
 			   end;";
+	    $date=date('d-M-y');
 		$stid=oci_parse($this->conn,$sql);
 		oci_bind_by_name($stid,":r",$result,32);
 		oci_bind_by_name($stid,":iduser",$userid);
@@ -86,6 +87,7 @@ class DatabaseInteraction {
 		oci_bind_by_name($stid,":freeslots",$freeS);
 		oci_bind_by_name($stid,":description",$descr);
 		oci_bind_by_name($stid,":name",$name);
+		oci_bind_by_name($stid, ':datac',$date);
 		oci_execute($stid);
 		oci_commit($this->conn);
 		oci_free_statement($stid);
@@ -128,14 +130,16 @@ class DatabaseInteraction {
 	public function addFile($cufar,$nume,$tip,$cale) {
 
 		$sql="begin 
-			  :r:=DIGIX.ADDFILE(:chestid,:filename,:filetype,:filepath);
+			  :r:=DIGIX.ADDFILE(:chestid,:filename,:filetype,:filepath,:datac);
 			  end;";
+		$date=date('d-M-y');
 		$stid=oci_parse($this->conn,$sql);
 		oci_bind_by_name($stid,":r",$result,32);
 		oci_bind_by_name($stid, ':chestid', $cufar);
 		oci_bind_by_name($stid, ':filename',$nume);
 		oci_bind_by_name($stid, ':filetype',$tip);
 		oci_bind_by_name($stid, ':filepath',$cale);
+		oci_bind_by_name($stid, ':datac',$date);
 		oci_execute($stid);
 		oci_commit($this->conn);
 		oci_free_statement($stid);
@@ -182,7 +186,7 @@ class DatabaseInteraction {
 
 	public function getFilesForChest($cid){
 
-		$sql='select name,type,file_id,chest_id,path from files where chest_id=:idc';
+		$sql='select name,type,file_id,chest_id,path,createdat as age from files where chest_id=:idc';
 		$stid=oci_parse($this->conn,$sql);
 		oci_bind_by_name($stid, ':idc', $cid);
 	    oci_execute($stid);
@@ -195,6 +199,7 @@ class DatabaseInteraction {
 	        	$file->type=$row['TYPE'];
 	        	$file->name=$row['NAME'];
 	        	$file->path=$row['PATH'];
+	        	$file->createdat=$row['AGE'];
 	        	$files[]=$file;
 
 	        }
@@ -323,7 +328,7 @@ class DatabaseInteraction {
         return $files;
 	}
 	public function getChestsForUser($userid){
-		$sql='SELECT  chests.name,chest_id,user_id,capacity,freeslots,description from users join chests on user_id=id and user_id=:idu';
+		$sql='SELECT  chests.name,chest_id,user_id,capacity,freeslots,description,createdat as age from users join chests on user_id=id and user_id=:idu';
 		$stid=oci_parse($this->conn,$sql);
 		oci_bind_by_name($stid, ':idu', $userid);
         oci_execute($stid);
@@ -338,6 +343,7 @@ class DatabaseInteraction {
                $cufar->capacity=$row['CAPACITY'];
                $cufar->freeSlots=$row['FREESLOTS'];
                $cufar->description=$row['DESCRIPTION'];
+               $cufar->createdat=$row['AGE'];
                $cufar->name=$row['NAME'];
 
                $cufere[]=$cufar;
