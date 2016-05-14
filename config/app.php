@@ -149,6 +149,7 @@ return [
         Illuminate\View\ViewServiceProvider::class,
         Yajra\Oci8\Oci8ServiceProvider::class,
         'Thujohn\Twitter\TwitterServiceProvider',
+        Laravel\Socialite\SocialiteServiceProvider::class,
 
         /*
          * Application Service Providers...
@@ -204,6 +205,7 @@ return [
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
         'Twitter' => 'Thujohn\Twitter\Facades\Twitter',
+        'Socialite' => Laravel\Socialite\Facades\Socialite::class,
 
     ],
 

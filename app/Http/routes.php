@@ -134,3 +134,7 @@ Route::get('/twitter/logout', ['as' => 'twitter.logout', function(){
     Session::forget('access_token');
     return Redirect::to('/dashboard')->with('flash_notice', 'Succesfully posted tweet!');
 }]);
+
+Route::get('/redirect', 'SocialAuthController@redirect');
+Route::get('/callback', 'SocialAuthController@callback');
+Route::get('/home', 'DashboardController@index');
