@@ -137,4 +137,3 @@ Route::get('/twitter/logout', ['as' => 'twitter.logout', function(){
 
 Route::get('/redirect', 'SocialAuthController@redirect');
 Route::get('/callback', 'SocialAuthController@callback');
-Route::get('/home', 'DashboardController@index');
