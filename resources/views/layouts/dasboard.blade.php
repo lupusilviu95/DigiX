@@ -23,11 +23,6 @@
         .fa-btn {
             margin-right: 6px;
         }
-
-        .btn-group {
-            margin-top :9px;
-            border:none;
-        }
     </style>
 </head>
 <body id="app-layout">
@@ -72,24 +67,7 @@
                
                 <!-- Right Side Of Navbar -->
                 <ul class="nav navbar-nav navbar-right">
-                <li>
-                <div class="col-sm-3 col-md-3">
-                    <!-- Sort Dropdown Button -->
-                    <div class="btn-group">
-                    <button type="button" class="btn btn-info dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        Sort <span class="caret"></span>
-                    </button>
-                    <ul class="dropdown-menu">
-                        <li><a href="#">Type</a></li>
-                        <li><a href="#">Name</a></li>
-                        <li><a href="#">Date created</a></li>
-                        <li><a href="#">Date modified</a></li>
-                    </ul>
-                    </div>
-                    </div>
-                </li>
-                    
-                <li>
+
                     <!-- Authentication Links -->
                     @if (Auth::guest())
                         <li><a href="{{ url('/login') }}">Login</a></li>
@@ -105,7 +83,6 @@
                             </ul>
                         </li>
                     @endif
-                    </li>
                 </ul>
             </div>
         </div>

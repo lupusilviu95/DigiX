@@ -7,11 +7,12 @@
     margin-top:50px;
     margin-left: 50px;
     margin-bottom:50px;
-    
+    width: 515px;
     height:330px;
     width:100%;
     overflow:hidden;
-    height:auto;  
+    height:auto;
+  
 }
 
 @media (min-width: 360px) {
@@ -83,5 +84,5 @@
 }
 
 .twitterWrapper .twitter-tweet-rendered {
-    max-width: 100% ;
+    max-width: 100% !important;
 }

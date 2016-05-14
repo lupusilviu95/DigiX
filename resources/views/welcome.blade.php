@@ -17,7 +17,7 @@
             -moz-background-size: auto,auto,auto;
             -o-background-size: auto,auto,auto;
             background-size: auto,auto,auto;
-            background-position: 0px 51px,0px 380px,bottom;
+            background-position: 0px 51px,0px 378px,bottom;
             }
 
             footer {
@@ -29,12 +29,12 @@
     <body>
     <div class="container">
     <div class="row">   
-        <div class="col-md-8 col-md-offset-2">
+        <div class="col-md-10 col-md-offset-1">
             <div class="panel panel-default">                 
 
                     
             <div class="row">
-            <div class="col-xs-9 col-sm-offset-1">
+            <div class="col-xs-8 col-sm-8">
                     
             <div id="myCarousel" class="carousel slide" data-ride="carousel">
             <!-- Indicators -->
@@ -106,7 +106,7 @@
 
 <footer class="footer">
       <div class="container">
-        <p class="text-muted"></p>
+        <p class="text-muted">Place footer content here.</p>
       </div>
     </footer>
 
