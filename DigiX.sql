@@ -16,7 +16,7 @@ name varchar2(200)
 
 
 alter table chests drop constraint chests_users;
-alter table chests add constraint chests_users foreign key (user_id) references users(id) ON DELETE CASCADE;
+alter table chests add constraint chests_users foreign key (user_id) references users(id) ;
 /
 
 
@@ -32,13 +32,10 @@ path varchar2(255)
 ;
 
 
-select files.name,tags.name from files join files_tags on files.file_id=files_tags.file_id join tags on tags.tag_id = files_tags.tag_id;
-select * from files_tags;
-select * from tags;
 
 /
 alter table files drop constraint files_chests;
-alter table files add constraint files_chests foreign key (chest_id) references chests(chest_id) ON DELETE CASCADE;
+alter table files add constraint files_chests foreign key (chest_id) references chests(chest_id) ;
 
 
 /
@@ -266,7 +263,7 @@ create or replace package body DigiX is
   
 end DigiX;
 /
-
+-------------------TRiggers
 
 create or replace trigger decreaseFreeSlots after insert on files
 for each row 
@@ -294,19 +291,6 @@ begin
 end decreaseFreeSlots;
 /
 
-
-
-commit;
-select * from relatives;
-
-select * from files_relatives;
-
-
-select f.name,t.name,r.name from files f join files_tags ft on f.file_id=ft.file_id join tags t on t.tag_id = ft.tag_id left outer join files_relatives fr on f.file_id=fr.file_id left outer join relatives r on r.relative_id=fr.relative_id;
-
-
-select files.fi,files.name,tags.name from files join files_tags on files.file_id=files_tags.file_id join tags on tags.tag_id = files_tags.tag_id ;
-select  files.name,relatives.name from files left outer join files_relatives on files.file_id=files_relatives.file_id left outer join  relatives on relatives.relative_id=files_relatives.relative_id;
 
 
 
@@ -338,7 +322,7 @@ select * from tags;
   select f.file_id ,count(f.file_id) as relevance from files_tags ft ,files f,tags t where ft.tag_id=t.tag_id and (t.name in ('amazon') ) and f.file_id=ft.file_id and f.chest_id=1 group by f.file_id;
   
   
-  
+  select * from users where id =1;
   
   
   select chests.chest_id,chests.user_id,files.file_id from users join chests on users.id=chests.user_id join files on files.chest_id=chests.chest_id;
@@ -354,3 +338,173 @@ select * from tags;
   
   
   select f.file_id as fisier, count (f.file_id) as relevance from files f join files_tags ft on f.file_id=ft.file_id join tags t on t.tag_id = ft.tag_id left outer join files_relatives fr on f.file_id=fr.file_id left outer join relatives r on r.relative_id=fr.relative_id where (((t.name in ('amazon','internship','test') ) or r.name in ('mama') )) and f.chest_id=:chestid group by f.file_id
+
+
+
+
+SELECT  chests.name,chest_id,user_id,capacity,freeslots,description from users join chests on user_id=id and user_id=2;
+
+-------------Indexare
+
+
+
+---Interogari frecvente:
+--Fisierele dintr-un cufar - poate folosi index
+  select name,type,file_id,chest_id,path from files where chest_id=200;
+--Cuferele unui user -poate folosi index
+  SELECT  chests.name,chest_id,user_id,capacity,freeslots,description from users join chests on user_id=id and user_id=2;
+--Info despre un cufar --foloeseste unique scan
+  select name,chest_id,user_id,capacity,freeslots,description from chests where chest_id=2;
+  
+--Updatarea unui cufar  --foloseste unique scan
+  update chests set name='cufar indexat' ,description='cva' where chest_id=2;   
+
+
+----Indecsi ( plus cei pe PK)
+select count(*) from files;
+select count (*) from chests;
+
+create or replace procedure populateChests is
+v_user number;
+v_capacity number;
+v_nume varchar2(30);
+v_descr varchar2(40);
+v_rez integer;
+begin
+  for v_i in 1..10000 loop
+    v_user:=dbms_random.value(1,4);
+    v_capacity:=40;
+    v_nume:='cufar'||v_i;
+    v_descr:='descriere'||v_i;
+    v_rez:=DIGIX.NEWCHEST(v_user,v_capacity,v_capacity,v_descr,v_nume);
+    end loop;
+    
+end;
+/
+create or replace procedure populateChestNumber(p_chestnr integer,p_nr_of_files integer ) is 
+v_name varchar2(20):='dummy.pdf';
+v_type varchar2(20):='pdf';
+v_rez integer;
+v_path varchar2(100):='userdata/dummy/dummy.pdf';
+begin
+  for v_i in 1..p_nr_of_files loop
+    v_rez:=digix.addfile(p_chestnr,v_name,v_type,v_path);
+  end loop;
+end;
+/
+
+begin
+ populateChests();
+end;
+
+begin 
+ for v_i in 5..4000 loop
+ populateChestNumber(v_i,30);
+ end loop;
+end;
+
+
+
+create  index files_for_chest on files(chest_id);
+create index chests_for_users on chests(user_id);
+
+
+
+
+-----------------------CSVExport;
+
+
+create or replace procedure  exportCSV is
+ 
+type cursor_type is ref cursor;
+c cursor_type;
+d cursor_type;
+TYPE columns_names IS TABLE OF VARCHAR2(50);
+v_columns columns_names;
+stmt varchar2(10000);
+rezultat varchar2(1000);
+insertStmt varchar2(10000):='insert into ';
+username varchar2(200);
+obiect varchar2(200);
+tip varchar2(200);
+comanda varchar2(10000);
+select_stmt varchar2(1000);
+file_id UTL_FILE.FILE_TYPE;
+begin
+  select user into username from dual;
+  for c_j in (select object_name,object_type FROM   USER_OBJECTS where object_type in ('TABLE') and object_name  in('TAGS','CHESTS','FILES','RELATIVES','FILES_TAGS','FILES_RELATIVES') ) loop
+       file_id := UTL_FILE.FOPEN ('DIRECTOR', c_j.object_name||'.csv', 'W');
+      SELECT column_name
+      BULK COLLECT INTO v_columns
+      FROM all_tab_columns 
+      WHERE table_name =upper(c_j.object_name);
+      stmt:='select ';
+      for v_i in v_columns.first..v_columns.last loop
+          stmt:=stmt||''''''||'||'|| v_columns(v_i)||'||'||'''''' ||'||'',''||';
+      end loop;
+      stmt:=substr(stmt,1,length(stmt)-7);
+      stmt:=stmt||' from '||c_j.object_name;
+      open d for stmt;
+      insertStmt:='';
+      
+      loop
+          fetch d into rezultat;
+          exit when d%NOTFOUND;
+          insertStmt:=insertStmt || rezultat;
+          UTL_FILE.PUT(file_id,insertStmt);
+          UTL_FILE.NEW_LINE(file_id,1);
+          insertStmt:='';
+       end loop;
+       UTL_FILE.FCLOSE(file_id);
+  end loop;
+end;
+/
+
+
+BEGIN
+EXPORTCSV();
+END;
+
+----CSVImport
+
+
+create or replace procedure importCSVChests is 
+v_rez integer;
+type cursor_type is ref cursor;
+c_i cursor_type;
+v_user chests.user_id%type;
+v_cap chests.capacity%type;
+v_fs chests.freeSlots%type;
+v_desc chests.description%type;
+v_name chests.name%type;
+begin 
+  
+  execute immediate 'create  table  xtern_chests(
+                     user_id number(10,0),
+                     capacity number(10,0),
+                     freeSlots number(10,0),
+                     description varchar2(2000),
+                     name varchar2(200)
+                      )
+                     organization external 
+                      (
+                        default directory director
+                        access parameters 
+                        (records delimited by newline fields terminated by '','')
+                        location (''CHEST_IMPORT.csv'')
+                      )';
+  open c_i for 'select * from xtern_chests';
+  loop
+    fetch c_i into v_user,v_cap,v_fs,v_desc,v_name;
+    exit when c_i%NOTFOUND;
+    v_rez:=digix.newchest(v_user,v_cap,v_fs,v_desc,v_name);
+  end loop;
+  execute immediate 'drop table xtern_chests';
+
+end;
+
+select * from chests where user_id=61;
+
+begin 
+importCSVChests();
+end;

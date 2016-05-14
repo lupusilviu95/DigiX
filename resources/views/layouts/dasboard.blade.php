@@ -52,6 +52,7 @@
                     <li><a href="{{ url('/newChest') }}">Add Chest</a></li>
                     <li><a href="" id ="updateOption" class="update">Update Chest</a></li>
                     <li><a href="" id="deleteOption" class="delete" onclick="confirmDelete(this)">Delete Chest</a></li>
+                    
                 </ul>
                 <div class="col-sm-3 col-md-3 ">
                     <form class="navbar-form" role="search" name ="searchform" action="/dashboard/search" method="GET" onsubmit="return validateForm()">
@@ -87,7 +88,7 @@
             </div>
         </div>
     </nav>
-
+   
     @yield('content')
 
     <!-- JavaScripts -->
