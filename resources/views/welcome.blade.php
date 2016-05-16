@@ -22,6 +22,16 @@
             margin-top: 20px;
             margin-bottom: 300px;
             }
+
+        body{
+            font-family: 'Lato';
+            background: url("/css/treasure_top_m.jpg") no-repeat, url("/css/treasure_bottom_e.jpg") no-repeat;
+            -webkit-background-size: auto,auto;
+            -moz-background-size: auto,auto;
+            -o-background-size: auto,auto;
+            background-size: auto,auto;
+            background-position: 0px 51px,bottom;
+            }
 </style>
 
     <body>
