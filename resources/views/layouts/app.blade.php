@@ -28,6 +28,10 @@
     </style>
 </head>
 <body id="app-layout">
+
+
+    @yield('facebook')
+
     <nav class="navbar navbar-default navbar-static-top">
         <div class="container">
             <div class="navbar-header">
