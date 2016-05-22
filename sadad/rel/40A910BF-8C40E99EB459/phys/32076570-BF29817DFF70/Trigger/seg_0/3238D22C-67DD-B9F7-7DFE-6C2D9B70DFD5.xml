@@ -1,0 +1,14 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<TriggerOraclev10g class="oracle.dbtools.crest.model.design.storage.oracle.v10g.TriggerOraclev10g" name="INCREASEFREESLOTS" directorySegmentName="seg_0" id="3238D22C-67DD-B9F7-7DFE-6C2D9B70DFD5">
+<sourceConnName>Student</sourceConnName>
+<sourceObjSchema>STUDENT</sourceObjSchema>
+<sourceObjName>INCREASEFREESLOTS</sourceObjName>
+<createdBy>silviu</createdBy>
+<createdTime>2016-05-18 13:06:18 UTC</createdTime>
+<ownerDesignName>sadad</ownerDesignName>
+<actions>DELETE</actions>
+<body>declare &lt;br/&gt;old_slots number;&lt;br/&gt;chest number;&lt;br/&gt;begin&lt;br/&gt;  chest:=:old.chest_id;&lt;br/&gt;  select freeSlots into old_slots from chests where chest_id=chest;&lt;br/&gt;  old_slots:=old_slots+1;&lt;br/&gt;  update chests set freeSlots=old_slots where chest_id=chest;&lt;br/&gt;end decreaseFreeSlots;</body>
+<triggerTime>AFTER</triggerTime>
+<owner>26C60211-29C5-5FD7-2DC1-BDD80380510C</owner>
+<table>01B1C14D-A11A-5147-6AD8-01FFEA315ABA</table>
+</TriggerOraclev10g>

@@ -33,6 +33,7 @@ class ChestController extends Controller
         {
 	            
 	    	$_SESSION['currChest'] = $id;
+            
             $files=$db->getFilesForChest($id);
             return view('chest.index',compact('files'));
 	    }
@@ -75,10 +76,30 @@ class ChestController extends Controller
 
     public function addFile($id) {
 
-
-
         session_start();
-        session_destroy();
+        $_SESSION['chest']=$id;
+
+
+        $user=Auth::user()->id;
+        $db=new DatabaseInteraction('student', 'STUDENT', 'localhost/XE');
+        $db->connect();
+        $owner=$db->verifyOwnership($user,$id);
+        
+        if($owner==1)
+        {
+            
+            return \Redirect::to('/viewChest/'.$id.'/add/local');    
+            return view('chest.addlocalfile',compact('id'));
+
+        }
+        else  return redirect('/dashboard');
+        
+       
+    }
+    public function addLocalFile($id) {
+
+       session_start();
+        $_SESSION['chest']=$id;
 
 
         $user=Auth::user()->id;
@@ -90,14 +111,131 @@ class ChestController extends Controller
         {
             
 
-            return view('chest.addFile',compact('id'));
+            return view('chest.addlocalfile',compact('id'));
 
         }
         else  return redirect('/dashboard');
         
        
     }
+    public function addFacebookFile($id) {
 
+        
+session_start();
+        $_SESSION['chest']=$id;
+
+        $user=Auth::user()->id;
+        $db=new DatabaseInteraction('student', 'STUDENT', 'localhost/XE');
+        $db->connect();
+        $owner=$db->verifyOwnership($user,$id);
+        
+        if($owner==1)
+        {
+            
+
+            return view('chest.addfacebookfile',compact('id'));
+
+        }
+        else  return redirect('/dashboard');
+        
+       
+    }
+    public function addSoundcloudFile($id) {
+
+       session_start();
+        $_SESSION['chest']=$id;
+
+        $user=Auth::user()->id;
+        $db=new DatabaseInteraction('student', 'STUDENT', 'localhost/XE');
+        $db->connect();
+        $owner=$db->verifyOwnership($user,$id);
+        
+        if($owner==1)
+        {
+            
+
+            return view('chest.addsoundcloudfile',compact('id'));
+
+        }
+        else  return redirect('/dashboard');
+        
+       
+    }
+    public function addSlideshareFile($id) {
+
+        session_start();
+        $_SESSION['chest']=$id;
+
+
+        $user=Auth::user()->id;
+        $db=new DatabaseInteraction('student', 'STUDENT', 'localhost/XE');
+        $db->connect();
+        $owner=$db->verifyOwnership($user,$id);
+        
+        if($owner==1)
+        {
+            
+
+            return view('chest.addslidesharefile',compact('id'));
+
+        }
+        else  return redirect('/dashboard');
+        
+       
+    }
+    public function addYoutubeFile($id) {
+        session_start();
+        $_SESSION['chest']=$id;
+        
+
+        $user=Auth::user()->id;
+        $db=new DatabaseInteraction('student', 'STUDENT', 'localhost/XE');
+        $db->connect();
+        $owner=$db->verifyOwnership($user,$id);
+        
+        if($owner==1)
+        {
+            
+
+            if (\Session::has('token'))  
+            {
+                $youtube = \App::make('youtube');
+          
+
+                $channelsResponse = $youtube->channels->listChannels('contentDetails', array('mine' => 'true',));
+         
+                $videos=null;
+                foreach ($channelsResponse['items'] as $channel) {
+                  // Extract the unique playlist ID that identifies the list of videos
+                  // uploaded to the channel, and then call the playlistItems.list method
+                  // to retrieve that list.
+                  $uploadsListId = $channel['contentDetails']['relatedPlaylists']['uploads'];
+
+                  $playlistItemsResponse = $youtube->playlistItems->listPlaylistItems('snippet', array(
+                    'playlistId' => $uploadsListId,
+                    'maxResults' => 50
+                  ));
+
+                 
+                  foreach ($playlistItemsResponse['items'] as $playlistItem) {
+                  
+                    $videos[]=$playlistItem;
+                  }
+                }
+         
+      
+      
+  
+          }
+            else return Redirect::to("/");
+
+            return view('chest.addyoutubefile',compact('videos','id'));
+
+        }
+        else  return redirect('/dashboard');
+        
+       
+    }
      public function delete($id) {
         
       $user=Auth::user()->id;

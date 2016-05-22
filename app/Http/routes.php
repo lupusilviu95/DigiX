@@ -12,6 +12,11 @@ use App\DatabaseInteraction;
 |
 */
 
+Route::get('/loginY/{id}', ['uses' => 'GoogleLoginController@index', 'as' => 'login']);
+Route::get('/loginCallback', ['uses' => 'GoogleLoginController@store', 'as' => 'loginCallback']);
+Route::get('/videos','YouTubeApiController@videos');
+
+
 Route::get('/', function () {
     return view('welcome');
 });
@@ -23,6 +28,11 @@ Route::get('/dashboard/search','DashboardController@search');
 
 Route::get('/viewChest/{id}','ChestController@index');
 Route::get('/viewChest/{id}/add','ChestController@addFile');
+Route::get('/viewChest/{id}/add/local','ChestController@addLocalFile');
+Route::get('/viewChest/{id}/add/facebook','ChestController@addFacebookFile');
+Route::get('/viewChest/{id}/add/youtube','ChestController@addYoutubeFile');
+Route::get('/viewChest/{id}/add/soundcloud','ChestController@addSoundcloudFile');
+Route::get('/viewChest/{id}/add/slideshare','ChestController@addSlideshareFile');
 Route::get('/newChest','ChestController@newChest');
 Route::get('/delete/chest/{id}','ChestController@delete');
 Route::get('/edit/chest/{id}','ChestController@edit');
@@ -33,6 +43,7 @@ Route::get('/viewFile/{id}','FileController@view');
 Route::get('/delete/file/{id}','FileController@delete');
 Route::get('/download/file/{id}','FileController@download');
 Route::post('/upload/{id}','FileController@upload');
+Route::post('/upload/youtube/{id}','FileController@uploadYoutube');
 
 Route::get('/viewChest/{id}/search','ChestController@search');
 

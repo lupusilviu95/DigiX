@@ -1,0 +1,105 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Table class="oracle.dbtools.crest.model.design.relational.Table" directorySegmentName="seg_0" id="0AD3A641-F20C-C68F-4E0D-5860B33DA764" schemaObject="1C60D95A-58E1-01C3-A6CC-927F3D0A1FDC" name="SOCIAL_ACCOUNTS">
+<sourceConnName>Student</sourceConnName>
+<sourceObjSchema>STUDENT</sourceObjSchema>
+<sourceObjName>SOCIAL_ACCOUNTS</sourceObjName>
+<createdBy>silviu</createdBy>
+<createdTime>2016-05-18 13:06:17 UTC</createdTime>
+<ownerDesignName>sadad</ownerDesignName>
+<allowColumnReorder>false</allowColumnReorder>
+<existDependencyGenerateInDDl>true</existDependencyGenerateInDDl>
+<parsed>true</parsed>
+<columns itemClass="oracle.dbtools.crest.model.design.relational.Column">
+<Column name="USER_ID" id="6D09898F-98ED-621F-2EE2-9CB463F3CE8F">
+<sourceConnName>Student</sourceConnName>
+<sourceObjSchema>SOCIAL_ACCOUNTS</sourceObjSchema>
+<sourceObjName>USER_ID</sourceObjName>
+<createdBy>silviu</createdBy>
+<createdTime>2016-05-18 13:06:18 UTC</createdTime>
+<ownerDesignName>sadad</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<dataTypePrecision>10</dataTypePrecision>
+<dataTypeScale>0</dataTypeScale>
+<ownDataTypeParameters>,10,0</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="PROVIDER_USER_ID" id="25769C54-F93D-B5E7-EA33-E493F43AEDFE">
+<sourceConnName>Student</sourceConnName>
+<sourceObjSchema>SOCIAL_ACCOUNTS</sourceObjSchema>
+<sourceObjName>PROVIDER_USER_ID</sourceObjName>
+<createdBy>silviu</createdBy>
+<createdTime>2016-05-18 13:06:18 UTC</createdTime>
+<ownerDesignName>sadad</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>255 BYTE</dataTypeSize>
+<ownDataTypeParameters>255 BYTE,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="PROVIDER" id="0F20E9D5-768B-111E-4A54-050F589523AE">
+<sourceConnName>Student</sourceConnName>
+<sourceObjSchema>SOCIAL_ACCOUNTS</sourceObjSchema>
+<sourceObjName>PROVIDER</sourceObjName>
+<createdBy>silviu</createdBy>
+<createdTime>2016-05-18 13:06:18 UTC</createdTime>
+<ownerDesignName>sadad</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>255 BYTE</dataTypeSize>
+<ownDataTypeParameters>255 BYTE,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="CREATED_AT" id="F0162D2D-DAC6-809B-7996-7052C4B572B0">
+<sourceConnName>Student</sourceConnName>
+<sourceObjSchema>SOCIAL_ACCOUNTS</sourceObjSchema>
+<sourceObjName>CREATED_AT</sourceObjName>
+<createdBy>silviu</createdBy>
+<createdTime>2016-05-18 13:06:18 UTC</createdTime>
+<ownerDesignName>sadad</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT015</logicalDatatype>
+<dataTypePrecision>6</dataTypePrecision>
+<ownDataTypeParameters>,6,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="UPDATED_AT" id="DE222CDF-EAA0-12F1-3B17-00A86C5D1914">
+<sourceConnName>Student</sourceConnName>
+<sourceObjSchema>SOCIAL_ACCOUNTS</sourceObjSchema>
+<sourceObjName>UPDATED_AT</sourceObjName>
+<createdBy>silviu</createdBy>
+<createdTime>2016-05-18 13:06:18 UTC</createdTime>
+<ownerDesignName>sadad</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT015</logicalDatatype>
+<dataTypePrecision>6</dataTypePrecision>
+<ownDataTypeParameters>,6,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="ID" id="D48E7CE9-8103-B7D8-CC21-DDA16C336C91">
+<sourceConnName>Student</sourceConnName>
+<sourceObjSchema>SOCIAL_ACCOUNTS</sourceObjSchema>
+<sourceObjName>ID</sourceObjName>
+<createdBy>silviu</createdBy>
+<createdTime>2016-05-18 13:06:18 UTC</createdTime>
+<ownerDesignName>sadad</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>2 BYTE</dataTypeSize>
+<ownDataTypeParameters>2 BYTE,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+</columns>
+</Table>

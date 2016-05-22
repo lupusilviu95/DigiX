@@ -150,6 +150,7 @@ return [
         Yajra\Oci8\Oci8ServiceProvider::class,
         'Thujohn\Twitter\TwitterServiceProvider',
         Laravel\Socialite\SocialiteServiceProvider::class,
+        'App\Providers\YouTubeServiceProvider',
 
         /*
          * Application Service Providers...

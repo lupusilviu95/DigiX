@@ -1,0 +1,49 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<TableProxyOraclev11g class="oracle.dbtools.crest.model.design.storage.oracle.v11g.TableProxyOraclev11g" name="PASSWORD_RESETS" directorySegmentName="seg_0" id="66A2FF7D-69F3-3978-EB66-3684D8ECB5FB">
+<createdBy>silviu</createdBy>
+<createdTime>2016-05-18 13:06:17 UTC</createdTime>
+<ownerDesignName>sadad</ownerDesignName>
+<schemaObject>1C60D95A-58E1-01C3-A6CC-927F3D0A1FDC</schemaObject>
+<logging>YES</logging>
+<partitionedRowMovement>DISABLE</partitionedRowMovement>
+<segment>5280BA4F-2276-F3BA-C1E2-85C6DA24EBC4</segment>
+<tableSpace>A1B428F2-84BE-CFF5-3386-1BDC2B2D632B</tableSpace>
+<temporaryChanged>false</temporaryChanged>
+<accessDriverType>oracle_loader</accessDriverType>
+<rejectLimit></rejectLimit>
+<columnProxies itemClass="oracle.dbtools.crest.model.design.storage.oracle.v12c.ColumnProxyOraclev12c">
+<ColumnProxy name="EMAIL" id="2535616A-D292-C8A1-01E2-457D3B8F99FF">
+<createdBy>silviu</createdBy>
+<createdTime>2016-05-18 13:06:18 UTC</createdTime>
+<ownerDesignName>sadad</ownerDesignName>
+</ColumnProxy>
+<ColumnProxy name="TOKEN" id="2D81496B-39E4-B372-2AA7-769FADBA0AC9">
+<createdBy>silviu</createdBy>
+<createdTime>2016-05-18 13:06:18 UTC</createdTime>
+<ownerDesignName>sadad</ownerDesignName>
+</ColumnProxy>
+<ColumnProxy name="CREATED_AT" id="B8FD6E40-9567-37F3-60CB-285241405F33">
+<createdBy>silviu</createdBy>
+<createdTime>2016-05-18 13:06:18 UTC</createdTime>
+<ownerDesignName>sadad</ownerDesignName>
+</ColumnProxy>
+</columnProxies>
+<indexProxies>
+<IndexProxy class="oracle.dbtools.crest.model.design.storage.oracle.v10g.IndexProxyOraclev10g" name="PASSWORD_RESETS_EMAIL_INDEX" id="CB22AB7F-E546-1139-5D1C-5FF961EC0258">
+<createdBy>silviu</createdBy>
+<createdTime>2016-05-18 13:06:18 UTC</createdTime>
+<ownerDesignName>sadad</ownerDesignName>
+<schemaObject>1C60D95A-58E1-01C3-A6CC-927F3D0A1FDC</schemaObject>
+<segment>79BEAEF9-7A27-6665-0E00-A10FEE737A36</segment>
+<tableSpace>A1B428F2-84BE-CFF5-3386-1BDC2B2D632B</tableSpace>
+</IndexProxy>
+<IndexProxy class="oracle.dbtools.crest.model.design.storage.oracle.v10g.IndexProxyOraclev10g" name="PASSWORD_RESETS_TOKEN_INDEX" id="FB6BB126-F208-C453-3499-305BF545C992">
+<createdBy>silviu</createdBy>
+<createdTime>2016-05-18 13:06:18 UTC</createdTime>
+<ownerDesignName>sadad</ownerDesignName>
+<schemaObject>1C60D95A-58E1-01C3-A6CC-927F3D0A1FDC</schemaObject>
+<segment>79BEAEF9-7A27-6665-0E00-A10FEE737A36</segment>
+<tableSpace>A1B428F2-84BE-CFF5-3386-1BDC2B2D632B</tableSpace>
+</IndexProxy>
+</indexProxies>
+</TableProxyOraclev11g>

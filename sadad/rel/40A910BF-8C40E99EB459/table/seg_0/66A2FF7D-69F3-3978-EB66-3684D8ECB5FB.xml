@@ -1,0 +1,82 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Table class="oracle.dbtools.crest.model.design.relational.Table" directorySegmentName="seg_0" id="66A2FF7D-69F3-3978-EB66-3684D8ECB5FB" schemaObject="1C60D95A-58E1-01C3-A6CC-927F3D0A1FDC" name="PASSWORD_RESETS">
+<sourceConnName>Student</sourceConnName>
+<sourceObjSchema>STUDENT</sourceObjSchema>
+<sourceObjName>PASSWORD_RESETS</sourceObjName>
+<createdBy>silviu</createdBy>
+<createdTime>2016-05-18 13:06:17 UTC</createdTime>
+<ownerDesignName>sadad</ownerDesignName>
+<allowColumnReorder>false</allowColumnReorder>
+<existDependencyGenerateInDDl>true</existDependencyGenerateInDDl>
+<parsed>true</parsed>
+<columns itemClass="oracle.dbtools.crest.model.design.relational.Column">
+<Column name="EMAIL" id="2535616A-D292-C8A1-01E2-457D3B8F99FF">
+<sourceConnName>Student</sourceConnName>
+<sourceObjSchema>PASSWORD_RESETS</sourceObjSchema>
+<sourceObjName>EMAIL</sourceObjName>
+<createdBy>silviu</createdBy>
+<createdTime>2016-05-18 13:06:18 UTC</createdTime>
+<ownerDesignName>sadad</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>255 BYTE</dataTypeSize>
+<ownDataTypeParameters>255 BYTE,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="TOKEN" id="2D81496B-39E4-B372-2AA7-769FADBA0AC9">
+<sourceConnName>Student</sourceConnName>
+<sourceObjSchema>PASSWORD_RESETS</sourceObjSchema>
+<sourceObjName>TOKEN</sourceObjName>
+<createdBy>silviu</createdBy>
+<createdTime>2016-05-18 13:06:18 UTC</createdTime>
+<ownerDesignName>sadad</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>255 BYTE</dataTypeSize>
+<ownDataTypeParameters>255 BYTE,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="CREATED_AT" id="B8FD6E40-9567-37F3-60CB-285241405F33">
+<sourceConnName>Student</sourceConnName>
+<sourceObjSchema>PASSWORD_RESETS</sourceObjSchema>
+<sourceObjName>CREATED_AT</sourceObjName>
+<createdBy>silviu</createdBy>
+<createdTime>2016-05-18 13:06:18 UTC</createdTime>
+<ownerDesignName>sadad</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT015</logicalDatatype>
+<dataTypePrecision>6</dataTypePrecision>
+<ownDataTypeParameters>,6,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+</columns>
+<indexes itemClass="oracle.dbtools.crest.model.design.relational.Index">
+<ind_PK_UK id="CB22AB7F-E546-1139-5D1C-5FF961EC0258" schemaObject="1C60D95A-58E1-01C3-A6CC-927F3D0A1FDC" name="PASSWORD_RESETS_EMAIL_INDEX">
+<sourceConnName>Student</sourceConnName>
+<sourceObjSchema>STUDENT</sourceObjSchema>
+<sourceObjName>PASSWORD_RESETS_EMAIL_INDEX</sourceObjName>
+<createdBy>silviu</createdBy>
+<createdTime>2016-05-18 13:06:18 UTC</createdTime>
+<ownerDesignName>sadad</ownerDesignName>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="2535616A-D292-C8A1-01E2-457D3B8F99FF"/>
+</indexColumnUsage>
+</ind_PK_UK>
+<ind_PK_UK id="FB6BB126-F208-C453-3499-305BF545C992" schemaObject="1C60D95A-58E1-01C3-A6CC-927F3D0A1FDC" name="PASSWORD_RESETS_TOKEN_INDEX">
+<sourceConnName>Student</sourceConnName>
+<sourceObjSchema>STUDENT</sourceObjSchema>
+<sourceObjName>PASSWORD_RESETS_TOKEN_INDEX</sourceObjName>
+<createdBy>silviu</createdBy>
+<createdTime>2016-05-18 13:06:18 UTC</createdTime>
+<ownerDesignName>sadad</ownerDesignName>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="2D81496B-39E4-B372-2AA7-769FADBA0AC9"/>
+</indexColumnUsage>
+</ind_PK_UK>
+</indexes>
+</Table>

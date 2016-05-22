@@ -1,0 +1,146 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Table class="oracle.dbtools.crest.model.design.relational.Table" directorySegmentName="seg_0" id="01B1C14D-A11A-5147-6AD8-01FFEA315ABA" schemaObject="1C60D95A-58E1-01C3-A6CC-927F3D0A1FDC" name="FILES">
+<sourceConnName>Student</sourceConnName>
+<sourceObjSchema>STUDENT</sourceObjSchema>
+<sourceObjName>FILES</sourceObjName>
+<createdBy>silviu</createdBy>
+<createdTime>2016-05-18 13:06:17 UTC</createdTime>
+<ownerDesignName>sadad</ownerDesignName>
+<allowColumnReorder>false</allowColumnReorder>
+<existDependencyGenerateInDDl>true</existDependencyGenerateInDDl>
+<parsed>true</parsed>
+<columns itemClass="oracle.dbtools.crest.model.design.relational.Column">
+<Column name="FILE_ID" id="3868456A-4712-6571-708B-94F1D2DE5411">
+<sourceConnName>Student</sourceConnName>
+<sourceObjSchema>FILES</sourceObjSchema>
+<sourceObjName>FILE_ID</sourceObjName>
+<createdBy>silviu</createdBy>
+<createdTime>2016-05-18 13:06:18 UTC</createdTime>
+<ownerDesignName>sadad</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<dataTypePrecision>10</dataTypePrecision>
+<dataTypeScale>0</dataTypeScale>
+<ownDataTypeParameters>,10,0</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="CHEST_ID" id="75A53D89-2361-6F79-9739-01DA04753D6C">
+<sourceConnName>Student</sourceConnName>
+<sourceObjSchema>FILES</sourceObjSchema>
+<sourceObjName>CHEST_ID</sourceObjName>
+<createdBy>silviu</createdBy>
+<createdTime>2016-05-18 13:06:18 UTC</createdTime>
+<ownerDesignName>sadad</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<dataTypePrecision>10</dataTypePrecision>
+<dataTypeScale>0</dataTypeScale>
+<ownDataTypeParameters>,10,0</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+<associations>
+<colAssociation fkAssociation="F28CCA75-9482-CCE1-54D7-A70EECBF2FDD" referredColumn="12C9FB86-5C76-D8F4-CED9-437589A66803"/>
+</associations>
+</Column>
+<Column name="NAME" id="63FD2FF7-8942-6E95-0F44-96C81A5A9CD1">
+<sourceConnName>Student</sourceConnName>
+<sourceObjSchema>FILES</sourceObjSchema>
+<sourceObjName>NAME</sourceObjName>
+<createdBy>silviu</createdBy>
+<createdTime>2016-05-18 13:06:18 UTC</createdTime>
+<ownerDesignName>sadad</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>255 BYTE</dataTypeSize>
+<ownDataTypeParameters>255 BYTE,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="TYPE" id="2A948863-B2E8-A243-E36E-62EC15AAB85B">
+<sourceConnName>Student</sourceConnName>
+<sourceObjSchema>FILES</sourceObjSchema>
+<sourceObjName>TYPE</sourceObjName>
+<createdBy>silviu</createdBy>
+<createdTime>2016-05-18 13:06:18 UTC</createdTime>
+<ownerDesignName>sadad</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>255 BYTE</dataTypeSize>
+<ownDataTypeParameters>255 BYTE,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="PATH" id="6D9557FA-41C7-1249-BB8C-3B05E194AF5D">
+<sourceConnName>Student</sourceConnName>
+<sourceObjSchema>FILES</sourceObjSchema>
+<sourceObjName>PATH</sourceObjName>
+<createdBy>silviu</createdBy>
+<createdTime>2016-05-18 13:06:18 UTC</createdTime>
+<ownerDesignName>sadad</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>255 BYTE</dataTypeSize>
+<ownDataTypeParameters>255 BYTE,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="CREATEDAT" id="3233AF74-80A3-053D-1258-51E0D2D1A9D5">
+<sourceConnName>Student</sourceConnName>
+<sourceObjSchema>FILES</sourceObjSchema>
+<sourceObjName>CREATEDAT</sourceObjName>
+<createdBy>silviu</createdBy>
+<createdTime>2016-05-18 13:06:18 UTC</createdTime>
+<ownerDesignName>sadad</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT007</logicalDatatype>
+<dataTypeSize>7</dataTypeSize>
+<ownDataTypeParameters>7,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+</columns>
+<indexes itemClass="oracle.dbtools.crest.model.design.relational.Index">
+<ind_PK_UK id="16AAFE44-805F-ECC3-20D1-7925AE87467D" schemaObject="1C60D95A-58E1-01C3-A6CC-927F3D0A1FDC" name="FILES_PK">
+<sourceConnName>Student</sourceConnName>
+<sourceObjSchema>STUDENT</sourceObjSchema>
+<sourceObjName>SYS_C007665</sourceObjName>
+<createdBy>silviu</createdBy>
+<createdTime>2016-05-18 13:06:18 UTC</createdTime>
+<ownerDesignName>sadad</ownerDesignName>
+<pk>true</pk>
+<indexState>Primary Constraint</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="3868456A-4712-6571-708B-94F1D2DE5411"/>
+</indexColumnUsage>
+</ind_PK_UK>
+<ind_PK_UK id="B18C9E58-1D65-69B6-B603-5E9A144B472C" schemaObject="1C60D95A-58E1-01C3-A6CC-927F3D0A1FDC" name="FILES_FOR_CHEST">
+<sourceConnName>Student</sourceConnName>
+<sourceObjSchema>STUDENT</sourceObjSchema>
+<sourceObjName>FILES_FOR_CHEST</sourceObjName>
+<createdBy>silviu</createdBy>
+<createdTime>2016-05-18 13:06:18 UTC</createdTime>
+<ownerDesignName>sadad</ownerDesignName>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="75A53D89-2361-6F79-9739-01DA04753D6C"/>
+</indexColumnUsage>
+</ind_PK_UK>
+<ind_PK_UK id="DD0D9DA2-D6D4-833B-9F55-8DB2C0952DCA" name="FILES_CHESTS">
+<createdBy>silviu</createdBy>
+<createdTime>2016-05-18 13:06:18 UTC</createdTime>
+<ownerDesignName>sadad</ownerDesignName>
+<indexState>Foreign Key</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="75A53D89-2361-6F79-9739-01DA04753D6C"/>
+</indexColumnUsage>
+</ind_PK_UK>
+</indexes>
+</Table>

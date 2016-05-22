@@ -1,0 +1,81 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<TableProxyOraclev11g class="oracle.dbtools.crest.model.design.storage.oracle.v11g.TableProxyOraclev11g" name="CHESTS" directorySegmentName="seg_0" id="E16B6569-FD82-30DD-22A6-623604769206">
+<createdBy>silviu</createdBy>
+<createdTime>2016-05-18 13:06:17 UTC</createdTime>
+<ownerDesignName>sadad</ownerDesignName>
+<schemaObject>1C60D95A-58E1-01C3-A6CC-927F3D0A1FDC</schemaObject>
+<logging>YES</logging>
+<partitionedRowMovement>DISABLE</partitionedRowMovement>
+<segment>5280BA4F-2276-F3BA-C1E2-85C6DA24EBC4</segment>
+<tableSpace>A1B428F2-84BE-CFF5-3386-1BDC2B2D632B</tableSpace>
+<temporaryChanged>false</temporaryChanged>
+<accessDriverType>oracle_loader</accessDriverType>
+<rejectLimit></rejectLimit>
+<columnProxies itemClass="oracle.dbtools.crest.model.design.storage.oracle.v12c.ColumnProxyOraclev12c">
+<ColumnProxy name="CHEST_ID" id="12C9FB86-5C76-D8F4-CED9-437589A66803">
+<createdBy>silviu</createdBy>
+<createdTime>2016-05-18 13:06:18 UTC</createdTime>
+<ownerDesignName>sadad</ownerDesignName>
+</ColumnProxy>
+<ColumnProxy name="NAME" id="22B4E864-D635-4AC3-2ED9-C9109CF5929E">
+<createdBy>silviu</createdBy>
+<createdTime>2016-05-18 13:06:18 UTC</createdTime>
+<ownerDesignName>sadad</ownerDesignName>
+</ColumnProxy>
+<ColumnProxy name="CREATEDAT" id="69858E51-1924-446B-D4AC-1A6C66B3A4F3">
+<createdBy>silviu</createdBy>
+<createdTime>2016-05-18 13:06:18 UTC</createdTime>
+<ownerDesignName>sadad</ownerDesignName>
+</ColumnProxy>
+<ColumnProxy name="CAPACITY" id="7FBD9F61-EA90-2EB9-B491-1502C103262E">
+<createdBy>silviu</createdBy>
+<createdTime>2016-05-18 13:06:18 UTC</createdTime>
+<ownerDesignName>sadad</ownerDesignName>
+</ColumnProxy>
+<ColumnProxy name="USER_ID" id="96CF2C33-B392-F87B-E006-EBAF6995EB37">
+<createdBy>silviu</createdBy>
+<createdTime>2016-05-18 13:06:18 UTC</createdTime>
+<ownerDesignName>sadad</ownerDesignName>
+</ColumnProxy>
+<ColumnProxy name="FREESLOTS" id="F90C506B-FDD3-E208-43A2-8D718A0FD2E2">
+<createdBy>silviu</createdBy>
+<createdTime>2016-05-18 13:06:18 UTC</createdTime>
+<ownerDesignName>sadad</ownerDesignName>
+</ColumnProxy>
+<ColumnProxy name="DESCRIPTION" id="F9CC197F-267A-CF6B-C553-59121E567322">
+<createdBy>silviu</createdBy>
+<createdTime>2016-05-18 13:06:18 UTC</createdTime>
+<ownerDesignName>sadad</ownerDesignName>
+</ColumnProxy>
+</columnProxies>
+<indexProxies>
+<IndexProxy class="oracle.dbtools.crest.model.design.storage.oracle.v10g.IndexProxyOraclev10g" name="CHESTS_FOR_USERS" id="F0868951-0F1B-631B-5AB3-E1D47D3DE4E5">
+<createdBy>silviu</createdBy>
+<createdTime>2016-05-18 13:06:18 UTC</createdTime>
+<ownerDesignName>sadad</ownerDesignName>
+<schemaObject>1C60D95A-58E1-01C3-A6CC-927F3D0A1FDC</schemaObject>
+<segment>79BEAEF9-7A27-6665-0E00-A10FEE737A36</segment>
+<tableSpace>A1B428F2-84BE-CFF5-3386-1BDC2B2D632B</tableSpace>
+</IndexProxy>
+</indexProxies>
+<foreignKeys>
+<ForeignKey class="oracle.dbtools.crest.model.design.storage.oracle.v10g.FKProxyOraclev10g" name="CHESTS_USERS" id="A5B2FA72-E42D-BBF2-EED2-F45AB10D7C15">
+<createdBy>silviu</createdBy>
+<createdTime>2016-05-18 13:06:18 UTC</createdTime>
+<ownerDesignName>sadad</ownerDesignName>
+</ForeignKey>
+</foreignKeys>
+<primaryKeys>
+<PrimaryKey class="oracle.dbtools.crest.model.design.storage.oracle.v10g.PKProxyOraclev10g" name="CHESTS_PK" id="29EB873C-E681-BDA4-8D20-E4E54ACAFFAC">
+<createdBy>silviu</createdBy>
+<createdTime>2016-05-18 13:06:18 UTC</createdTime>
+<ownerDesignName>sadad</ownerDesignName>
+<schemaObject>1C60D95A-58E1-01C3-A6CC-927F3D0A1FDC</schemaObject>
+<segment>79BEAEF9-7A27-6665-0E00-A10FEE737A36</segment>
+<tableSpace>A1B428F2-84BE-CFF5-3386-1BDC2B2D632B</tableSpace>
+<indexSegment>79BEAEF9-7A27-6665-0E00-A10FEE737A36</indexSegment>
+<indexSort>SORTED</indexSort>
+<usingIndex>BY INDEX NAME</usingIndex>
+</PrimaryKey>
+</primaryKeys>
+</TableProxyOraclev11g>

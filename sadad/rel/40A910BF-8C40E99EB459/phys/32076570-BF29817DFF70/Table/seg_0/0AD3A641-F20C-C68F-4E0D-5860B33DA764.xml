@@ -1,0 +1,46 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<TableProxyOraclev11g class="oracle.dbtools.crest.model.design.storage.oracle.v11g.TableProxyOraclev11g" name="SOCIAL_ACCOUNTS" directorySegmentName="seg_0" id="0AD3A641-F20C-C68F-4E0D-5860B33DA764">
+<createdBy>silviu</createdBy>
+<createdTime>2016-05-18 13:06:17 UTC</createdTime>
+<ownerDesignName>sadad</ownerDesignName>
+<schemaObject>1C60D95A-58E1-01C3-A6CC-927F3D0A1FDC</schemaObject>
+<logging>YES</logging>
+<partitionedRowMovement>DISABLE</partitionedRowMovement>
+<segment>5280BA4F-2276-F3BA-C1E2-85C6DA24EBC4</segment>
+<tableSpace>A1B428F2-84BE-CFF5-3386-1BDC2B2D632B</tableSpace>
+<temporaryChanged>false</temporaryChanged>
+<accessDriverType>oracle_loader</accessDriverType>
+<rejectLimit></rejectLimit>
+<columnProxies itemClass="oracle.dbtools.crest.model.design.storage.oracle.v12c.ColumnProxyOraclev12c">
+<ColumnProxy name="PROVIDER" id="0F20E9D5-768B-111E-4A54-050F589523AE">
+<createdBy>silviu</createdBy>
+<createdTime>2016-05-18 13:06:18 UTC</createdTime>
+<ownerDesignName>sadad</ownerDesignName>
+</ColumnProxy>
+<ColumnProxy name="PROVIDER_USER_ID" id="25769C54-F93D-B5E7-EA33-E493F43AEDFE">
+<createdBy>silviu</createdBy>
+<createdTime>2016-05-18 13:06:18 UTC</createdTime>
+<ownerDesignName>sadad</ownerDesignName>
+</ColumnProxy>
+<ColumnProxy name="USER_ID" id="6D09898F-98ED-621F-2EE2-9CB463F3CE8F">
+<createdBy>silviu</createdBy>
+<createdTime>2016-05-18 13:06:18 UTC</createdTime>
+<ownerDesignName>sadad</ownerDesignName>
+</ColumnProxy>
+<ColumnProxy name="ID" id="D48E7CE9-8103-B7D8-CC21-DDA16C336C91">
+<createdBy>silviu</createdBy>
+<createdTime>2016-05-18 13:06:18 UTC</createdTime>
+<ownerDesignName>sadad</ownerDesignName>
+</ColumnProxy>
+<ColumnProxy name="UPDATED_AT" id="DE222CDF-EAA0-12F1-3B17-00A86C5D1914">
+<createdBy>silviu</createdBy>
+<createdTime>2016-05-18 13:06:18 UTC</createdTime>
+<ownerDesignName>sadad</ownerDesignName>
+</ColumnProxy>
+<ColumnProxy name="CREATED_AT" id="F0162D2D-DAC6-809B-7996-7052C4B572B0">
+<createdBy>silviu</createdBy>
+<createdTime>2016-05-18 13:06:18 UTC</createdTime>
+<ownerDesignName>sadad</ownerDesignName>
+</ColumnProxy>
+</columnProxies>
+</TableProxyOraclev11g>

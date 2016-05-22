@@ -1,129 +1,8 @@
 @extends('layouts.app')
-  <link rel="stylesheet"  href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
-  <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.3/jquery.min.js" integrity="sha384-I6F5OKECLVtK/BL+8iSLDEHowSAfUo76ZL9+kGAgTRdiByINKJaqTPH/QVNS1VDb" crossorigin="anonymous"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
-  {{-- <script src="{{ elixir('js/app.js') }}"></script> --}}
-
-
-@section('facebook')
-
-<script>
-  	window.fbAsyncInit = function() {
-    	FB.init({
-     	appId      : '1076282755772512',
-     	xfbml      : true,
-      	version    : 'v2.6'
-    	});
-  	};
-
-  	(function(d, s, id){
-    	var js, fjs = d.getElementsByTagName(s)[0];
-     	if (d.getElementById(id)) {return;}
-     	js = d.createElement(s); js.id = id;
-     	js.src = "//connect.facebook.net/en_US/sdk.js";
-     	fjs.parentNode.insertBefore(js, fjs);
-   	}(document, 'script', 'facebook-jssdk'));
-
-   	function authenticate(){
-   		FB.getLoginStatus(function (response) {
-     		if (response.status === 'connected') {
-        		getPhotos();
-     		} else {
-        		console.log("not connected");
-        		FB.login(function(response) {
-				    if (response.authResponse) {
-					    location.reload();
-				    } else {
-				        console.log('User cancelled login or did not fully authorize.');
-				    }
-				},{scope: 'user_photos'});
-     		}
-  		});
-   	};
-
-  	function getPhotos(){
-
-  		FB.api('/me?fields=id,name,photos', function(response){
-  			var idData
-			if(response){
-				for (var i = 0; i < response.photos.data.length; i++) {
-						if(i==0){
-							createActiveDiv(i);
-						}
-						else{
-							createDiv(i);
-						}
-						idData=response.photos.data[i];
-						putImg(idData.id, i);
-				}
-			}
-			else
-				console.log("No Photos");
-
-			/*var respData=$.getJSON(response.photos.paging.next, function(){});
-			var j=0;
-			var object;
-			console.log(respData);
-			/*object=respData.responseJSON;
-			console.log(object.data);*/
-			/*for(var j=0; j< respData.responseJSON.data.length;j++){
-				console.log("enter for");
-				console.log(respData.responseJSON.data[j].id);
-			}
-			while(respData.next){
-				j=j+1;
-				console.log(j);
-				respData=$.getJSON(respData.paging.next, function(){});
-				console.log("done");
-			}*/
-		});
-
-		
- 	};
-
- 	function createActiveDiv(divId){
- 		var div = document.createElement("div");
- 		div.setAttribute('id', divId);
- 		div.setAttribute('class', 'item active');
- 		document.getElementById("carouselWrapper").appendChild(div);
- 	}
-
- 	function createDiv(divId){
- 		var div = document.createElement("div");
- 		div.setAttribute('id', divId);
- 		div.setAttribute('class', 'item');
- 		document.getElementById("carouselWrapper").appendChild(div);
- 	};
-
- 	function putImg(id, divId){
- 		FB.api('/' + id + '?fields=images', function(response){
-			var img = document.createElement("img");
-			img.src=response.images[1].source;
-			img.width=173;
-			img.height=130;
-			img.alt=response.link;
-			document.getElementById(divId).appendChild(img);
-		});
-
- 	}
-</script>
-
-@endsection
 
 
 @section('content')
 
-<script src="/js/carousel.js"></script>
- <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
- <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
-  <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
-  <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.3/jquery.min.js" integrity="sha384-I6F5OKECLVtK/BL+8iSLDEHowSAfUo76ZL9+kGAgTRdiByINKJaqTPH/QVNS1VDb" crossorigin="anonymous"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
-  {{-- <script src="{{ elixir('js/app.js') }}"></script> --}}
 
 <div class="container">
 	<div class="row">
@@ -131,7 +10,15 @@
 		<ul class="nav nav-pills">
             	<li class="active"><a data-toggle="pill" href="#local">Local File</a></li>
     			<li><a data-toggle="pill" href="#facebook" onclick="authenticate()">Facebook</a></li>
-   				<li><a data-toggle="pill" href="#youtube">Youtube</a></li>
+
+    					@if( Session::has('token') )
+    						<li><a data-toggle="pill" href="#youtube">Youtube</a></li>
+    					@else 
+    						<li><a  href="/loginY/{{$id}}">Youtube</a></li>
+    					@endif
+    	
+				 
+   				
     			<li><a data-toggle="pill" href="#soundcloud">SoundCloud</a></li>
   			</ul>
 
@@ -236,8 +123,22 @@
     			</div>
 
     			<div id="youtube" class="tab-pane fade">
-      			<h3>Youtube video</h3>
-      			<p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+	      			<h3>Youtube video</h3>
+	      			@if(Session::has('videos'))
+	      				{{$videos=Session::get('videos')}}
+	      			@endif
+	      			@if(isset($videos))
+	      			<ul class="list-unstyled video-list-thumbs row">
+						@foreach($videos as $video)
+						    <li class="col-lg-3 col-sm-4 col-xs-6">
+						        <a href="http://youtube.com/watch?v={{ $video['snippet']['resourceId']['videoId']}}" title="{{ $video['snippet']['title'] }}" target="_blank">
+						            <img src="{{ $video['snippet']['thumbnails']['medium']['url'] }}" alt="{{ $video['snippet']['title'] }}" />
+						            <h2 class="truncate">{{ $video['snippet']['title'] }}</h2>
+						        </a>
+						    </li>
+						@endforeach
+					</ul>
+					@endif
     			</div>
 
     			<div id="soundcloud" class="tab-pane fade">

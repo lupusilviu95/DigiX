@@ -127,10 +127,10 @@ class DatabaseInteraction {
 	}
 	
 
-	public function addFile($cufar,$nume,$tip,$cale) {
+	public function addFile($cufar,$nume,$tip,$cale,$sursa) {
 
 		$sql="begin 
-			  :r:=DIGIX.ADDFILE(:chestid,:filename,:filetype,:filepath,:datac);
+			  :r:=DIGIX.ADDFILE(:chestid,:filename,:filetype,:filepath,:datac,:org);
 			  end;";
 		$date=date('d-M-y');
 		$stid=oci_parse($this->conn,$sql);
@@ -140,6 +140,7 @@ class DatabaseInteraction {
 		oci_bind_by_name($stid, ':filetype',$tip);
 		oci_bind_by_name($stid, ':filepath',$cale);
 		oci_bind_by_name($stid, ':datac',$date);
+		oci_bind_by_name($stid,':org',$sursa);
 		oci_execute($stid);
 		oci_commit($this->conn);
 		oci_free_statement($stid);
@@ -186,7 +187,7 @@ class DatabaseInteraction {
 
 	public function getFilesForChest($cid){
 
-		$sql='select name,type,file_id,chest_id,path,createdat as age from files where chest_id=:idc';
+		$sql='select name,type,file_id,chest_id,path,createdat as age,origin from files where chest_id=:idc';
 		$stid=oci_parse($this->conn,$sql);
 		oci_bind_by_name($stid, ':idc', $cid);
 	    oci_execute($stid);
@@ -200,6 +201,7 @@ class DatabaseInteraction {
 	        	$file->name=$row['NAME'];
 	        	$file->path=$row['PATH'];
 	        	$file->createdat=$row['AGE'];
+	        	$file->origin=$row['ORIGIN'];
 	        	$files[]=$file;
 
 	        }

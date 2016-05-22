@@ -34,6 +34,7 @@
    						<th><a href="?sortOption=type">Type</a></th>
               <th><a href="?sortOption=created_at">Created at</a></th>
               <th>Twitter</th>
+              <th>Source</th>
  					 </tr>
                     @foreach($files as $file)
                     <tr class="clickable-row" id="{{$file->fileid}}" onclick="pop(this)">
@@ -45,6 +46,7 @@
                       @else
                       <td>N/A</td>
                       @endif
+                      <td>{{$file->origin}}</td>
                     </tr>    
                     @endforeach
                   </tbody>

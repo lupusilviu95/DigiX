@@ -10,6 +10,9 @@
       return strtotime($b->createdat)-strtotime($a->createdat);
     }
     ?>
+
+
+    
 @section('content')
 
 <div class="container">
@@ -57,6 +60,9 @@
                         </div>
                     </div>
                 @endif
+
+
+                
 </div>
 @endsection
 

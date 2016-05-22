@@ -114,7 +114,8 @@ class FileController extends Controller
 
       $db=new DatabaseInteraction('student', 'STUDENT', 'localhost/XE');
       $db->connect();
-      $fileid=$db->addFile($id,$name,$extension,$filepath);
+      $origin='local';
+      $fileid=$db->addFile($id,$name,$extension,$filepath,$origin);
 
       foreach ($separated_tags as $tag) {
         $db->addTagToFile($fileid,$tag);
@@ -126,5 +127,41 @@ class FileController extends Controller
       return redirect('/viewChest/'.$id);
 
    	 }
+
+     public function uploadYoutube(Request $request){
+      $this->validate($request,[ 
+        'tags'=>array('required', 'regex:/^(([a-z]+))$|^(([a-z]+)[,]([a-z]+))$|^(([a-z]+)[,]([a-z]+)[,]([a-z]+))$/i')
+
+        ]);
+
+      $user=Auth::user()->id;
+      $id=$request->chestid;
+
+      $tags=$request->tags;
+      $separated_tags=explode(",",$tags);
+
+      $name=$request->videoname;
+      $filepath=$request->videoid;
+
+      $rudenie=$request->rudenie;
+
+      $db=new DatabaseInteraction('student', 'STUDENT', 'localhost/XE');
+      $db->connect();
+      $origin='youtube';
+      $extension='youtube';
+
+      $fileid=$db->addFile($id,$name,$extension,$filepath,$origin);
+
+      foreach ($separated_tags as $tag) {
+        $db->addTagToFile($fileid,$tag);
+       }
+       if(strcmp($rudenie,"-none-")){
+        $db->addRelativeToFile($fileid,$rudenie);
+       }
+
+      return redirect('/viewChest/'.$id);
+
+      return $request->all();
+     }
 
 }
