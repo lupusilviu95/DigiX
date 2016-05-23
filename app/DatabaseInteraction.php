@@ -176,7 +176,7 @@ class DatabaseInteraction {
 			  :r:=DIGIX.GETFILEPATH(:fileid);
 			  end;";
 		$stid=oci_parse($this->conn,$sql);
-		oci_bind_by_name($stid, ':r',$response,100);
+		oci_bind_by_name($stid, ':r',$response,255);
 		oci_bind_by_name($stid, ':fileid',$fileid);
 		oci_execute($stid);
 		oci_commit($this->conn);

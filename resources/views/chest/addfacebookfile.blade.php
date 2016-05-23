@@ -9,6 +9,7 @@
         xfbml      : true,
         version    : 'v2.6'
         });
+        document.getElementById('button').disabled = true;
         authenticate();
     };
 
@@ -42,6 +43,7 @@
         FB.api('/me?fields=id,name,photos', function(response){
             var idData
             if(response){
+                document.getElementById('button').disabled = false;
                 for (var i = 0; i < response.photos.data.length; i++) {
                         if(i==0){
                             createActiveDiv(i);
@@ -100,7 +102,18 @@
             img.alt=response.link;
             document.getElementById(divId).appendChild(img);
         });
+    }
 
+    function formSubmit(){
+        var actDiv=document.getElementsByClassName("item active")[0];
+        var image = actDiv.getElementsByTagName("img");
+        var source = image[0].getAttribute("src");
+        console.log(source);
+        var form = document.forms['FBform'];
+        form.elements["source"].value=source;
+        console.log(form);
+        form.submit();
+        
     }
 </script>
 
@@ -112,58 +125,63 @@
 <div class="container">
 	<div class="row">
 		<div class="col-md-5 col-md-offset-3">
-			<form action="/upload/{{$id}}" method="POST" enctype="multipart/form-data">
-      					<input type="hidden" name="chestid" value="{{$id}}">
-      					<div id="myCarousel" class="carousel slide" data-ride="carousel" data-interval="false">
 
-               				 <!-- Wrapper for slides -->
-                			<div id="carouselWrapper" class="carousel-inner" role="listbox">
+                <div id="myCarousel" class="carousel slide" data-ride="carousel" data-interval="false">
 
-		                	</div>
+                    <!-- Wrapper for slides -->
+                    <div id="carouselWrapper" class="carousel-inner" role="listbox">
 
-                			<!-- Left and right controls -->
-                			<a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev">
-                    			<span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
-                    			<span class="sr-only">Previous</span>
-                			</a>
-                			<a class="right carousel-control" href="#myCarousel" role="button" data-slide="next">
-                    			<span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
-                    			<span class="sr-only">Next</span>
-                			</a>
-            			</div>
+                    </div>
 
-            			<div class="form-group{{ $errors->has('tags') ? ' has-error' : '' }}">
-    						<label for="tags">Tags</label>
-    						<input type="text" class="form-control" id="tags" name="tags" placeholder="Enter tags separated by comma" value="{{ old('tags') }}">
-    						@if ($errors->has('tags'))
-								<span class="help-block">
-									<strong>{{ $errors->first('tags') }}</strong>
-								</span>
-							@endif
-  			  			</div>
+                    <!-- Left and right controls -->
+                    <a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev">
+                        <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+                        <span class="sr-only">Previous</span>
+                    </a>
+                    <a class="right carousel-control" href="#myCarousel" role="button" data-slide="next">
+                        <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+                        <span class="sr-only">Next</span>
+                    </a>
+                </div>
 
-  			  			<div class="form-group">
-			  	 			<label for="rudenie">Relatives</label>
-						 	<select class="form-control" id="rudenie" name="rudenie">
-						 		<option>-none-</option>
-			  					<option>mama</option>
-			 					<option>tata</option>
-			  					<option>frate</option>
-			  					<option>sora</option>
-			  					<option>bunic</option>
-			  					<option>bunica</option>
-			  					<option>var</option>
-			  					<option>verisoara</option>
-			  					<option>unchi</option>
-			  					<option>matusa</option>
-			 				</select>
-  			  			</div>
+			<form action="/upload/facebook/{{$id}}" method="POST" id="FBform">
+                {!! csrf_field() !!}
+      			<input type="hidden" name="chestid" value="{{$id}}">
+                <input type="hidden" name="source" id="source" value="">
+      			
 
-  			  			<button type="submit" class="btn btn-default" disabled>Submit</button>
+            	<div class="form-group{{ $errors->has('tags') ? ' has-error' : '' }}">
+    				<label for="tags">Tags</label>
+    				<input type="text" class="form-control" id="tags" name="tags" placeholder="Enter tags separated by comma" value="{{ old('tags') }}">
+    					@if ($errors->has('tags'))
+							<span class="help-block">
+								<strong>{{ $errors->first('tags') }}</strong>
+							</span>
+						@endif
+  			  	</div>
 
-            		</form>
-           </div>
+  			  	<div class="form-group">
+			  	 	<label for="rudenie">Relatives</label>
+				 	<select class="form-control" id="rudenie" name="rudenie">
+				 		<option>-none-</option>
+			  			<option>mama</option>
+			 			<option>tata</option>
+			  			<option>frate</option>
+			  			<option>sora</option>
+			  			<option>bunic</option>
+			  			<option>bunica</option>
+			  			<option>var</option>
+			  			<option>verisoara</option>
+			  			<option>unchi</option>
+			  			<option>matusa</option>
+			 		</select>
+  			  	</div>
+
+  			  	<button type="button" class="btn btn-default" onclick="formSubmit()" id="button">Submit</button>
+
+            </form>
         </div>
-     </div>
+    </div>
+</div>
 
 @endsection

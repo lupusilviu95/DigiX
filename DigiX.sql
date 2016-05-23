@@ -35,7 +35,7 @@ create or replace package body DigiX is
     end if;
   end checkExistsFile;
   function getFilePath(id_fisier files.file_id%type ) return varchar2 is
-  cale varchar2(100);
+  cale varchar2(255);
   begin
      if(checkExistsFile(id_fisier)=false)
       then raise DigixExceptions.inexistent_file;

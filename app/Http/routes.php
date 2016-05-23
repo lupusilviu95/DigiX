@@ -44,6 +44,7 @@ Route::get('/delete/file/{id}','FileController@delete');
 Route::get('/download/file/{id}','FileController@download');
 Route::post('/upload/{id}','FileController@upload');
 Route::post('/upload/youtube/{id}','FileController@uploadYoutube');
+Route::post('/upload/facebook/{id}','FileController@uploadFaceBook');
 
 Route::get('/viewChest/{id}/search','ChestController@search');
 
