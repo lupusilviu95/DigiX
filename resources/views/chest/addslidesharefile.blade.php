@@ -8,7 +8,7 @@
 	<div class="row">
 		<div class="col-md-5 col-md-offset-3">
 			<form action="" method="POST">
-      					<p>Soundlcoud something something</p>
+      					<p>Slideshare something something</p>
             			<div class="form-group{{ $errors->has('tags') ? ' has-error' : '' }}">
     						<label for="tags">Tags</label>
     						<input type="text" class="form-control" id="tags" name="tags" placeholder="Enter tags separated by comma" value="{{ old('tags') }}">

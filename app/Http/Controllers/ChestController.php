@@ -9,6 +9,8 @@ use Auth;
 use App\File;
 use App\DatabaseInteraction;
 use Storage;
+use Session;
+use DOMDocument;
 
 class ChestController extends Controller
 
@@ -161,6 +163,29 @@ session_start();
         
        
     }
+    
+    public function SearchSlideShare($id) {
+
+       session_start();
+        $_SESSION['chest']=$id;
+
+        $user=Auth::user()->id;
+        $db=new DatabaseInteraction('student', 'STUDENT', 'localhost/XE');
+        $db->connect();
+        $owner=$db->verifyOwnership($user,$id);
+        
+        if($owner==1)
+        {
+            
+
+            return view('chest.searchUserForm',compact('id'));
+
+        }
+        else  return redirect('/dashboard');
+        
+       
+    }
+
     public function addSlideshareFile($id) {
 
         session_start();
@@ -324,4 +349,60 @@ session_start();
         return redirect('/dashboard');
 
     }
+
+    public function processSlideshare(Request $request, $id) {
+        
+                
+        $name=Auth::user()->id;
+        $user=$request->username;
+
+        $url="https://www.slideshare.net/api/2/get_slideshows_by_user";
+
+
+        $api_key="Zg6wXN6k";
+        $secret_key = "extxY8qg";
+        $time = time();
+        $hash = hash('sha1',$secret_key.$time);
+
+
+        $req=$url ."?api_key=".$api_key
+            ."&ts=".$time
+            ."&hash=".$hash
+            ."&username_for=".$user;
+
+          
+       
+        $dom=new DOMDocument();
+        $dom->load($req);
+
+        
+        $messageNodes = $dom->getElementsByTagName('Message'); 
+        if($messageNodes->length != 0)
+        {
+           
+           $flash_error=Session::get('flash_error');
+           return redirect()->back()->withInput()->with('flash_error', 'User Not Found');
+        }
+
+        
+        else 
+
+        {
+            $slideshows = $dom->getElementsByTagName('Slideshow');
+            foreach ($slideshows as $slideshow) {
+                $urls=$slideshow->getElementsByTagName('URL');
+                $titles=$slideshow->getElementsByTagName('Title');
+                $embeds=$slideshow->getElementsByTagName('Embed');
+                echo '<a href="'.$urls->item(0)->nodeValue. '">'.$titles->item(0)->nodeValue.'</a>';
+                echo $embeds->item(0)->nodeValue;
+                echo '<br>';
+                
+            }
+        
+        }
+
+    }
+
+
+
 }

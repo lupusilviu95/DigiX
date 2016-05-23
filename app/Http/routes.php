@@ -32,6 +32,7 @@ Route::get('/viewChest/{id}/add/local','ChestController@addLocalFile');
 Route::get('/viewChest/{id}/add/facebook','ChestController@addFacebookFile');
 Route::get('/viewChest/{id}/add/youtube','ChestController@addYoutubeFile');
 Route::get('/viewChest/{id}/add/soundcloud','ChestController@addSoundcloudFile');
+Route::get('/viewChest/{id}/add/slideshareSearch','ChestController@SearchSlideshare');
 Route::get('/viewChest/{id}/add/slideshare','ChestController@addSlideshareFile');
 Route::get('/newChest','ChestController@newChest');
 Route::get('/delete/chest/{id}','ChestController@delete');
@@ -45,6 +46,8 @@ Route::get('/download/file/{id}','FileController@download');
 Route::post('/upload/{id}','FileController@upload');
 Route::post('/upload/youtube/{id}','FileController@uploadYoutube');
 Route::post('/upload/facebook/{id}','FileController@uploadFaceBook');
+
+Route::post('/search/processSlideshare/{id}','ChestController@processSlideshare');///
 
 Route::get('/viewChest/{id}/search','ChestController@search');
 

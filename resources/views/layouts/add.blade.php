@@ -67,7 +67,7 @@
                         @endif
                      
                      <li><a href="/viewChest/{{$_SESSION['chest']}}/add/soundcloud">SoundCloud</a></li>
-                     <li><a href="/viewChest/{{$_SESSION['chest']}}/add/slideshare">Slideshare</a></li>
+                     <li><a href="/viewChest/{{$_SESSION['chest']}}/add/slideshareSearch">Slideshare</a></li>
                 </ul>
 
                 <!-- Right Side Of Navbar -->
