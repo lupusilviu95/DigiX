@@ -11,6 +11,7 @@ use App\DatabaseInteraction;
 use Storage;
 use Session;
 use DOMDocument;
+use App\Slideshow;
 
 class ChestController extends Controller
 
@@ -352,7 +353,10 @@ session_start();
 
     public function processSlideshare(Request $request, $id) {
         
-                
+        session_start();
+        $_SESSION['chest']=$id;
+        
+
         $this->validate($request,[
             'username'=>'required'
             ]);
@@ -367,11 +371,13 @@ session_start();
         $secret_key = "extxY8qg";
         $time = time();
         $hash = hash('sha1',$secret_key.$time);
+        $limit=10;
 
 
         $req=$url ."?api_key=".$api_key
             ."&ts=".$time
             ."&hash=".$hash
+            ."&limit=".$limit
             ."&username_for=".$user;
 
           
@@ -393,15 +399,20 @@ session_start();
 
         {
             $slideshows = $dom->getElementsByTagName('Slideshow');
+            $slides=null;
             foreach ($slideshows as $slideshow) {
                 $urls=$slideshow->getElementsByTagName('URL');
                 $titles=$slideshow->getElementsByTagName('Title');
-                $embeds=$slideshow->getElementsByTagName('Embed');
-                echo '<a href="'.$urls->item(0)->nodeValue. '">'.$titles->item(0)->nodeValue.'</a>';
-                echo $embeds->item(0)->nodeValue;
-                echo '<br>';
-                
+                $embeds=$slideshow->getElementsByTagName('SlideshowEmbedUrl');
+                $slide=new Slideshow();
+                $slide->title=$titles->item(0)->nodeValue;
+                $slide->url=$urls->item(0)->nodeValue;
+                $slide->embedlink=$embeds->item(0)->nodeValue;
+                $slides[]=$slide;
             }
+           
+            return view('chest.addslidesharefile',compact('slides','id'));
+            //var_dump($slides);
         
         }
 
