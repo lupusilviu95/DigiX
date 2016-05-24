@@ -13,9 +13,14 @@
 		<div class="col-md-5 col-md-offset-3">
 			<form action="/search/processSlideshare/{{$id}}" method="POST">
 				{!! csrf_field() !!}
-            			<div class="form">
+            		<div class="form-group{{ $errors->has('username') ? ' has-error' : '' }}">
     						<label for="user">SlideShare Username</label>
     						<input type="text" class="form-control" id="usernameId" name="username" placeholder="SlideShare Username">
+                @if ($errors->has('username'))
+                      <span class="help-block">
+                        <strong>{{ $errors->first('username') }}</strong>
+                      </span>
+                @endif
   			  			</div>
 
   			  			<button type="submit" class="btn btn-default">Submit</button>

@@ -353,6 +353,10 @@ session_start();
     public function processSlideshare(Request $request, $id) {
         
                 
+        $this->validate($request,[
+            'username'=>'required'
+            ]);
+
         $name=Auth::user()->id;
         $user=$request->username;
 
