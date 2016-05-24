@@ -21,8 +21,8 @@
                                             {{ $slideshow->title }}
                                             </a>
                                         </div>
-                                        <div class="panel-body" >
-                                        <iframe src="{{$slideshow->embedlink}}" class="embed responsive item" width="479" height="511" frameborder="0" allowfullscreen></iframe>
+                                        <div class="panel-body embed-responsive embed-responsive-16by9" >
+                                        <iframe src="{{$slideshow->embedlink}}" class="embed responsive item" width="100%" height="100%" frameborder="0" allowfullscreen></iframe>
                                         </div>
                     
                                 </div>
