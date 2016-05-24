@@ -31,7 +31,7 @@
                     {!! csrf_field() !!}
                     <input type="hidden" name="chestid" value="{{$id}}">
                     <input type="hidden" name="videoid" id="videoid" value="">
-                    <input type="hidden" name="videoname" id="videoname" values="">
+                    <input type="hidden" name="videoname" id="videoname" value="">
                     <div class="form-group{{ $errors->has('tags') ? ' has-error' : '' }}">
                         <label for="tags">Tags</label>
                         <input type="text" class="form-control" id="tags" name="tags" placeholder="Enter tags separated by comma" value="{{ old('tags') }}">

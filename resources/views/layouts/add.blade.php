@@ -117,6 +117,19 @@
             document.getElementById("videoid").value=id;
             document.getElementById("buton").removeAttribute("disabled");        
         }
+
+        function getSlideshareInfo(e) {
+            var elements =document.getElementsByClassName("bg-info");
+             for( var i=0;i<elements.length;i++){
+                 elements[i].classList.remove("bg-info");
+             }
+            e.classList.add("bg-info");
+            var embed=e.getAttribute("data-embed");
+            var title=e.getAttribute("data-title");
+            document.getElementById("slidesharename").value=title;
+            document.getElementById("embedlink").value=embed;
+            document.getElementById("buton").removeAttribute("disabled");        
+        }
     </script>
 
     <script type="text/javascript">

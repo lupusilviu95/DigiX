@@ -46,6 +46,7 @@ Route::get('/download/file/{id}','FileController@download');
 Route::post('/upload/{id}','FileController@upload');
 Route::post('/upload/youtube/{id}','FileController@uploadYoutube');
 Route::post('/upload/facebook/{id}','FileController@uploadFaceBook');
+Route::post('/upload/slideshare/{id}','FileController@addslideshareFile');
 
 Route::post('/search/processSlideshare/{id}','ChestController@processSlideshare');///
 

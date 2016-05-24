@@ -200,4 +200,44 @@ class FileController extends Controller
       return $request->all();
      }
 
+     public function addslideshareFile(Request $request){
+
+      $this->validate($request,[ 
+        'tags'=>array('required', 'regex:/^(([a-z]+))$|^(([a-z]+)[,]([a-z]+))$|^(([a-z]+)[,]([a-z]+)[,]([a-z]+))$/i')
+
+        ]);
+
+      $id=Auth::user()->id;
+
+      $tags=$request->tags;
+      $separated_tags=explode(",",$tags);
+
+      $title=$request->slidesharename;
+      $embed=$request->embedlink;
+
+      $rudenie=$request->rudenie;
+
+      $db=new DatabaseInteraction('student', 'STUDENT', 'localhost/XE');
+      $db->connect();
+      $origin='slideshare';
+      $extension='slideshare';
+
+      $fileid=$db->addFile($id,$title,$extension,$embed,$origin);
+
+      foreach ($separated_tags as $tag) {
+        $db->addTagToFile($fileid,$tag);
+       }
+       if(strcmp($rudenie,"-none-")){
+        $db->addRelativeToFile($fileid,$rudenie);
+       }
+
+      return redirect('/viewChest/'.$id);
+
+      return $request->all();
+
+     }
+
+
+
+
 }
