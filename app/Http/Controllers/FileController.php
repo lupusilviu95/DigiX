@@ -207,7 +207,7 @@ class FileController extends Controller
 
         ]);
 
-      $id=Auth::user()->id;
+      $id=$request->chestid;
 
       $tags=$request->tags;
       $separated_tags=explode(",",$tags);
