@@ -12,10 +12,15 @@ use Storage;
 use Session;
 use DOMDocument;
 use App\Slideshow;
+use App\SoundcloudFile;     
+use Njasm\Soundcloud\SoundcloudFacade;
 
 class ChestController extends Controller
 
 {	 
+
+    protected $clientID='1e6c18cd3bd30bc2add78468fd6fe4c3',$clientSecret='12bec80747a6a4503d092f3a7087032a',$callbackUri='http://localhost:8000/SCcallback';
+    protected $useridURL='https://api.soundcloud.com/me.json?oauth_token=';
 	 private $starting_path;
 	 public function __construct()
     {
@@ -143,28 +148,7 @@ session_start();
         
        
     }
-    public function addSoundcloudFile($id) {
-
-       session_start();
-        $_SESSION['chest']=$id;
-
-        $user=Auth::user()->id;
-        $db=new DatabaseInteraction('student', 'STUDENT', 'localhost/XE');
-        $db->connect();
-        $owner=$db->verifyOwnership($user,$id);
-        
-        if($owner==1)
-        {
-            
-
-            return view('chest.addsoundcloudfile',compact('id'));
-
-        }
-        else  return redirect('/dashboard');
-        
-       
-    }
-    
+  
     public function SearchSlideShare($id) {
 
        session_start();
@@ -209,6 +193,49 @@ session_start();
         
        
     }
+     public function addSoundcloudFile($id){
+
+        session_start();
+        $_SESSION['chest']=$id;
+        
+
+        $user=Auth::user()->id;
+        $db=new DatabaseInteraction('student', 'STUDENT', 'localhost/XE');
+        $db->connect();
+        $owner=$db->verifyOwnership($user,$id);
+        
+        if($owner==1)
+        {
+
+            $code=\Session::get('code');
+            $facade = new SoundcloudFacade($this->clientID, $this->clientSecret, $this->callbackUri);
+            $response=$facade->codeForToken($code);
+            $token=Session::get('sc_token');
+            $content = file_get_contents($this->useridURL.$token);
+            $json = json_decode($content, true);
+            $uid=$json["id"];
+            $tracksURL="https://api.soundcloud.com/tracks?user_id="
+            .$uid.
+            "&limit=100&format=json&oauth_token="
+            .$token;
+            $tracks=file_get_contents($tracksURL);
+            $json_tracks=json_decode($tracks,true);
+            $size=sizeof($json_tracks);
+            $songs=null;
+            for($i=0;$i<$size;$i++){
+                $song=new SoundcloudFile();
+                $song->title=$json_tracks[$i]['title'];
+                $song->embedurl=$json_tracks[$i]['uri'];
+                $song->url=$json_tracks[$i]['permalink_url'];
+                $songs[]=$song;
+            }
+            
+            return view('chest.addsoundcloudfile',compact('songs','id'));
+        }
+        else return Redirect::to('/');
+
+         
+     }
     public function addYoutubeFile($id) {
         session_start();
         $_SESSION['chest']=$id;

@@ -65,8 +65,12 @@
                         @else 
                             <li><a  href="/loginY/{{$id}}">Youtube</a></li>
                         @endif
-                     
-                     <li><a href="/viewChest/{{$_SESSION['chest']}}/add/soundcloud">SoundCloud</a></li>
+                      @if(Session::has('sc_token') )
+                           <li><a href="/viewChest/{{$_SESSION['chest']}}/add/soundcloud">Soundcloud</a></li>
+                        @else 
+                            <li><a  href="/soundcloud/{{$id}}">Soundcloud</a></li>
+                        @endif
+                   
                      <li><a href="/viewChest/{{$_SESSION['chest']}}/add/slideshareSearch">Slideshare</a></li>
                 </ul>
 
@@ -128,6 +132,20 @@
             var title=e.getAttribute("data-title");
             document.getElementById("slidesharename").value=title;
             document.getElementById("embedlink").value=embed;
+            document.getElementById("buton").removeAttribute("disabled");        
+        }
+        function getSoundcloudInfo(e) {
+            var elements =document.getElementsByClassName("bg-info");
+             for( var i=0;i<elements.length;i++){
+                 elements[i].classList.remove("bg-info");
+             }
+            e.classList.add("bg-info");
+            var embed=e.getAttribute("data-embed");
+            var title=e.getAttribute("data-title");
+            var url=e.getAttribute("data-url");
+            document.getElementById("songtitle").value=title;
+            document.getElementById("embedurl").value=embed;
+            document.getElementById("url").value=url;
             document.getElementById("buton").removeAttribute("disabled");        
         }
     </script>

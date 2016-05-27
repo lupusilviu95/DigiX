@@ -11,6 +11,9 @@ use App\DatabaseInteraction;
 | and give it the controller to call when that URI is requested.
 |
 */
+Route::get('/soundcloud/{id}','SoundcloudController@register');
+Route::get('/SCcallback','SoundcloudController@callback');
+
 
 Route::get('/loginY/{id}', ['uses' => 'GoogleLoginController@index', 'as' => 'login']);
 Route::get('/loginCallback', ['uses' => 'GoogleLoginController@store', 'as' => 'loginCallback']);
@@ -34,6 +37,7 @@ Route::get('/viewChest/{id}/add/youtube','ChestController@addYoutubeFile');
 Route::get('/viewChest/{id}/add/soundcloud','ChestController@addSoundcloudFile');
 Route::get('/viewChest/{id}/add/slideshareSearch','ChestController@SearchSlideshare');
 Route::get('/viewChest/{id}/add/slideshare','ChestController@addSlideshareFile');
+Route::get('/viewChest/{id}/add/soundcloud','ChestController@addSoundcloudFile');
 Route::get('/newChest','ChestController@newChest');
 Route::get('/delete/chest/{id}','ChestController@delete');
 Route::get('/edit/chest/{id}','ChestController@edit');
@@ -47,6 +51,8 @@ Route::post('/upload/{id}','FileController@upload');
 Route::post('/upload/youtube/{id}','FileController@uploadYoutube');
 Route::post('/upload/facebook/{id}','FileController@uploadFaceBook');
 Route::post('/upload/slideshare/{id}','FileController@addslideshareFile');
+Route::post('/upload/soundcloud/{id}','FileController@addsoundcloudFile');
+
 
 Route::post('/search/processSlideshare/{id}','ChestController@processSlideshare');///
 

@@ -57,23 +57,6 @@
             }
             else
                 console.log("No Photos");
-
-            /*var respData=$.getJSON(response.photos.paging.next, function(){});
-            var j=0;
-            var object;
-            console.log(respData);
-            /*object=respData.responseJSON;
-            console.log(object.data);*/
-            /*for(var j=0; j< respData.responseJSON.data.length;j++){
-                console.log("enter for");
-                console.log(respData.responseJSON.data[j].id);
-            }
-            while(respData.next){
-                j=j+1;
-                console.log(j);
-                respData=$.getJSON(respData.paging.next, function(){});
-                console.log("done");
-            }*/
         });
 
         
