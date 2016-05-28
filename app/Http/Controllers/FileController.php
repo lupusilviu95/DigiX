@@ -12,268 +12,113 @@ use Response;
 
 class FileController extends Controller
 {
-   private  $root='C:\wamp\www\DigiX\storage\app\\';
-   protected $request;
 
-   public function __construct(\Illuminate\Http\Request $request)
-   {  
+    private $root = "";
+    protected $request;
 
-       $this->request = $request;
-      
-   }
-   public function delete($id) {
+    protected $clientID = '1e6c18cd3bd30bc2add78468fd6fe4c3', $clientSecret = '12bec80747a6a4503d092f3a7087032a', $callbackUri = 'http://localhost:8000/SCcallback';
+    protected $useridURL = 'https://api.soundcloud.com/me.json?oauth_token=';
 
-      if(!Auth::check())
-        return redirect('/');
-      else 
-      {
 
-       		$user=Auth::user()->id;
-          $db=new DatabaseInteraction('student', 'STUDENT', 'localhost/XE');
-          $db->connect();
-           $owner=$db->verifyFileOwnership($user,$id);
-          if($owner==1){
-          $cale=$db->getFilePath($id);
-          Storage::delete($cale);
-          $db->deleteFile($id);
-          
-       		return redirect()->back();
-        }
+    public function __construct(\Illuminate\Http\Request $request)
+    {
+
+        $this->request = $request;
+        $this->root = public_path() . "\\";
+        $this->middleware('auth');
+
+
+    }
+
+    public function delete($id)
+    {
+
+        if (!Auth::check())
+            return redirect('/');
         else {
-            return redirect('/dashboard');
+
+            $user = Auth::user()->id;
+            $db = new DatabaseInteraction('student', 'STUDENT', 'localhost/XE');
+            $db->connect();
+            $owner = $db->verifyFileOwnership($user, $id);
+            if ($owner == 1) {
+
+                $origin = $db->isLocal($id);
+                if ($origin == 1) {
+                    $cale = $db->getFilePath($id);
+                    File::delete($cale);
+                    $db->deleteFile($id);
+
+                } else {
+                    $db->deleteFile($id);
+                }
+
+
+                return redirect()->back();
+            } else {
+                return redirect('/dashboard');
+            }
         }
-      }
 
-   	}
-    public function download ($id) {
-
-      
-      if(!Auth::check())
-        return redirect('/');
-      else 
-      {
-        
-          $user=Auth::user()->id;
-
-          $db=new DatabaseInteraction('student', 'STUDENT', 'localhost/XE');
-          $db->connect();
-          $owner=$db->verifyFileOwnership($user,$id);
-          if($owner==1){
-          $cale=$db->getFilePath($id);
-          return response()->download($this->root.$cale);
-          }
-          else {
-            return redirect('/dashboard');
-          }
-      }
-      
-    }
-    public function view ($id) {
-
-      if(!Auth::check())
-        return redirect('/');
-      else 
-      {
-          $user=Auth::user()->id;
-          $db=new DatabaseInteraction('student', 'STUDENT', 'localhost/XE');
-          $db->connect();
-          $owner=$db->verifyFileOwnership($user,$id);
-          if($owner==1){
-          $cale=$db->getFilePath($id);
-          return response()->file($this->root.$cale);
-          }
-          else{
-            return redirect('/dashboard');
-          }
-      }
-      
     }
 
-   	 public function upload(Request $request) {
-   	 	$this->validate($request,[ 
-   	 		'file' =>'required',
-    		'tags'=>array('required', 'regex:/^(([a-z]+))$|^(([a-z]+)[,]([a-z]+))$|^(([a-z]+)[,]([a-z]+)[,]([a-z]+))$/i')
-
-    		]);
-   	 	$user=Auth::user()->id;
-   	 	$id=$request->chestid;
-   	
-      $file=$this->request->file('file');
-
-      $name = $file->getClientOriginalName();
-      $filepath='userdata/users/user'.$user.'/chest'.$id.'/'.$name;
-
-      $extension = $file->getClientOriginalExtension();
-
-      Storage::disk('local')->put($filepath, File::get($file));
-
-      $tags=$request->tags;
-      $separated_tags=explode(",",$tags);
-
-      $rudenie=$request->rudenie;
-
-      $db=new DatabaseInteraction('student', 'STUDENT', 'localhost/XE');
-      $db->connect();
-      $origin='local';
-      $fileid=$db->addFile($id,$name,$extension,$filepath,$origin);
-
-      foreach ($separated_tags as $tag) {
-        $db->addTagToFile($fileid,$tag);
-       }
-       if(strcmp($rudenie,"-none-")){
-        $db->addRelativeToFile($fileid,$rudenie);
-       }
-
-      return redirect('/viewChest/'.$id);
-
-   	 }
-
-     public function uploadYoutube(Request $request){
-      $this->validate($request,[ 
-        'tags'=>array('required', 'regex:/^(([a-z]+))$|^(([a-z]+)[,]([a-z]+))$|^(([a-z]+)[,]([a-z]+)[,]([a-z]+))$/i')
-
-        ]);
-
-      $user=Auth::user()->id;
-      $id=$request->chestid;
-
-      $tags=$request->tags;
-      $separated_tags=explode(",",$tags);
-
-      $name=$request->videoname;
-      $filepath=$request->videoid;
-
-      $rudenie=$request->rudenie;
-
-      $db=new DatabaseInteraction('student', 'STUDENT', 'localhost/XE');
-      $db->connect();
-      $origin='youtube';
-      $extension='youtube';
-
-      $fileid=$db->addFile($id,$name,$extension,$filepath,$origin);
-
-      foreach ($separated_tags as $tag) {
-        $db->addTagToFile($fileid,$tag);
-       }
-       if(strcmp($rudenie,"-none-")){
-        $db->addRelativeToFile($fileid,$rudenie);
-       }
-
-      return redirect('/viewChest/'.$id);
-
-      return $request->all();
-     }
-
-     public function uploadFaceBook(Request $request){
-      $this->validate($request,[ 
-        'tags'=>array('required', 'regex:/^(([a-z]+))$|^(([a-z]+)[,]([a-z]+))$|^(([a-z]+)[,]([a-z]+)[,]([a-z]+))$/i')
-
-        ]);
-
-      $user=Auth::user()->id;
-      $id=$request->chestid;
-
-      $tags=$request->tags;
-      $separated_tags=explode(",",$tags);
-
-      $name='FaceBook Photo';
-      $filepath=$request->source;
-
-      $rudenie=$request->rudenie;
-
-      $db=new DatabaseInteraction('student', 'STUDENT', 'localhost/XE');
-      $db->connect();
-      $origin='facebook';
-      $extension='facebook';
-
-      $fileid=$db->addFile($id,$name,$extension,$filepath,$origin);
-
-      foreach ($separated_tags as $tag) {
-        $db->addTagToFile($fileid,$tag);
-       }
-       if(strcmp($rudenie,"-none-")){
-        $db->addRelativeToFile($fileid,$rudenie);
-       }
-
-      return redirect('/viewChest/'.$id);
-
-      return $request->all();
-     }
-
-     public function addslideshareFile(Request $request){
-
-      $this->validate($request,[ 
-        'tags'=>array('required', 'regex:/^(([a-z]+))$|^(([a-z]+)[,]([a-z]+))$|^(([a-z]+)[,]([a-z]+)[,]([a-z]+))$/i')
-
-        ]);
-
-      $id=$request->chestid;
-
-      $tags=$request->tags;
-      $separated_tags=explode(",",$tags);
-
-      $title=$request->slidesharename;
-      $embed=$request->embedlink;
-
-      $rudenie=$request->rudenie;
-
-      $db=new DatabaseInteraction('student', 'STUDENT', 'localhost/XE');
-      $db->connect();
-      $origin='slideshare';
-      $extension='slideshare';
-
-      $fileid=$db->addFile($id,$title,$extension,$embed,$origin);
-
-      foreach ($separated_tags as $tag) {
-        $db->addTagToFile($fileid,$tag);
-       }
-       if(strcmp($rudenie,"-none-")){
-        $db->addRelativeToFile($fileid,$rudenie);
-       }
-
-      return redirect('/viewChest/'.$id);
-
-      return $request->all();
-
-     }
-     public function addsoundcloudFile(Request $request){
-
-      $this->validate($request,[ 
-        'tags'=>array('required', 'regex:/^(([a-z]+))$|^(([a-z]+)[,]([a-z]+))$|^(([a-z]+)[,]([a-z]+)[,]([a-z]+))$/i')
-
-        ]);
-
-      $id=$request->chestid;
-
-      $tags=$request->tags;
-      $separated_tags=explode(",",$tags);
-
-      $title=$request->songtitle;
-      $embed=$request->embedurl;
-
-      $rudenie=$request->rudenie;
-
-      $db=new DatabaseInteraction('student', 'STUDENT', 'localhost/XE');
-      $db->connect();
-      $origin=$request->url;
-      $extension='soundcloud';
-
-      $fileid=$db->addFile($id,$title,$extension,$embed,$origin);
-
-      foreach ($separated_tags as $tag) {
-        $db->addTagToFile($fileid,$tag);
-       }
-       if(strcmp($rudenie,"-none-")){
-        $db->addRelativeToFile($fileid,$rudenie);
-       }
-
-      return redirect('/viewChest/'.$id);
-
-      
-
-     }
+    public function download($id)
+    {
 
 
+        if (!Auth::check())
+            return redirect('/');
+        else {
+
+            $user = Auth::user()->id;
+
+            $db = new DatabaseInteraction('student', 'STUDENT', 'localhost/XE');
+            $db->connect();
+            $owner = $db->verifyFileOwnership($user, $id);
+            if ($owner == 1) {
+                $origin = $db->isLocal($id);
+                if ($origin == 1) {
+                    $cale = $db->getFilePath($id);
+                    return response()->download($this->root . $cale);
+
+                } else {
+                    return redirect()->back()->with("flash_info", "We're sorry,but this is not available for this type of resource");
+                }
+
+            } else {
+                return redirect('/dashboard');
+            }
+        }
+
+    }
+
+    public function view($id)
+    {
+
+        if (!Auth::check())
+            return redirect('/');
+        else {
+            $user = Auth::user()->id;
+            $db = new DatabaseInteraction('student', 'STUDENT', 'localhost/XE');
+            $db->connect();
+            $owner = $db->verifyFileOwnership($user, $id);
+            if ($owner == 1) {
+                $origin = $db->isLocal($id);
+                if ($origin == 1) {
+                    $cale = $db->getFilePath($id);
+                    return response()->file($this->root . $cale);
+
+                } else {
+                    return redirect()->back()->with("flash_info", "We're sorry,but this is not available for this type of resource");
+                }
+
+
+            } else {
+                return redirect('/dashboard');
+            }
+        }
+
+    }
 
 
 }

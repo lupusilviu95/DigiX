@@ -10,6 +10,7 @@ create or replace package DigiX is
   procedure deleteFile(id_fisier files.file_id%type);
   procedure deleteChest(id_chest chests.chest_id%type);
   function checkFileOwnership(id_user users.id%type,id_file files.file_id%type) return integer;
+  function checkFileOrigin(id_fisier files.file_id%type) return integer;
   function checkChestOwnership(id_user users.id%type,id_chest chests.chest_id%type) return integer;
   function newChest(id_user users.id%type,cap chests.capacity%type,frees chests.freeSlots%type,descr chests.description%type,nume chests.name%type,datac date) return integer;
   function addFile(id_chest files.chest_id%type,nume files.name%type, tip files.type%type,cale files.path%type,datac date,origine files.origin%type) return integer;
@@ -103,7 +104,16 @@ create or replace package body DigiX is
     return 0;
     
   end;
-  
+  function checkFileOrigin(id_fisier files.file_id%type) return integer is
+  begin 
+    select 1 into counter from files where file_id=id_fisier and origin='local';
+    if(counter=1) then 
+      return 1;
+      end if;
+    EXCEPTION
+    when no_data_found then
+    return 0;
+  end;
   function newChest(id_user users.id%type,cap chests.capacity%type,frees chests.freeSlots%type,descr chests.description%type,nume chests.name%type,datac date) return integer is 
   begin
     select count(*) into nrRecords from chests;
@@ -198,7 +208,5 @@ begin
   update chests set freeSlots=old_slots where chest_id=chest;
 end decreaseFreeSlots;
 /
-
-
 
 

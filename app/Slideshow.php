@@ -6,5 +6,5 @@ use Illuminate\Database\Eloquent\Model;
 
 class Slideshow extends Model
 {
-    public $title,$url,$embedlink;
+    public $title, $url, $embedlink;
 }
