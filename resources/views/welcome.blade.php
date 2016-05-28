@@ -12,27 +12,7 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
   {{-- <script src="{{ elixir('js/app.js') }}"></script> --}}
 
-    <style>
-        body{
-            font-family: 'Lato';
-            
-            }
-
-            footer {
-            margin-top: 20px;
-            margin-bottom: 300px;
-            }
-
-        body{
-            font-family: 'Lato';
-            background: url("/css/treasure_top_m.jpg") no-repeat, url("/css/treasure_bottom_e.jpg") no-repeat;
-            -webkit-background-size: auto,auto;
-            -moz-background-size: auto,auto;
-            -o-background-size: auto,auto;
-            background-size: auto,auto;
-            background-position: 0px 51px,bottom;
-            }
-</style>
+  <link rel="stylesheet" href="/css/welcomeStyle.css">
 
     <body>
     <div class="container">
@@ -57,22 +37,22 @@
                 <div class="carousel-inner" role="listbox">
 
                 <div class="item active">
-                    <img src="/css/photo1.jpg" alt="Responsive image"class="img-responsive"  >
+                    <img src="/images/photo1.jpg" alt="Responsive image"class="img-responsive"  >
                     
                 </div>
 
                 <div class="item">
-                    <img src="/css/photo2.jpg" alt="Responsive image"class="img-responsive"  >
+                    <img src="/images/photo2.jpg" alt="Responsive image"class="img-responsive"  >
                     
                 </div>
     
                 <div class="item">
-                    <img src="/css/photo3.jpg" alt="Responsive image"class="img-responsive"  >
+                    <img src="/images/photo3.jpg" alt="Responsive image"class="img-responsive"  >
                     
                 </div>
 
                 <div class="item">
-                    <img src="/css/photo4.jpg" alt="Responsive image"class="img-responsive"  >
+                    <img src="/images/photo4.jpg" alt="Responsive image"class="img-responsive"  >
                 </div>
 
                 </div>
@@ -98,7 +78,7 @@
 
 
             <div class="audioWrapper">
-                <iframe width="100%" height="166" scrolling="no" frameborder="no" src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/4152184&amp;color=ff5500&amp;auto_play=false&amp;hide_related=false&amp;show_comments=true&amp;show_user=true&amp;show_reposts=false"></iframe>
+                <iframe width="100%" height="166" scrolling="no" frameborder="no" src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/148399353&amp;color=ff5500&amp;auto_play=false&amp;hide_related=false&amp;show_comments=true&amp;show_user=true&amp;show_reposts=false"></iframe>
             </div>
 
             <div class="twitterWrapper">

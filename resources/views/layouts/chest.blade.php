@@ -15,21 +15,11 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
     {{-- <link href="{{ elixir('css/app.css') }}" rel="stylesheet"> --}}
 
-    <style>
-        body {
-            font-family: 'Lato';
-        }
+    <link rel="stylesheet" href="/css/dashboard_chest_Style.css">
+    <link rel="shortcut icon" href="/images/favicon_i.ico">
 
-        .fa-btn {
-            margin-right: 6px;
-        }
-
-        .btn-group {
-            margin-top :9px;
-            border:none;
-        }
-    </style>
 </head>
+
 <body id="app-layout">
     <nav class="navbar navbar-default navbar-static-top">
         <div class="container">

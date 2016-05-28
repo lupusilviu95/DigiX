@@ -2,17 +2,8 @@
 
 @section('content')
 
-<style>
-        body{
-            font-family: 'Lato';
-            background: url("/css/treasure_login.jpg") no-repeat;
-            -webkit-background-size: cover;
-            -moz-background-size: cover;
-            -o-background-size: cover;
-            background-size: cover;
-            background-position: initial;
-        }
-</style>
+<link rel="stylesheet" href="/css/authStyle.css">
+<link rel="stylesheet" href="/css/bootstrap-social.css">
 
 <div class="container">
     <div class="row">
@@ -73,9 +64,13 @@
 
                         <div class="form-group">
                             <div class="col-md-6 col-md-offset-4">
-                                <button type="button" class="btn btn-primary" onclick="location.href='redirect'">
+                                <!-- <button type="button" class="btn btn-primary" onclick="location.href='redirect'">
                                     FB Login
-                                </button>
+                                    </button> -->
+
+                                  <a class="btn btn-block btn-social btn-facebook" role="button" onclick="location.href='redirect'">
+                                    <span class="fa fa-facebook"></span> Login with Facebook
+                                  </a>
                             </div>
                         </div>
                     </form>
@@ -84,4 +79,10 @@
         </div>
     </div>
 </div>
+
+<footer class="footer">
+      <div class="container">
+        <p class="text-muted"></p>
+      </div>
+    </footer>
 @endsection

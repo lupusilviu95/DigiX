@@ -5,3 +5,8 @@ body {
 .fa-btn {
   margin-right: 6px;
 }
+
+.btn-group {
+  margin-top :9px;
+  border:none;
+}
