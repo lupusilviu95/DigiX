@@ -205,6 +205,8 @@ class DatabaseInteraction
             $file->path = $row['PATH'];
             $file->createdat = $row['AGE'];
             $file->origin = $row['ORIGIN'];
+            $file->tags=$this->getTagsForFile($file->fileid);
+            $file->relative=$this->getRelativeForFile($file->fileid);
             $files[] = $file;
         }
         oci_free_statement($stid);
@@ -213,11 +215,11 @@ class DatabaseInteraction
 
     public function searchFilesByTags($chestid, $tags)
     {
-        $sql = "select f.file_id as fisier,f.name as nume , f.type as tip, f.path as cale,count(f.file_id) as relevance from files_tags ft ,files f,tags t 
+        $sql = "select f.file_id as fisier,f.name as nume , f.type as tip, f.path as cale,count(f.file_id) as relevance,f.createdat as age,f.origin from files_tags ft ,files f,tags t 
                 where ft.tag_id=t.tag_id
                 and (t.name in " . $tags . " ) and f.file_id=ft.file_id 
                 and f.chest_id=:chestid 
-                group by f.file_id,f.name,f.type,f.path order by relevance desc";
+                group by f.file_id,f.name,f.type,f.path,f.createdat,f.origin order by relevance desc";
         $stid = oci_parse($this->conn, $sql);
         oci_bind_by_name($stid, ':chestid', $chestid);
         oci_execute($stid);
@@ -229,6 +231,10 @@ class DatabaseInteraction
             $file->type = $row['TIP'];
             $file->name = $row['NUME'];
             $file->path = $row['CALE'];
+             $file->createdat = $row['AGE'];
+            $file->origin = $row['ORIGIN'];
+            $file->tags=$this->getTagsForFile($file->fileid);
+            $file->relative=$this->getRelativeForFile($file->fileid);
             $files[] = $file;
         }
         oci_free_statement($stid);
@@ -237,11 +243,11 @@ class DatabaseInteraction
 
     public function globalSearchFilesByTags($userid, $tags)
     {
-        $sql = "select f.file_id as fisier,f.name as nume , f.type as tip, f.path as cale,f.chest_id as cufar ,count(f.file_id) as relevance from files_tags ft ,files f,tags t 
+        $sql = "select f.file_id as fisier,f.name as nume , f.type as tip, f.path as cale,f.chest_id as cufar ,count(f.file_id) as relevance,f.createdat as age,f.origin from files_tags ft ,files f,tags t 
                 where ft.tag_id=t.tag_id
                 and (t.name in " . $tags . " ) and f.file_id=ft.file_id 
                 and f.chest_id in ( select chest_id from chests where user_id=:user_id)
-                group by f.file_id,f.name,f.type,f.path,f.chest_id order by relevance desc";
+                group by f.file_id,f.name,f.type,f.path,f.chest_id,f.createdat,f.origin order by relevance desc";
         $stid = oci_parse($this->conn, $sql);
         oci_bind_by_name($stid, ":user_id", $userid);
         oci_execute($stid);
@@ -253,6 +259,10 @@ class DatabaseInteraction
             $file->type = $row['TIP'];
             $file->name = $row['NUME'];
             $file->path = $row['CALE'];
+             $file->createdat = $row['AGE'];
+            $file->origin = $row['ORIGIN'];
+            $file->tags=$this->getTagsForFile($file->fileid);
+            $file->relative=$this->getRelativeForFile($file->fileid);
             $files[] = $file;
         }
         oci_free_statement($stid);
@@ -313,6 +323,37 @@ class DatabaseInteraction
         }
         oci_free_statement($stid);
         return $files;
+    }
+
+    public function  getRelativeForFile ($fileid){
+        $sql="select r.name as relative from files f join files_relatives fr on f.file_id=fr.file_id join relatives r on r.relative_id=fr.RELATIVE_ID where fr.file_id=:fileid";
+        $stid = oci_parse($this->conn, $sql);
+        oci_bind_by_name($stid, ':fileid', $fileid);
+        oci_execute($stid);
+        $relative=null;
+        while ($row = oci_fetch_array($stid, OCI_ASSOC + OCI_RETURN_NULLS)) {
+            $relative=$row['RELATIVE'];
+            
+        }
+        oci_free_statement($stid);
+        if($relative==null)
+            $relative="none";
+        return $relative;
+
+    }
+    public function getTagsForFile($fileid){
+        $sql="select t.name as tag from files f join files_tags ft on f.file_id=ft.file_id join tags t on t.tag_id= ft.tag_id where ft.file_id=:fileid";
+        $stid = oci_parse($this->conn, $sql);
+        oci_bind_by_name($stid, ':fileid', $fileid);
+        oci_execute($stid);
+        $tags=null;
+        while ($row = oci_fetch_array($stid, OCI_ASSOC + OCI_RETURN_NULLS)) {
+            $tag=$row['TAG'];
+            $tags[] = $tag;
+        }
+        oci_free_statement($stid);
+        return $tags;
+
     }
 
     public function getChestsForUser($userid)

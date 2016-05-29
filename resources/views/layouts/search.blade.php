@@ -51,9 +51,6 @@
             <!-- Left Side Of Navbar -->
             <ul class="nav navbar-nav">
                 <li><a href="{{ url('/dashboard') }}">Dashboard</a></li>
-                <li><a href="" id="deleteOption" class="delete"
-                       data-confirm="Are you sure to delete this item?">Delete</a></li>
-                <li><a href="" id="downloadOption">Download</a></li>
             </ul>
 
 

@@ -145,7 +145,7 @@
     $(document).ready(function () {
         $("div").on('click', '.panel-heading', function () {
             $(".panel-heading").stop(true, true);
-            $(this).effect("highlight", {color: "#00FFE4"}, 300000);
+            $(this).effect("highlight", {color: "#31B0D5"}, 300000);
         });
     });
 </script>

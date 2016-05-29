@@ -73,3 +73,4 @@ Route::post('/upload/soundcloud/{id}', 'UploadController@uploadSoundcloudFile');
 
 
 
+Route::get('/tags/{id}','ChestController@test');

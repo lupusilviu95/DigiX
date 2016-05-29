@@ -11,6 +11,10 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.min.css"
           integrity="sha384-XdYbMnZ/QjLh6iI4ogqCTaIjrFk87ip+ekIjefZch0Y+PvJ8CDYtEs1ipDmPorQ+" crossorigin="anonymous">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:100,300,400,700">
+    <link rel="stylesheet" href="/css/bootstrap-social.css">
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css" rel="stylesheet">    
+    <link href="/css/bootstrap3_player.css" rel="stylesheet">
+
 
     <!-- Styles -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.6/css/bootstrap.min.css"
@@ -49,8 +53,6 @@
 
 
                 <li><a href="/viewChest/{{$_SESSION['currChest']}}/add">Add File</a></li>
-                <li><a href="" id="deleteOption" class="delete" onclick="confirmDelete(this)">Delete</a></li>
-                <li><a href="" id="downloadOption">Download</a></li>
             </ul>
 
             <div class="col-sm-3 col-md-3 ">
@@ -122,11 +124,12 @@
         integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS"
         crossorigin="anonymous"></script>
 {{-- <script src="{{ elixir('js/app.js') }}"></script> --}}
+
 <script type="text/javascript">
 
 
     $(document).ready(function () {
-
+        $(".dropdown-toggle").dropdown();
         $('#myTable').on('click', '.clickable-row', function (event) {
             $(this).addClass('bg-info').siblings().removeClass('bg-info');
 
@@ -177,6 +180,9 @@
         }
     }
 </script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script> 
+<script src="/js/bootstrap3_player.js"></script>
 
 </body>
 </html>

@@ -18,9 +18,8 @@ function date_cmp($a, $b)
         @if(Session::has('flash_info'))
             <div class="alert alert-info">{{Session::get('flash_info')}}</div>
         @endif
-        <div class="row">
-            <div class="col-md-10 col-md-offset-1">
-                <div class="panel panel-default">
+     
+        
                     @if($files!=null)
                         <?php
                         if (isset($_GET['sortOption'])) {
@@ -33,38 +32,203 @@ function date_cmp($a, $b)
                                 usort($files, "date_cmp");
                         }
                         ?>
-                        <table class="table table-bordered" id="myTable">
-                            <tbody>
-                            <tr>
-                                <th><a href="?sortOption=name"> File name</a></th>
-                                <th><a href="?sortOption=type">Type</a></th>
-                                <th><a href="?sortOption=created_at">Created at</a></th>
-                                <th>Twitter</th>
-                                <th>Source</th>
-                            </tr>
-                            @foreach($files as $file)
-                                <tr class="clickable-row" id="{{$file->fileid}}" onclick="pop(this)">
-                                    <td><a href="/viewFile/{{$file->fileid}}">{{$file->name}}</a></td>
-                                    <td>{{$file->type}}</td>
-                                    <td>{{$file->createdat}}</td>
-                                    @if($file->type=='jpg')
-                                        <td><a href="/tweet/{{$file->fileid}}">Tweet this</a></td>
-                                    @else
-                                        <td>N/A</td>
-                                    @endif
-                                    <td>{{$file->origin}}</td>
-                                </tr>
-                            @endforeach
-                            </tbody>
-                        </table>
+                
+                        @foreach($files as $file)
+                           @if($file->type=='youtube')
+                                 <div class="row">
+                                    <div class="col-md-7 col-md-offset-2">
+                                        <div class="panel panel-default">
+                                            <div class="panel-heading">
+                                                <a href="{{$file->origin}}">{{$file->name}}</a>
+                                                <span class="pull-right">
+                                                                           <ul class="list-inline">
+                                                                                 <li><a href="/delete/file/{{$file->fileid}}" onclick="confirmDelete(this)"><i class="glyphicon glyphicon-trash"></i></a></li>
+                                                                            </ul>
+                                                                       </span>
+                                            </div>
+                                             <div class="panel-body embed-responsive embed-responsive-16by9">
+                                                 <iframe class="embed responsive item" width="100%" height="100%"
+                                                 src="https://www.youtube.com/embed/{{$file->path}}"
+                                                 frameborder="0" allowfullscreen>
+                                                 </iframe>
+                                            </div>
+                                            <div class="panel-footer">
+                                                Tags : {{$file->getFormatedTags()}}
+                                                <span class="pull-right">
+                                                    Relative : {{$file->getFormatedRelative()}}
+                                                </span>
+                                            </div>
+                                    </div>
+                                </div> 
+                            </div>       
+                            @elseif($file->type=='facebook')
+                             <div class="row">
+                                    <div class="col-md-7 col-md-offset-2">
+                                        <div class="panel panel-default">
+                                            <div class="panel-heading">{{$file->name}}
+                                            <span class="pull-right">
+                                                                           <ul class="list-inline">
+                                                                                 <li><a href="/delete/file/{{$file->fileid}}" onclick="confirmDelete(this)"><i class="glyphicon glyphicon-trash"></i></a></li>
+                                                                            </ul>
+                                                                       </span>
+                                            </div>
+                                             <div class="panel-body">
+                                                 <img class="img-responsive" src="{{$file->path}}" alt="{{$file->name}}">
+                                            </div>
+                                            <div class="panel-footer">
+                                                Tags : {{$file->getFormatedTags()}}
+                                                <span class="pull-right">
+                                                    Relative : {{$file->getFormatedRelative()}}
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>        
+
+                            @elseif($file->type=='soundcloud')
+                            <div class="row">
+                             
+                                    <div class="col-md-7 col-md-offset-2">
+                                        <div class="panel panel-default">
+                                            <div class="panel-heading">
+                                                <a href="{{$file->origin}}">{{$file->name}}</a>
+                                                <span class="pull-right">
+                                                                           <ul class="list-inline">
+                                                                                 <li><a href="/delete/file/{{$file->fileid}}" onclick="confirmDelete(this)"><i class="glyphicon glyphicon-trash"></i></a></li>
+                                                                            </ul>
+                                                                       </span>
+                                            </div>
+                                             <div class="panel-body embed-responsive embed-responsive-16by9" style="max-height: 166px;" >
+                                                  <iframe width="100%" height="100%" scrolling="no" frameborder="no"
+                                                  src="https://w.soundcloud.com/player/?url={{$file->origin}}&amp;color=ff6600&amp;auto_play=false&amp;show_artwork=true">
+                                                  </iframe>
+                                            </div>
+                                            <div class="panel-footer">
+                                                Tags : {{$file->getFormatedTags()}}
+                                                <span class="pull-right">
+                                                    Relative : {{$file->getFormatedRelative()}}
+                                                </span>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>        
+
+                            @elseif($file->type=='slideshare')
+                            <div class="row">
+                                    <div class="col-md-7 col-md-offset-2">
+                                        <div class="panel panel-default">
+                                            <div class="panel-heading">
+                                                <a href="{{$file->origin}}">{{$file->name}}</a>
+                                                <span class="pull-right">
+                                                                           <ul class="list-inline">
+                                                                                 <li><a href="/delete/file/{{$file->fileid}}" onclick="confirmDelete(this)"><i class="glyphicon glyphicon-trash"></i></a></li>
+                                                                            </ul>
+                                                                       </span>
+                                            </div>
+                                             <div class="panel-body embed-responsive embed-responsive-16by9">
+                                                 <iframe class="embed responsive item" width="100%" height="100%"
+                                                 src="{{$file->path}}"
+                                                 frameborder="0" allowfullscreen>
+                                                 </iframe>
+                                            </div>
+                                            <div class="panel-footer">
+                                                Tags : {{$file->getFormatedTags()}}
+                                                <span class="pull-right">
+                                                    Relative : {{$file->getFormatedRelative()}}
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>        
+
+                            @elseif($file->type=='jpg' || $file->type=='png') 
+
+                             <div class="row">
+                                    <div class="col-md-7 col-md-offset-2">
+                                        <div class="panel panel-default">
+                                            <div class="panel-heading">{{$file->name}}
+                                                                       <span class="pull-right">
+                                                                           <ul class="list-inline">
+                                                                                 <li><a href="/download/file/{{$file->fileid}}" ><i class="glyphicon glyphicon-download-alt"></i></a></li>
+                                                                                 <li><a href="/delete/file/{{$file->fileid}}" onclick="confirmDelete(this)"><i class="glyphicon glyphicon-trash"></i></a></li>
+                                                                                 <li ><a href="/tweet/{{$file->fileid}}"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>
+                                                                            </ul>
+                                                                       </span>
+                                            </div>
+                                             <div class="panel-body">
+                                                 <img class="img-responsive" src="/{{$file->path}}" alt="{{$file->name}}">
+                                            </div>
+                                             <div class="panel-footer">
+                                                Tags : {{$file->getFormatedTags()}}
+                                                <span class="pull-right">
+                                                    Relative : {{$file->getFormatedRelative()}}
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>        
+                            @elseif($file->type=='mp3') 
+                            <div class="row">  
+                            <div class="col-md-7 col-md-offset-2">
+                                        <div class="panel panel-default">
+                                            <div class="panel-heading">{{$file->name}}
+                                                                       <span class="pull-right">
+                                                                           <ul class="list-inline">
+                                                                                 <li><a href="/download/file/{{$file->fileid}}" ><i class="glyphicon glyphicon-download-alt"></i></a></li>
+                                                                                 <li><a href="/delete/file/{{$file->fileid}}" onclick="confirmDelete(this)"><i class="glyphicon glyphicon-trash"></i></a></li>
+                                                                            </ul>
+                                                                       </span>
+                                            </div>
+                                             <div class="panel-body">
+                                                  <audio controls>
+                                                      <source src="/{{$file->path}}" type="audio/mpeg" />
+                                                      An html5-capable browser is required to play this audio. 
+                                                  </audio>
+                                            </div>
+                                             <div class="panel-footer">
+                                                Tags : {{$file->getFormatedTags()}}
+                                                <span class="pull-right">
+                                                    Relative : {{$file->getFormatedRelative()}}
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </div> 
+                            </div>
+                            @else 
+                            <div class="row">
+                                <div class="col-md-7 col-md-offset-2">
+                                        <div class="panel panel-default">
+                                            <div class="panel-heading"><a href="/viewFile/{{$file->fileid}}">{{$file->name}}</a>
+                                                                       <span class="pull-right">
+                                                                           <ul class="list-inline">
+                                                                                 <li><a href="/download/file/{{$file->fileid}}" ><i class="glyphicon glyphicon-download-alt"></i></a></li>
+                                                                                 <li><a href="/delete/file/{{$file->fileid}}" onclick="confirmDelete(this)"><i class="glyphicon glyphicon-trash"></i></a></li>
+                                                                            </ul>
+                                                                       </span>
+                                            </div>
+                                             <div class="panel-body">
+                                             <p class="text-center"><em>No preview available</em></p>
+                                            </div>
+                                             <div class="panel-footer">
+                                                Tags : {{$file->getFormatedTags()}}
+                                                <span class="pull-right">
+                                                    Relative : {{$file->getFormatedRelative()}}
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </div> 
+                            </div>
+                            @endif
+
+                        @endforeach
                     @else
                         <div class="panel-heading">Cufar gol</div>
                     @endif
 
-                </div>
+                
             </div>
-        </div>
-    </div>
+    
 
 
 @endsection

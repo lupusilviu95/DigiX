@@ -1,0 +1,185 @@
+CREATE TABLE c_aer_conditonat
+(
+id varchar(250) PRIMARY KEY,
+nume varchar(250),
+stare int,
+temperatura int,
+intensitate int
+);
+
+CREATE TABLE a_aer_conditonat
+(
+id varchar(250) PRIMARY KEY,
+id_record varchar(250),
+stare int,
+temperatura int,
+intensitate int,
+data datetime,
+nume varchar(300)
+);
+
+
+
+CREATE TABLE apa
+(
+id varchar(250) PRIMARY KEY,
+nume varchar(250),
+temperatura int,
+presiune int
+);
+
+CREATE TABLE a_apa
+(
+id varchar(250) PRIMARY KEY,
+id_record varchar(250),
+temperatura int,
+presiune int,
+data datetime,
+nume varchar(300)
+);
+
+
+
+
+CREATE TABLE c_aragaz
+(
+id varchar(250) PRIMARY KEY,
+nume varchar(250),
+stare int,
+temperatura int
+);
+
+CREATE TABLE c_aspirator
+(
+id varchar(250) PRIMARY KEY,
+nume varchar(250),
+stare int
+);
+
+
+
+
+CREATE TABLE c_frigider
+(
+id varchar(250) PRIMARY KEY,
+nume varchar(250),
+stare int,
+temperatura int
+);
+
+CREATE TABLE a_frigider
+(
+id varchar(250) PRIMARY KEY,
+id_record varchar(250),
+stare int,
+temperatura int,
+data datetime,
+nume varchar(300)
+);
+
+
+
+
+
+CREATE TABLE c_jaluzele
+(
+id varchar(250) PRIMARY KEY,
+nume varchar(250),
+stare int
+);
+
+CREATE TABLE a_jaluzele
+(
+id varchar(250) PRIMARY KEY,
+id_record varchar(250),
+stare int,
+data datetime,
+nume varchar(300)
+);
+
+
+
+CREATE TABLE  lumini
+(
+id varchar(250) PRIMARY KEY,
+nume varchar(250),
+stare int,
+nr_becuri int
+);
+
+CREATE TABLE a_lumini
+(
+id varchar(250) PRIMARY KEY,
+id_record varchar(250),
+stare int,
+nr_becuri int,
+data datetime,
+nume varchar(300)
+);
+
+
+
+
+CREATE TABLE c_masina_spalat
+(
+id varchar(250) PRIMARY KEY,
+nume varchar(250),
+stare int,
+rotatii int,
+temperatura int,
+program varchar(100)
+);
+
+CREATE TABLE a_masina_spalat
+(
+id varchar(250) PRIMARY KEY,
+id_record varchar(250),
+stare int,
+rotatii int,
+temperatura int,
+program varchar(100),
+data datetime,
+nume varchar(300)
+);
+
+
+CREATE TABLE c_sistem_audio
+(
+id varchar(250) PRIMARY KEY,
+nume varchar(250),
+stare int,
+volum int,
+melodie varchar(100)
+);
+
+CREATE TABLE a_sistem_audio
+(
+id varchar(250) PRIMARY KEY,
+id_record varchar(250),
+stare int,
+volum int,
+melodie varchar(100),
+data datetime,
+nume varchar(300)
+);
+
+
+CREATE TABLE c_tv
+(
+id varchar(250) PRIMARY KEY,
+nume varchar(250),
+stare int,
+volum int,
+canal varchar(100)
+);
+
+CREATE TABLE a_tv
+(
+id varchar(250) PRIMARY KEY,
+id_record varchar(250),
+stare int,
+volum int,
+canal varchar(100),
+data datetime,
+nume varchar(300)
+);

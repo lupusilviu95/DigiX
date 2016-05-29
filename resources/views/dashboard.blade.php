@@ -41,11 +41,15 @@ function date_cmp($a, $b)
 
                             <div class="panel-heading" onclick="pop(this)" id="{{$cufar->id_cufar}}">
                                 <a href="/viewChest/{{$cufar->id_cufar}}">
-                                    {{$cufar->name}}({{$cufar->getFreeSlots()}}/{{$cufar->capacity}})
+                                    <p class="text-center" >{{$cufar->name}}({{$cufar->getFreeSlots()}}/{{$cufar->capacity}})</p>
                                 </a>
                             </div>
+
                             <div class="panel-body">
-                                {{$cufar->description}}
+                                <img class="img-responsive" src="/chest.jpg" alt="chest">
+                            </div>
+                            <div class="panel-footer">
+                            {{$cufar->description}}
                             </div>
 
                         </div>
