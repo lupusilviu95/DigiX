@@ -3,7 +3,6 @@
 
 @section('content')
 
-
     <div class="container">
         @if($slides)
             @foreach($slides as $slideshow)
