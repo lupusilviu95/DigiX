@@ -71,6 +71,4 @@ Route::post('/upload/slideshare/{id}', 'UploadController@uploadSlideshareFile');
 Route::post('/upload/soundcloud/{id}', 'UploadController@uploadSoundcloudFile');
 
 
-
-
-Route::get('/tags/{id}','ChestController@test');
+Route::get('/tags/{id}', 'ChestController@test');

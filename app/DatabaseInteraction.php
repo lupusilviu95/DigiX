@@ -205,8 +205,8 @@ class DatabaseInteraction
             $file->path = $row['PATH'];
             $file->createdat = $row['AGE'];
             $file->origin = $row['ORIGIN'];
-            $file->tags=$this->getTagsForFile($file->fileid);
-            $file->relative=$this->getRelativeForFile($file->fileid);
+            $file->tags = $this->getTagsForFile($file->fileid);
+            $file->relative = $this->getRelativeForFile($file->fileid);
             $files[] = $file;
         }
         oci_free_statement($stid);
@@ -231,10 +231,10 @@ class DatabaseInteraction
             $file->type = $row['TIP'];
             $file->name = $row['NUME'];
             $file->path = $row['CALE'];
-             $file->createdat = $row['AGE'];
+            $file->createdat = $row['AGE'];
             $file->origin = $row['ORIGIN'];
-            $file->tags=$this->getTagsForFile($file->fileid);
-            $file->relative=$this->getRelativeForFile($file->fileid);
+            $file->tags = $this->getTagsForFile($file->fileid);
+            $file->relative = $this->getRelativeForFile($file->fileid);
             $files[] = $file;
         }
         oci_free_statement($stid);
@@ -259,10 +259,10 @@ class DatabaseInteraction
             $file->type = $row['TIP'];
             $file->name = $row['NUME'];
             $file->path = $row['CALE'];
-             $file->createdat = $row['AGE'];
+            $file->createdat = $row['AGE'];
             $file->origin = $row['ORIGIN'];
-            $file->tags=$this->getTagsForFile($file->fileid);
-            $file->relative=$this->getRelativeForFile($file->fileid);
+            $file->tags = $this->getTagsForFile($file->fileid);
+            $file->relative = $this->getRelativeForFile($file->fileid);
             $files[] = $file;
         }
         oci_free_statement($stid);
@@ -325,30 +325,33 @@ class DatabaseInteraction
         return $files;
     }
 
-    public function  getRelativeForFile ($fileid){
-        $sql="select r.name as relative from files f join files_relatives fr on f.file_id=fr.file_id join relatives r on r.relative_id=fr.RELATIVE_ID where fr.file_id=:fileid";
+    public function getRelativeForFile($fileid)
+    {
+        $sql = "select r.name as relative from files f join files_relatives fr on f.file_id=fr.file_id join relatives r on r.relative_id=fr.RELATIVE_ID where fr.file_id=:fileid";
         $stid = oci_parse($this->conn, $sql);
         oci_bind_by_name($stid, ':fileid', $fileid);
         oci_execute($stid);
-        $relative=null;
+        $relative = null;
         while ($row = oci_fetch_array($stid, OCI_ASSOC + OCI_RETURN_NULLS)) {
-            $relative=$row['RELATIVE'];
-            
+            $relative = $row['RELATIVE'];
+
         }
         oci_free_statement($stid);
-        if($relative==null)
-            $relative="none";
+        if ($relative == null)
+            $relative = "none";
         return $relative;
 
     }
-    public function getTagsForFile($fileid){
-        $sql="select t.name as tag from files f join files_tags ft on f.file_id=ft.file_id join tags t on t.tag_id= ft.tag_id where ft.file_id=:fileid";
+
+    public function getTagsForFile($fileid)
+    {
+        $sql = "select t.name as tag from files f join files_tags ft on f.file_id=ft.file_id join tags t on t.tag_id= ft.tag_id where ft.file_id=:fileid";
         $stid = oci_parse($this->conn, $sql);
         oci_bind_by_name($stid, ':fileid', $fileid);
         oci_execute($stid);
-        $tags=null;
+        $tags = null;
         while ($row = oci_fetch_array($stid, OCI_ASSOC + OCI_RETURN_NULLS)) {
-            $tag=$row['TAG'];
+            $tag = $row['TAG'];
             $tags[] = $tag;
         }
         oci_free_statement($stid);

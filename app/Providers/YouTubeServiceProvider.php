@@ -25,18 +25,18 @@ class YouTubeServiceProvider extends ServiceProvider
     {
         $app = $this->app;
 
-  $this->app->bind('GoogleClient', function () {
-    $googleClient = new \Google_Client();
-    $googleClient->setAccessToken(\Session::get("token"));
+        $this->app->bind('GoogleClient', function () {
+            $googleClient = new \Google_Client();
+            $googleClient->setAccessToken(\Session::get("token"));
 
-    return $googleClient;
-  });
+            return $googleClient;
+        });
 
-  $this->app->bind('youtube', function () use ($app) {
-    $googleClient = \App::make('GoogleClient');
-    $youtube = new \Google_Service_YouTube($googleClient);
+        $this->app->bind('youtube', function () use ($app) {
+            $googleClient = \App::make('GoogleClient');
+            $youtube = new \Google_Service_YouTube($googleClient);
 
-    return $youtube;
-  });
+            return $youtube;
+        });
     }
 }

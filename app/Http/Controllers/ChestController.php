@@ -172,14 +172,16 @@ class ChestController extends Controller
         return redirect('/dashboard');
 
     }
-    public function test($id){
+
+    public function test($id)
+    {
         $db = new DatabaseInteraction('student', 'STUDENT', 'localhost/XE');
         $db->connect();
-        $tags=$db->getTagsForFile($id);
+        $tags = $db->getTagsForFile($id);
         foreach ($tags as $tag) {
-            echo $tag."\n";
+            echo $tag . "\n";
         }
-        $relative=$db->getRelativeForFile($id);
+        $relative = $db->getRelativeForFile($id);
         echo $relative;
 
     }

@@ -18,9 +18,9 @@
                                 </a>
                             </div>
                             <div class="panel-body embed-responsive embed-responsive-16by9">
-                                <iframe class="embed responsive item" width="100%" height="100%"
+                                <iframe class="embed responsive item" 
                                         src="https://www.youtube.com/embed/{{ $video['snippet']['resourceId']['videoId']}}"
-                                        frameborder="0" allowfullscreen></iframe>
+                                        allowfullscreen></iframe>
                             </div>
 
                         </div>
@@ -50,16 +50,15 @@
                             <label for="rudenie">Relatives</label>
                             <select class="form-control" id="rudenie" name="rudenie">
                                 <option>-none-</option>
-                                <option>mama</option>
-                                <option>tata</option>
-                                <option>frate</option>
-                                <option>sora</option>
-                                <option>bunic</option>
-                                <option>bunica</option>
-                                <option>var</option>
-                                <option>verisoara</option>
-                                <option>unchi</option>
-                                <option>matusa</option>
+                                <option>mother</option>
+                                <option>father</option>
+                                <option>brother</option>
+                                <option>sister</option>
+                                <option>grandfather</option>
+                                <option>garndmother</option>
+                                <option>cousin</option>
+                                <option>uncle</option>
+                                <option>aunt</option>
                             </select>
                         </div>
                         <button type="submit" class="btn btn-default" id="buton" disabled>Submit</button>

@@ -14,7 +14,7 @@
                 <form action="/search/processSlideshare/{{$id}}" method="GET">
                     {!! csrf_field() !!}
                     <div class="form-group{{ $errors->has('username') ? ' has-error' : '' }}">
-                        <label for="user">SlideShare Username</label>
+                        <label for="usernameId">SlideShare Username</label>
                         <input type="text" class="form-control" id="usernameId" name="username"
                                placeholder="SlideShare Username">
                         @if ($errors->has('username'))

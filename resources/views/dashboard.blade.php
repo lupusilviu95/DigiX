@@ -40,16 +40,17 @@ function date_cmp($a, $b)
                         <div class="panel panel-default">
 
                             <div class="panel-heading" onclick="pop(this)" id="{{$cufar->id_cufar}}">
-                                <a href="/viewChest/{{$cufar->id_cufar}}">
-                                    <p class="text-center" >{{$cufar->name}}({{$cufar->getFreeSlots()}}/{{$cufar->capacity}})</p>
-                                </a>
+
+                                <p class="text-center"><a href="/viewChest/{{$cufar->id_cufar}}">{{$cufar->name}}
+                                        ({{$cufar->getFreeSlots()}}/{{$cufar->capacity}})</a></p>
+
                             </div>
 
                             <div class="panel-body">
                                 <img class="img-responsive" src="/chest.jpg" alt="chest">
                             </div>
                             <div class="panel-footer">
-                            {{$cufar->description}}
+                                {{$cufar->description}}
                             </div>
 
                         </div>
@@ -62,7 +63,7 @@ function date_cmp($a, $b)
             <div class="row">
                 <div class="col-md-10 col-md-offset-1">
                     <div class="panel panel-default">
-                        <div class="panel-heading">Nu ai nici un cufar :(</div>
+                        <div class="panel-heading">You don't have any chests yet</div>
                     </div>
                 </div>
             </div>

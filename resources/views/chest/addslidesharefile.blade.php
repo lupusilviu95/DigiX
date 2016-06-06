@@ -18,8 +18,7 @@
                                 </a>
                             </div>
                             <div class="panel-body embed-responsive embed-responsive-16by9">
-                                <iframe src="{{$slideshow->embedlink}}" class="embed responsive item" width="100%"
-                                        height="100%" frameborder="0" allowfullscreen></iframe>
+                                <iframe src="{{$slideshow->embedlink}}" class="embed responsive item" allowfullscreen></iframe>
                             </div>
 
                         </div>
@@ -44,8 +43,8 @@
                                    placeholder="Enter tags separated by comma" value="{{ old('tags') }}">
                             @if ($errors->has('tags'))
                                 <span class="help-block">
-                  <strong>{{ $errors->first('tags') }}</strong>
-                </span>
+                                <strong>{{ $errors->first('tags') }}</strong>
+                                </span>
                             @endif
                         </div>
 
@@ -53,17 +52,16 @@
                             <label for="rudenie">Relatives</label>
                             <select class="form-control" id="rudenie" name="rudenie">
                                 <option>-none-</option>
-                                <option>mama</option>
-                                <option>tata</option>
-                                <option>frate</option>
-                                <option>sora</option>
-                                <option>bunic</option>
-                                <option>bunica</option>
-                                <option>var</option>
-                                <option>verisoara</option>
-                                <option>unchi</option>
-                                <option>matusa</option>
-                            </select>
+                                <option>mother</option>
+                                <option>father</option>
+                                <option>brother</option>
+                                <option>sister</option>
+                                <option>grandfather</option>
+                                <option>garndmother</option>
+                                <option>cousin</option>
+                                <option>uncle</option>
+                                <option>aunt</option>
+                                </select>
                         </div>
 
                         <button type="submit" class="btn btn-default" id="buton" disabled>Submit</button>
@@ -71,9 +69,7 @@
                     </form>
                 </div>
             </div>
-            <div class="row">
-                <div class="col-md-5 col-md-offset-3"></div>
-            </div>
+          
 
 
         @endif

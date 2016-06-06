@@ -3,8 +3,6 @@
 @section('content')
 
     <script src="/js/carousel.js"></script>
-    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
-    <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
     <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
     <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
@@ -18,7 +16,7 @@
 
     <link rel="stylesheet" href="/css/welcomeStyle.css">
 
-    <body>
+    
     <div class="container">
         <div class="row">
             <div class="col-md-8 col-md-offset-2">
@@ -78,12 +76,12 @@
 
                             <div class="videoWrapper">
                                 <iframe class="embed-responsive-item" src="https://www.youtube.com/embed/N9q9uNa4DAg"
-                                        frameborder="0" width="560" height="315"></iframe>
+                                        ></iframe>
                             </div>
 
 
                             <div class="audioWrapper">
-                                <iframe width="100%" height="166" scrolling="no" frameborder="no"
+                                <iframe  
                                         src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/148399353&amp;color=ff5500&amp;auto_play=false&amp;hide_related=false&amp;show_comments=true&amp;show_user=true&amp;show_reposts=false"></iframe>
                             </div>
 
@@ -113,7 +111,7 @@
         </div>
     </footer>
 
-    </body>
+    
 
 
 @endsection
